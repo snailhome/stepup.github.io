@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Linux Mint 安装后要做的几件事 — STEP UP</title>
+	<meta name="description" content="标题: Linux Mint 安装后要做的几件事; 日期: 2010-01-01; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Linux Mint 安装后要做的几件事</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2010-01-01T08:03:00+08:00" itemprop="datePublished">2010-01-01 08:03:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/system.html" rel="category">System</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/linux-mint.html" rel="tag">Linux Mint</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/geng-xin-yuan.html" rel="tag">更新源</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/shu-ru-fa.html" rel="tag">输入法</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/yu-yan-bao.html" rel="tag">语言包</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><blockquote>
+<p>Linux Mint 1.72 是一个粉美观的桌面 Linux 系统，网评还不错的桌面，试用看看感觉还蛮好的。
+但是要记得安装好系统后要记得先做好几件事，才能用得舒心。</p>
+</blockquote>
+<h2>修改更新源</h2>
+<p>系统一装完，先修改更新源在做更新，不然会等吐血
+打开<code>菜单</code> -&gt; <code>系统管理</code> -&gt; <code>软件源</code> -&gt; <code>官方仓库</code>项
+分别选择<code>镜像</code>里的<code>主要</code>和<code>基础</code>两个选项，找最快的源，我选择的是：</p>
+<p>＊ 主要：http://mirrors.hustunique.com/linuxmint
+＊ 基础：http://mirrors.yun-idc.com/ubuntu</p>
+<p>然后点击<code>更新缓存</code>，然后打开终端开始更新吧</p>
+<div class="highlight"><pre><span></span>sudo apt-get clean <span class="o">&amp;&amp;</span> sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade -y
+</pre></div>
+
+
+<h2>修改语言支持</h2>
+<p>打开<code>菜单</code> -&gt; <code>首选项</code> -&gt; <code>语言设置</code>窗口 －&gt; <code>输入法</code>页 -&gt; 点击<code>添加/删除语言</code>，我只保留了中英美三国语言，语言、地区都选中国，点击<code>应用到整个系统</code></p>
+<h2>添加输入法</h2>
+<p>linux mint支持多种输入法框架，这方面做得还是比较好的。打开<code>菜单</code> -&gt; <code>首选项</code> -&gt; <code>语言设置</code>窗口 －&gt; <code>输入法</code>页 -&gt; 点击<code>添加对xxx的支持</code>按钮，就可以添加相应输入法的框架了</p>
+<p>我使用小企鹅<code>fcitx</code>输入法，在输入法<code>页点击</code>添加对fcitx的支持<code>按钮，就会开始安装进程，完成后不要点击</code>安装可选部件件<code>，不然会一股脑给你安装了61个可选部件，我勒个去～～，那怎么做？
+关闭</code>语言设置<code>窗口，打开</code>菜单<code>-&gt;</code>系统管理<code>-&gt;</code>新立得软件包管理器<code>，过滤</code>fcitx<code>，然后在列表中分别找到</code>fcitx-googlepinyin<code>，</code>fcitx-table-wubi<code>，</code>fcitx-table<code>，在列表项上右键选择</code>标志以便安装<code>，然后点击</code>应用`就开始安装了。
+这里安装的是谷哥拼音和五笔。</p>
+<blockquote>
+<p><code>fcitx</code>输入法界面比较美观，汉化也比较全面
+<code>ibus</code>也安装起来用过，但界面没那么好，汉化也不全，另外还有一个不足，在<code>General</code>页的<code>Show property panel:</code>项应选择<code>Do not show</code>，不然任务栏经常会被卡住</p>
+</blockquote>
+<p>现在应用注销一下以使输入法生效，重新登录后就可以在任务栏上看到键盘图标了
+现在就可以用：
+<em> <code>Ctrl+空格</code>：开关输入法
+</em> <code>Ctrl+Shift</code>：切换输入法</p>
+<h2>添加Firefox的语言包</h2>
+<p>打开Firefox，<code>Open menu</code> -&gt; <code>Add-ones</code>
+搜索<code>chinese</code>，安装 <code>Chinese Simplified(zh-CN) Language Pack</code>
+另外还可以选择安装<code>Firebug</code>、<code>BaiduSearch</code>
+关闭Firefox，再重新打开，界面就是中文的了</p></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Django后台在记录保存时先保存旧记录内容 — STEP UP</title>
+	<meta name="description" content="标题: Django后台在记录保存时先保存旧记录内容; 日期: 2015-09-21; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Django后台在记录保存时先保存旧记录内容</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-09-21T22:14:00+08:00" itemprop="datePublished">2015-09-21 22:14:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/django.html" rel="category">Django</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/django.html" rel="tag">Django</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/bao-cun.html" rel="tag">保存</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/bei-fen.html" rel="tag">备份</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><blockquote>
+<p><strong>场景：</strong><br>
+在一些重要的数据表，如设备台账表里，我们希望在记录保存时能够先保存一下旧记录内容，以便出现错误修改时能反查，恢复，这就是我们的需求。</p>
+</blockquote>
+<p>首先我们考虑一下，各数据表数据结构各不相同，如果针对每一个数据表做一个备份表太过繁琐，所以我们考虑只用一个<code>TextField</code>来保存旧记录内容，而把记录的各字段内容生成<code>Json</code>的形式保存到<code>TextField</code>中，就可以不用管各数据表的字段有多少，再附上方便检索和引用的表名、记录号、修改时间、操作人员等字段信息，那一个备份表就基本上够了。</p>
+<p>我们在<code>recordbackup</code>这个应用里</p>
+<div class="highlight"><pre><span></span><span class="c1"># recordbackup.models.py</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="c1"># Create your models here.</span>
+
+<span class="k">class</span> <span class="nc">RecordBack</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;应用&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;数据表&#39;</span><span class="p">)</span>
+    <span class="n">rid</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;记录号&#39;</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;原记录内容&#39;</span><span class="p">)</span>
+    <span class="n">modified_time</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;修改时间&#39;</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;操作人&#39;</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="n">verbose_name</span> <span class="o">=</span> <span class="s1">&#39;记录备份&#39;</span>
+</pre></div>
+
+
+<p>创建<code>admin.py</code>用于后台查看备份数据，<strong>只读</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># recordbackup/admin.py</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Register your models here.</span>
+
+<span class="nd">@admin.register</span><span class="p">(</span><span class="n">RecordBack</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">RecordBackAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="s1">&#39;rid&#39;</span><span class="p">,</span> <span class="s1">&#39;modified_time&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;list_operate&#39;</span><span class="p">)</span>
+    <span class="n">readonly_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="s1">&#39;rid&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;modified_time&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">)</span>
+    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="nf">list_operate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;a href=&quot;/admin/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/&quot;&gt;&lt;i class=&quot;icon-th-list&quot; title=&quot;查看原记录&quot;&gt;&lt;/i&gt;&lt;/a&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">rid</span><span class="p">)</span>
+    <span class="n">list_operate</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s1">&#39;操作&#39;</span>
+    <span class="n">list_operate</span><span class="o">.</span><span class="n">allow_tags</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+
+
+<p>生成相关数据表</p>
+<div class="highlight"><pre><span></span>./manage.py makemigrations
+./manage.py migrate
+</pre></div>
+
+
+<p>再创建一个<code>utils.py</code>用于转换记录为<code>Json</code>和保存旧记录功能的函数。</p>
+<div class="highlight"><pre><span></span><span class="c1"># recordbackup/utils.py</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="k">def</span> <span class="nf">toJSON</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    对对象进行json序列化，以json序列方式保存记录内容</span>
+<span class="sd">    :param obj: 记录对象</span>
+<span class="sd">    :return: 返回json串</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">),</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">),</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">OldRecordSave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    保存旧记录的数据</span>
+<span class="sd">    :param self: 修改前的记录对象</span>
+<span class="sd">    :param request:</span>
+<span class="sd">    :param obj: 修改后的记录对象</span>
+<span class="sd">    :param form: 表单数据</span>
+<span class="sd">    :param change: 表单数据是否被修改</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">RecordBack</span>
+    <span class="k">if</span> <span class="n">change</span><span class="p">:</span><span class="c1"># 更改的时候</span>
+        <span class="n">rb</span> <span class="o">=</span> <span class="n">RecordBack</span><span class="p">()</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">app_label</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">rid</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">pk</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">modified_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">obj_original</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">obj_original</span><span class="p">:</span>
+            <span class="n">rb</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">toJSON</span><span class="p">(</span><span class="n">obj_original</span><span class="p">)</span>
+            <span class="n">rb</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+            <span class="n">rb</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span><span class="c1"># 新增的时候</span>
+        <span class="k">pass</span>
+</pre></div>
+
+
+<p>现在记录备份的功能可以用了，我们在台账数据表<code>PcAdmin</code>的<code>save_model()</code>里加了保存旧记录的操作<code>OldRecordSave()</code></p>
+<div class="highlight"><pre><span></span><span class="c1"># pc/admin.py</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">recordbackup.utils</span> <span class="kn">import</span> <span class="n">OldRecordSave</span>
+<span class="k">class</span> <span class="nc">PcAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="o">......</span>
+    <span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+        <span class="n">OldRecordSave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">change</span><span class="p">)</span>  <span class="c1"># 保存旧记录的数据到备份表</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+
+
+<p>现在我们可以做一个测试，进入PC的编辑页面，修改一个字段信息，然后保存，我们看看<code>记录备份</code>表是不是多出一条记录，内容正是PC保存前的内容。
+类似的，我们只要在需要保存旧数据的admin中引入<code>from recordbackup.utils import OldRecordSave</code>，再在<code>save_model()</code>的<code>obj.save()</code>前加入<code>OldRecordSave(self, request, obj, form, change)</code>就可以实现旧记录数据的保存了。</p></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

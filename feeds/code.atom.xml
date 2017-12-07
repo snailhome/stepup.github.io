@@ -1,0 +1,1462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>STEP UP - Code</title><link href="/" rel="alternate"></link><link href="/feeds/code.atom.xml" rel="self"></link><id>/</id><updated>2015-10-06T11:23:00+08:00</updated><entry><title>如何git时免输用户名密码</title><link href="/ru-he-gitshi-mian-shu-yong-hu-ming-mi-ma.html" rel="alternate"></link><published>2015-10-06T11:23:00+08:00</published><updated>2015-10-06T11:23:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-10-06:/ru-he-gitshi-mian-shu-yong-hu-ming-mi-ma.html</id><summary type="html">&lt;p&gt;我要push静态博客时都要输入用户名和密码，特麻烦，百度了一下有好几种免输密码的方式，不知所云，后来尝试了一种成功，看官看过来。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; output/.git
+$ vim config
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;看到这一段&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[remote &amp;quot;origin&amp;quot;]&lt;/span&gt;
+        &lt;span class="na"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;https://github.com/yourname/yourname.github.io.git&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将其改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[remote &amp;quot;origin&amp;quot;]&lt;/span&gt;
+        &lt;span class="na"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;https://yourname:password@github.com/yourname/yourname.github.io.git&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当然，这个操作最好是在自己的机器上，毕竟用户名和密码明文放在上面，在其它机器上还是老老实实输入用户名和密码吧。&lt;/p&gt;</summary><content type="html">&lt;p&gt;我要push静态博客时都要输入用户名和密码，特麻烦，百度了一下有好几种免输密码的方式，不知所云，后来尝试了一种成功，看官看过来。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; output/.git
+$ vim config
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;看到这一段&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[remote &amp;quot;origin&amp;quot;]&lt;/span&gt;
+        &lt;span class="na"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;https://github.com/yourname/yourname.github.io.git&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将其改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[remote &amp;quot;origin&amp;quot;]&lt;/span&gt;
+        &lt;span class="na"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;https://yourname:password@github.com/yourname/yourname.github.io.git&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当然，这个操作最好是在自己的机器上，毕竟用户名和密码明文放在上面，在其它机器上还是老老实实输入用户名和密码吧。&lt;/p&gt;</content><category term="git"></category><category term="免密码"></category></entry><entry><title>46 个非常有用的 PHP 代码片段</title><link href="/46-ge-fei-chang-you-yong-de-php-dai-ma-pian-duan.html" rel="alternate"></link><published>2015-08-09T17:52:00+08:00</published><updated>2015-08-09T17:52:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-08-09:/46-ge-fei-chang-you-yong-de-php-dai-ma-pian-duan.html</id><summary type="html">&lt;p&gt;在编写代码的时候有个神奇的工具总是好的！下面这里收集了 40+ PHP 代码片段，可以帮助你开发 PHP 项目。&lt;/p&gt;
+&lt;p&gt;这些 PHP 片段对于 PHP 初学者也非常有帮助，非常容易学习，让我们开始学习吧～&lt;/p&gt;
+&lt;h3&gt;1. 发送 SMS&lt;/h3&gt;
+&lt;p&gt;在开发 Web 或者移动应用的时候，经常会遇到需要发送 SMS 给用户，或者因为登录原因，或者是为了发送信息。下面的 PHP 代码就实现了发送 SMS 的功能。&lt;/p&gt;
+&lt;p&gt;为了使用任何的语言发送 SMS，需要一个 SMS gateway。大部分的 SMS 会提供一个 API，这里是使用 MSG91 作为 SMS gateway。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function send_sms($mobile,$msg)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$authKey …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在编写代码的时候有个神奇的工具总是好的！下面这里收集了 40+ PHP 代码片段，可以帮助你开发 PHP 项目。&lt;/p&gt;
+&lt;p&gt;这些 PHP 片段对于 PHP 初学者也非常有帮助，非常容易学习，让我们开始学习吧～&lt;/p&gt;
+&lt;h3&gt;1. 发送 SMS&lt;/h3&gt;
+&lt;p&gt;在开发 Web 或者移动应用的时候，经常会遇到需要发送 SMS 给用户，或者因为登录原因，或者是为了发送信息。下面的 PHP 代码就实现了发送 SMS 的功能。&lt;/p&gt;
+&lt;p&gt;为了使用任何的语言发送 SMS，需要一个 SMS gateway。大部分的 SMS 会提供一个 API，这里是使用 MSG91 作为 SMS gateway。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function send_sms($mobile,$msg)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$authKey = &amp;quot;XXXXXXXXXXX&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;date_default_timezone_set(&amp;quot;Asia/Kolkata&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;$date = strftime(&amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;//Multiple mobiles numbers separated by comma&lt;/span&gt;
+&lt;span class="x"&gt;$mobileNumber = $mobile;&lt;/span&gt;
+
+&lt;span class="x"&gt;//Sender ID,While using route4 sender id should be 6 characters long.&lt;/span&gt;
+&lt;span class="x"&gt;$senderId = &amp;quot;IKOONK&amp;quot;;&lt;/span&gt;
+
+&lt;span class="x"&gt;//Your message to send, Add URL encoding here.&lt;/span&gt;
+&lt;span class="x"&gt;$message = urlencode($msg);&lt;/span&gt;
+
+&lt;span class="x"&gt;//Define route &lt;/span&gt;
+&lt;span class="x"&gt;$route = &amp;quot;template&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;//Prepare you post parameters&lt;/span&gt;
+&lt;span class="x"&gt;$postData = array(&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;#39;authkey&amp;#39; =&amp;gt; $authKey,&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;#39;mobiles&amp;#39; =&amp;gt; $mobileNumber,&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;#39;message&amp;#39; =&amp;gt; $message,&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;#39;sender&amp;#39; =&amp;gt; $senderId,&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;#39;route&amp;#39; =&amp;gt; $route&lt;/span&gt;
+&lt;span class="x"&gt;);&lt;/span&gt;
+
+&lt;span class="x"&gt;//API URL&lt;/span&gt;
+&lt;span class="x"&gt;$url=&amp;quot;https://control.msg91.com/sendhttp.php&amp;quot;;&lt;/span&gt;
+
+&lt;span class="x"&gt;// init the resource&lt;/span&gt;
+&lt;span class="x"&gt;$ch = curl_init();&lt;/span&gt;
+&lt;span class="x"&gt;curl_setopt_array($ch, array(&lt;/span&gt;
+&lt;span class="x"&gt;    CURLOPT_URL =&amp;gt; $url,&lt;/span&gt;
+&lt;span class="x"&gt;    CURLOPT_RETURNTRANSFER =&amp;gt; true,&lt;/span&gt;
+&lt;span class="x"&gt;    CURLOPT_POST =&amp;gt; true,&lt;/span&gt;
+&lt;span class="x"&gt;    CURLOPT_POSTFIELDS =&amp;gt; $postData&lt;/span&gt;
+&lt;span class="x"&gt;    //,CURLOPT_FOLLOWLOCATION =&amp;gt; true&lt;/span&gt;
+&lt;span class="x"&gt;));&lt;/span&gt;
+
+
+&lt;span class="x"&gt;//Ignore SSL certificate verification&lt;/span&gt;
+&lt;span class="x"&gt;curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);&lt;/span&gt;
+&lt;span class="x"&gt;curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);&lt;/span&gt;
+
+
+&lt;span class="x"&gt;//get response&lt;/span&gt;
+&lt;span class="x"&gt;$output = curl_exec($ch);&lt;/span&gt;
+&lt;span class="x"&gt;//Print error if any&lt;/span&gt;
+&lt;span class="x"&gt;if(curl_errno($ch))&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;#39;error:&amp;#39; . curl_error($ch);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+
+&lt;span class="x"&gt;curl_close($ch);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其中“$authKey = "XXXXXXXXXXX";”需要你输入你的密码，“$senderId = "IKOONK";”需要你输入你的 SenderID。当输入移动号码的时候需要指定国家代码 (比如，美国是 1，印度是 91 )。&lt;/p&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello World&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$mobile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;918112998787&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;send_sms&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$mobile&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$message&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 使用 mandrill 发送邮件&lt;/h3&gt;
+&lt;p&gt;Mandrill 是一款强大的 SMTP 提供器。开发者倾向于使用一个第三方 SMTP provider 来获取更好的收件交付。&lt;/p&gt;
+&lt;p&gt;下面的函数中，你需要把 “Mandrill.php” 放在同一个文件夹，作为 PHP 文件，这样就可以使用TA来发送邮件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function send_email($to_email,$subject,$message1)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;require_once &amp;#39;Mandrill.php&amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;$apikey = &amp;#39;XXXXXXXXXX&amp;#39;; //specify your api key here&lt;/span&gt;
+&lt;span class="x"&gt;$mandrill = new Mandrill($apikey);&lt;/span&gt;
+
+&lt;span class="x"&gt;$message = new stdClass();&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;html = $message1;&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;text = $message1;&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;subject = $subject;&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;from_email = &amp;quot;blog@koonk.com&amp;quot;;//Sender Email&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;from_name  = &amp;quot;KOONK&amp;quot;;//Sender Name&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;to = array(array(&amp;quot;email&amp;quot; =&amp;gt; $to_email));&lt;/span&gt;
+&lt;span class="x"&gt;$message-&amp;gt;track_opens = true;&lt;/span&gt;
+
+&lt;span class="x"&gt;$response = $mandrill-&amp;gt;messages-&amp;gt;send($message);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;“$apikey = 'XXXXXXXXXX'; //specify your api key here”这里需要你指定你的 API 密钥（从 Mandrill 账户中获得）。&lt;/p&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$to&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;abc@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$subject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;This is a test email&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;send_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$to&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$subject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$message&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;为了达到最好的效果，最好按照 Mandrill 的教程去配置 DNS。&lt;/p&gt;
+&lt;h3&gt;3. PHP 函数：阻止 SQL 注入&lt;/h3&gt;
+&lt;p&gt;SQL 注入或者 SQLi 常见的攻击网站的手段，使用下面的代码可以帮助你防止这些工具。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function clean($input)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    if (is_array($input))&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        foreach ($input as $key =&amp;gt; $val)&lt;/span&gt;
+&lt;span class="x"&gt;         {&lt;/span&gt;
+&lt;span class="x"&gt;            $output[$key] = clean($val);&lt;/span&gt;
+&lt;span class="x"&gt;            // $output[$key] = $this-&amp;gt;clean($val);&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    else&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        $output = (string) $input;&lt;/span&gt;
+&lt;span class="x"&gt;        // if magic quotes is on then use strip slashes&lt;/span&gt;
+&lt;span class="x"&gt;        if (get_magic_quotes_gpc()) &lt;/span&gt;
+&lt;span class="x"&gt;        {&lt;/span&gt;
+&lt;span class="x"&gt;            $output = stripslashes($output);&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;        // $output = strip_tags($output);&lt;/span&gt;
+&lt;span class="x"&gt;        $output = htmlentities($output, ENT_QUOTES, &amp;#39;UTF-8&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;// return the clean text&lt;/span&gt;
+&lt;span class="x"&gt;    return $output;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;clean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$text&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$text&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. 检测用户位置&lt;/h3&gt;
+&lt;p&gt;使用下面的函数，可以检测用户是在哪个城市访问你的网站&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function detect_city($ip) {&lt;/span&gt;
+
+&lt;span class="x"&gt;        $default = &amp;#39;UNKNOWN&amp;#39;;&lt;/span&gt;
+
+&lt;span class="x"&gt;        $curlopt_useragent = &amp;#39;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)&amp;#39;;&lt;/span&gt;
+
+&lt;span class="x"&gt;        $url = &amp;#39;http://ipinfodb.com/ip_locator.php?ip=&amp;#39; . urlencode($ip);&lt;/span&gt;
+&lt;span class="x"&gt;        $ch = curl_init();&lt;/span&gt;
+
+&lt;span class="x"&gt;        $curl_opt = array(&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_FOLLOWLOCATION  =&amp;gt; 1,&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_HEADER      =&amp;gt; 0,&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_RETURNTRANSFER  =&amp;gt; 1,&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_USERAGENT   =&amp;gt; $curlopt_useragent,&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_URL       =&amp;gt; $url,&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_TIMEOUT         =&amp;gt; 1,&lt;/span&gt;
+&lt;span class="x"&gt;            CURLOPT_REFERER         =&amp;gt; &amp;#39;http://&amp;#39; . $_SERVER[&amp;#39;HTTP_HOST&amp;#39;],&lt;/span&gt;
+&lt;span class="x"&gt;        );&lt;/span&gt;
+
+&lt;span class="x"&gt;        curl_setopt_array($ch, $curl_opt);&lt;/span&gt;
+
+&lt;span class="x"&gt;        $content = curl_exec($ch);&lt;/span&gt;
+
+&lt;span class="x"&gt;        if (!is_null($curl_info)) {&lt;/span&gt;
+&lt;span class="x"&gt;            $curl_info = curl_getinfo($ch);&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+
+&lt;span class="x"&gt;        curl_close($ch);&lt;/span&gt;
+
+&lt;span class="x"&gt;        if ( preg_match(&amp;#39;{&amp;lt;li&amp;gt;City : ([^&amp;lt;]*)&amp;lt;/li&amp;gt;}i&amp;#39;, $content, $regs) )  {&lt;/span&gt;
+&lt;span class="x"&gt;            $city = $regs[1];&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;        if ( preg_match(&amp;#39;{&amp;lt;li&amp;gt;State/Province : ([^&amp;lt;]*)&amp;lt;/li&amp;gt;}i&amp;#39;, $content, $regs) )  {&lt;/span&gt;
+&lt;span class="x"&gt;            $state = $regs[1];&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+
+&lt;span class="x"&gt;        if( $city!=&amp;#39;&amp;#39; &amp;amp;&amp;amp; $state!=&amp;#39;&amp;#39; ){&lt;/span&gt;
+&lt;span class="x"&gt;          $location = $city . &amp;#39;, &amp;#39; . $state;&lt;/span&gt;
+&lt;span class="x"&gt;          return $location;&lt;/span&gt;
+&lt;span class="x"&gt;        }else{&lt;/span&gt;
+&lt;span class="x"&gt;          return $default; &lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$_SERVER&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;REMOTE_ADDR&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="nv"&gt;$city&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;detect_city&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$ip&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$city&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;5. 获取 Web 页面的源代码&lt;/h3&gt;
+&lt;p&gt;使用下面的函数，可以获取任意 Web 页面的 HTML 代码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function display_sourcecode($url)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$lines = file($url);&lt;/span&gt;
+&lt;span class="x"&gt;$output = &amp;quot;&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;foreach ($lines as $line_num =&amp;gt; $line) { &lt;/span&gt;
+&lt;span class="x"&gt;    // loop thru each line and prepend line numbers&lt;/span&gt;
+&lt;span class="x"&gt;    $output.= &amp;quot;Line #&amp;lt;b&amp;gt;{$line_num}&amp;lt;/b&amp;gt; : &amp;quot; . htmlspecialchars($line) . &amp;quot;&amp;lt;br&amp;gt;\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://blog.koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;display_sourcecode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$source&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;6. 计算喜欢你的 Facebook 页面的用户&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function fb_fan_count($facebook_name)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    $data = json_decode(file_get_contents(&amp;quot;https://graph.facebook.com/&amp;quot;.$facebook_name));&lt;/span&gt;
+&lt;span class="x"&gt;    $likes = $data-&amp;gt;likes;&lt;/span&gt;
+&lt;span class="x"&gt;    return $likes;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;koonktechnologies&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;fb_fan_count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$page&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;7. 确定任意图片的主导颜色&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function dominant_color($image)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$i = imagecreatefromjpeg($image);&lt;/span&gt;
+&lt;span class="x"&gt;for ($x=0;$x&amp;lt;imagesx($i);$x++) {&lt;/span&gt;
+&lt;span class="x"&gt;    for ($y=0;$y&amp;lt;imagesy($i);$y++) {&lt;/span&gt;
+&lt;span class="x"&gt;        $rgb = imagecolorat($i,$x,$y);&lt;/span&gt;
+&lt;span class="x"&gt;        $r   = ($rgb &amp;gt;&amp;gt; 16) &amp;amp; 0xFF;&lt;/span&gt;
+&lt;span class="x"&gt;        $g   = ($rgb &amp;gt;&amp;gt;  &amp;amp; 0xFF;&lt;/span&gt;
+&lt;span class="x"&gt;        $b   = $rgb &amp;amp; 0xFF;&lt;/span&gt;
+&lt;span class="x"&gt;        $rTotal += $r;&lt;/span&gt;
+&lt;span class="x"&gt;        $gTotal += $g;&lt;/span&gt;
+&lt;span class="x"&gt;        $bTotal += $b;&lt;/span&gt;
+&lt;span class="x"&gt;        $total++;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;span class="x"&gt;$rAverage = round($rTotal/$total);&lt;/span&gt;
+&lt;span class="x"&gt;$gAverage = round($gTotal/$total);&lt;/span&gt;
+&lt;span class="x"&gt;$bAverage = round($bTotal/$total);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;8. whois 查询&lt;/h3&gt;
+&lt;p&gt;使用下面的函数可以获取任何域名用户的完整细节&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function whois_query($domain) {&lt;/span&gt;
+
+&lt;span class="x"&gt;    // fix the domain name:&lt;/span&gt;
+&lt;span class="x"&gt;    $domain = strtolower(trim($domain));&lt;/span&gt;
+&lt;span class="x"&gt;    $domain = preg_replace(&amp;#39;/^http:\/\//i&amp;#39;, &amp;#39;&amp;#39;, $domain);&lt;/span&gt;
+&lt;span class="x"&gt;    $domain = preg_replace(&amp;#39;/^www\./i&amp;#39;, &amp;#39;&amp;#39;, $domain);&lt;/span&gt;
+&lt;span class="x"&gt;    $domain = explode(&amp;#39;/&amp;#39;, $domain);&lt;/span&gt;
+&lt;span class="x"&gt;    $domain = trim($domain[0]);&lt;/span&gt;
+
+&lt;span class="x"&gt;    // split the TLD from domain name&lt;/span&gt;
+&lt;span class="x"&gt;    $_domain = explode(&amp;#39;.&amp;#39;, $domain);&lt;/span&gt;
+&lt;span class="x"&gt;    $lst = count($_domain)-1;&lt;/span&gt;
+&lt;span class="x"&gt;    $ext = $_domain[$lst];&lt;/span&gt;
+
+&lt;span class="x"&gt;    // You find resources and lists &lt;/span&gt;
+&lt;span class="x"&gt;    // like these on wikipedia: &lt;/span&gt;
+&lt;span class="x"&gt;    //&lt;/span&gt;
+&lt;span class="x"&gt;    // http://de.wikipedia.org/wiki/Whois&lt;/span&gt;
+&lt;span class="x"&gt;    //&lt;/span&gt;
+&lt;span class="x"&gt;    $servers = array(&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;biz&amp;quot; =&amp;gt; &amp;quot;whois.neulevel.biz&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;com&amp;quot; =&amp;gt; &amp;quot;whois.internic.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;us&amp;quot; =&amp;gt; &amp;quot;whois.nic.us&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;coop&amp;quot; =&amp;gt; &amp;quot;whois.nic.coop&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;info&amp;quot; =&amp;gt; &amp;quot;whois.nic.info&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;name&amp;quot; =&amp;gt; &amp;quot;whois.nic.name&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;net&amp;quot; =&amp;gt; &amp;quot;whois.internic.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;gov&amp;quot; =&amp;gt; &amp;quot;whois.nic.gov&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;edu&amp;quot; =&amp;gt; &amp;quot;whois.internic.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;mil&amp;quot; =&amp;gt; &amp;quot;rs.internic.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;int&amp;quot; =&amp;gt; &amp;quot;whois.iana.org&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ac&amp;quot; =&amp;gt; &amp;quot;whois.nic.ac&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ae&amp;quot; =&amp;gt; &amp;quot;whois.uaenic.ae&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;at&amp;quot; =&amp;gt; &amp;quot;whois.ripe.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;au&amp;quot; =&amp;gt; &amp;quot;whois.aunic.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;be&amp;quot; =&amp;gt; &amp;quot;whois.dns.be&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;bg&amp;quot; =&amp;gt; &amp;quot;whois.ripe.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;br&amp;quot; =&amp;gt; &amp;quot;whois.registro.br&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;bz&amp;quot; =&amp;gt; &amp;quot;whois.belizenic.bz&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ca&amp;quot; =&amp;gt; &amp;quot;whois.cira.ca&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;cc&amp;quot; =&amp;gt; &amp;quot;whois.nic.cc&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ch&amp;quot; =&amp;gt; &amp;quot;whois.nic.ch&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;cl&amp;quot; =&amp;gt; &amp;quot;whois.nic.cl&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;cn&amp;quot; =&amp;gt; &amp;quot;whois.cnnic.net.cn&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;cz&amp;quot; =&amp;gt; &amp;quot;whois.nic.cz&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;de&amp;quot; =&amp;gt; &amp;quot;whois.nic.de&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;fr&amp;quot; =&amp;gt; &amp;quot;whois.nic.fr&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;hu&amp;quot; =&amp;gt; &amp;quot;whois.nic.hu&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ie&amp;quot; =&amp;gt; &amp;quot;whois.domainregistry.ie&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;il&amp;quot; =&amp;gt; &amp;quot;whois.isoc.org.il&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;in&amp;quot; =&amp;gt; &amp;quot;whois.ncst.ernet.in&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ir&amp;quot; =&amp;gt; &amp;quot;whois.nic.ir&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;mc&amp;quot; =&amp;gt; &amp;quot;whois.ripe.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;to&amp;quot; =&amp;gt; &amp;quot;whois.tonic.to&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;tv&amp;quot; =&amp;gt; &amp;quot;whois.tv&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;ru&amp;quot; =&amp;gt; &amp;quot;whois.ripn.net&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;org&amp;quot; =&amp;gt; &amp;quot;whois.pir.org&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;aero&amp;quot; =&amp;gt; &amp;quot;whois.information.aero&amp;quot;,&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;quot;nl&amp;quot; =&amp;gt; &amp;quot;whois.domain-registry.nl&amp;quot;&lt;/span&gt;
+&lt;span class="x"&gt;    );&lt;/span&gt;
+
+&lt;span class="x"&gt;    if (!isset($servers[$ext])){&lt;/span&gt;
+&lt;span class="x"&gt;        die(&amp;#39;Error: No matching nic server found!&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+
+&lt;span class="x"&gt;    $nic_server = $servers[$ext];&lt;/span&gt;
+
+&lt;span class="x"&gt;    $output = &amp;#39;&amp;#39;;&lt;/span&gt;
+
+&lt;span class="x"&gt;    // connect to whois server:&lt;/span&gt;
+&lt;span class="x"&gt;    if ($conn = fsockopen ($nic_server, 43)) {&lt;/span&gt;
+&lt;span class="x"&gt;        fputs($conn, $domain.&amp;quot;\r\n&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;        while(!feof($conn)) {&lt;/span&gt;
+&lt;span class="x"&gt;            $output .= fgets($conn,128);&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;        fclose($conn);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    else { die(&amp;#39;Error: Could not connect to &amp;#39; . $nic_server . &amp;#39;!&amp;#39;); }&lt;/span&gt;
+
+&lt;span class="x"&gt;    return $output;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$domain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://www.blog.koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;whois_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$domain&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;print_r&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;9. 验证邮箱地址&lt;/h3&gt;
+&lt;p&gt;有时候，当在网站填写表单，用户可能会输入错误的邮箱地址，这个函数可以验证邮箱地址是否有效。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function is_validemail($email)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$check = 0;&lt;/span&gt;
+&lt;span class="x"&gt;if(filter_var($email,FILTER_VALIDATE_EMAIL))&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$check = 1;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;span class="x"&gt;return $check;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$email&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;blog@koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$check&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;is_validemail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$email&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$check&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;// If the output is 1, then email is valid.&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;10. 获取用户的真实  IP&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function getRealIpAddr()  &lt;/span&gt;
+&lt;span class="x"&gt;{  &lt;/span&gt;
+&lt;span class="x"&gt;    if (!emptyempty($_SERVER[&amp;#39;HTTP_CLIENT_IP&amp;#39;]))  &lt;/span&gt;
+&lt;span class="x"&gt;    {  &lt;/span&gt;
+&lt;span class="x"&gt;        $ip=$_SERVER[&amp;#39;HTTP_CLIENT_IP&amp;#39;];  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;    elseif (!emptyempty($_SERVER[&amp;#39;HTTP_X_FORWARDED_FOR&amp;#39;]))  &lt;/span&gt;
+&lt;span class="x"&gt;    //to check ip is pass from proxy  &lt;/span&gt;
+&lt;span class="x"&gt;    {  &lt;/span&gt;
+&lt;span class="x"&gt;        $ip=$_SERVER[&amp;#39;HTTP_X_FORWARDED_FOR&amp;#39;];  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;    else  &lt;/span&gt;
+&lt;span class="x"&gt;    {  &lt;/span&gt;
+&lt;span class="x"&gt;        $ip=$_SERVER[&amp;#39;REMOTE_ADDR&amp;#39;];  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;    return $ip;  &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;getRealIpAddr&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$ip&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;11. 转换 URL：从字符串变成超链接&lt;/h3&gt;
+&lt;p&gt;如果你正在开发论坛，博客或者是一个常规的表单提交，很多时候都要用户访问一个网站。使用这个函数，URL 字符串就可以自动的转换为超链接。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function makeClickableLinks($text) &lt;/span&gt;
+&lt;span class="x"&gt;{  &lt;/span&gt;
+&lt;span class="x"&gt; $text = eregi_replace(&amp;#39;(((f|ht){1}tp://)[-a-zA-Z0-9@:%_+.~#?&amp;amp;//=]+)&amp;#39;,  &lt;/span&gt;
+&lt;span class="x"&gt; &amp;#39;&amp;lt;a href=&amp;quot;\1&amp;quot;&amp;gt;\1&amp;lt;/a&amp;gt;&amp;#39;, $text);  &lt;/span&gt;
+&lt;span class="x"&gt; $text = eregi_replace(&amp;#39;([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_+.~#?&amp;amp;//=]+)&amp;#39;,  &lt;/span&gt;
+&lt;span class="x"&gt; &amp;#39;\1&amp;lt;a href=&amp;quot;http://\2&amp;quot;&amp;gt;\2&amp;lt;/a&amp;gt;&amp;#39;, $text);  &lt;/span&gt;
+&lt;span class="x"&gt; $text = eregi_replace(&amp;#39;([_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,3})&amp;#39;,  &lt;/span&gt;
+&lt;span class="x"&gt; &amp;#39;&amp;lt;a href=&amp;quot;mailto:\1&amp;quot;&amp;gt;\1&amp;lt;/a&amp;gt;&amp;#39;, $text);  &lt;/span&gt;
+
+&lt;span class="x"&gt;return $text;  &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;This is my first post on http://blog.koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;makeClickableLinks&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$text&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$text&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;12. 阻止多个 IP 访问你的网站&lt;/h3&gt;
+&lt;p&gt;这个代码片段可以方便你禁止某些特定的 IP 地址访问你的网站&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;if ( !file_exists(&amp;#39;blocked_ips.txt&amp;#39;) ) {&lt;/span&gt;
+&lt;span class="x"&gt; $deny_ips = array(&lt;/span&gt;
+&lt;span class="x"&gt;  &amp;#39;127.0.0.1&amp;#39;,&lt;/span&gt;
+&lt;span class="x"&gt;  &amp;#39;192.168.1.1&amp;#39;,&lt;/span&gt;
+&lt;span class="x"&gt;  &amp;#39;83.76.27.9&amp;#39;,&lt;/span&gt;
+&lt;span class="x"&gt;  &amp;#39;192.168.1.163&amp;#39;&lt;/span&gt;
+&lt;span class="x"&gt; );&lt;/span&gt;
+&lt;span class="x"&gt;} else {&lt;/span&gt;
+&lt;span class="x"&gt; $deny_ips = file(&amp;#39;blocked_ips.txt&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;span class="x"&gt;// read user ip adress:&lt;/span&gt;
+&lt;span class="x"&gt;$ip = isset($_SERVER[&amp;#39;REMOTE_ADDR&amp;#39;]) ? trim($_SERVER[&amp;#39;REMOTE_ADDR&amp;#39;]) : &amp;#39;&amp;#39;;&lt;/span&gt;
+
+&lt;span class="x"&gt;// search current IP in $deny_ips array&lt;/span&gt;
+&lt;span class="x"&gt;if ( (array_search($ip, $deny_ips))!== FALSE ) {&lt;/span&gt;
+&lt;span class="x"&gt; // address is blocked:&lt;/span&gt;
+&lt;span class="x"&gt; echo &amp;#39;Your IP adress (&amp;#39;.$ip.&amp;#39;) was blocked!&amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt; exit;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;13. 强制性文件下载&lt;/h3&gt;
+&lt;p&gt;如果你需要下载特定的文件而不用另开新窗口，下面的代码片段可以帮助你。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function force_download($file) &lt;/span&gt;
+&lt;span class="x"&gt;{ &lt;/span&gt;
+&lt;span class="x"&gt;    $dir      = &amp;quot;../log/exports/&amp;quot;; &lt;/span&gt;
+&lt;span class="x"&gt;    if ((isset($file))&amp;amp;&amp;amp;(file_exists($dir.$file))) { &lt;/span&gt;
+&lt;span class="x"&gt;       header(&amp;quot;Content-type: application/force-download&amp;quot;); &lt;/span&gt;
+&lt;span class="x"&gt;       header(&amp;#39;Content-Disposition: inline; filename=&amp;quot;&amp;#39; . $dir.$file . &amp;#39;&amp;quot;&amp;#39;); &lt;/span&gt;
+&lt;span class="x"&gt;       header(&amp;quot;Content-Transfer-Encoding: Binary&amp;quot;); &lt;/span&gt;
+&lt;span class="x"&gt;       header(&amp;quot;Content-length: &amp;quot;.filesize($dir.$file)); &lt;/span&gt;
+&lt;span class="x"&gt;       header(&amp;#39;Content-Type: application/octet-stream&amp;#39;); &lt;/span&gt;
+&lt;span class="x"&gt;       header(&amp;#39;Content-Disposition: attachment; filename=&amp;quot;&amp;#39; . $file . &amp;#39;&amp;quot;&amp;#39;); &lt;/span&gt;
+&lt;span class="x"&gt;       readfile(&amp;quot;$dir$file&amp;quot;); &lt;/span&gt;
+&lt;span class="x"&gt;    } else { &lt;/span&gt;
+&lt;span class="x"&gt;       echo &amp;quot;No file selected&amp;quot;; &lt;/span&gt;
+&lt;span class="x"&gt;    } &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;&amp;lt;php&lt;/span&gt;
+&lt;span class="x"&gt;force_download(&amp;quot;image.jpg&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;?&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;14. 创建 JSON 数据&lt;/h3&gt;
+&lt;p&gt;使用下面的 PHP 片段可以创建 JSON 数据，可以方便你创建移动应用的 Web 服务&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;$json_data = array (&amp;#39;id&amp;#39;=&amp;gt;1,&amp;#39;name&amp;#39;=&amp;gt;&amp;quot;Mohit&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;echo json_encode($json_data);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;15. 压缩 zip 文件&lt;/h3&gt;
+&lt;p&gt;使用下面的 PHP 片段可以即时压缩 zip 文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function create_zip($files = array(),$destination = &amp;#39;&amp;#39;,$overwrite = false) {  &lt;/span&gt;
+&lt;span class="x"&gt;    //if the zip file already exists and overwrite is false, return false  &lt;/span&gt;
+&lt;span class="x"&gt;    if(file_exists($destination) &amp;amp;&amp;amp; !$overwrite) { return false; }  &lt;/span&gt;
+&lt;span class="x"&gt;    //vars  &lt;/span&gt;
+&lt;span class="x"&gt;    $valid_files = array();  &lt;/span&gt;
+&lt;span class="x"&gt;    //if files were passed in...  &lt;/span&gt;
+&lt;span class="x"&gt;    if(is_array($files)) {  &lt;/span&gt;
+&lt;span class="x"&gt;        //cycle through each file  &lt;/span&gt;
+&lt;span class="x"&gt;        foreach($files as $file) {  &lt;/span&gt;
+&lt;span class="x"&gt;            //make sure the file exists  &lt;/span&gt;
+&lt;span class="x"&gt;            if(file_exists($file)) {  &lt;/span&gt;
+&lt;span class="x"&gt;                $valid_files[] = $file;  &lt;/span&gt;
+&lt;span class="x"&gt;            }  &lt;/span&gt;
+&lt;span class="x"&gt;        }  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;    //if we have good files...  &lt;/span&gt;
+&lt;span class="x"&gt;    if(count($valid_files)) {  &lt;/span&gt;
+&lt;span class="x"&gt;        //create the archive  &lt;/span&gt;
+&lt;span class="x"&gt;        $zip = new ZipArchive();  &lt;/span&gt;
+&lt;span class="x"&gt;        if($zip-&amp;gt;open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {  &lt;/span&gt;
+&lt;span class="x"&gt;            return false;  &lt;/span&gt;
+&lt;span class="x"&gt;        }  &lt;/span&gt;
+&lt;span class="x"&gt;        //add the files  &lt;/span&gt;
+&lt;span class="x"&gt;        foreach($valid_files as $file) {  &lt;/span&gt;
+&lt;span class="x"&gt;            $zip-&amp;gt;addFile($file,$file);  &lt;/span&gt;
+&lt;span class="x"&gt;        }  &lt;/span&gt;
+&lt;span class="x"&gt;        //debug  &lt;/span&gt;
+&lt;span class="x"&gt;        //echo &amp;#39;The zip archive contains &amp;#39;,$zip-&amp;gt;numFiles,&amp;#39; files with a status of &amp;#39;,$zip-&amp;gt;status;  &lt;/span&gt;
+
+&lt;span class="x"&gt;        //close the zip -- done!  &lt;/span&gt;
+&lt;span class="x"&gt;        $zip-&amp;gt;close();  &lt;/span&gt;
+
+&lt;span class="x"&gt;        //check to make sure the file exists  &lt;/span&gt;
+&lt;span class="x"&gt;        return file_exists($destination);  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;    else  &lt;/span&gt;
+&lt;span class="x"&gt;    {  &lt;/span&gt;
+&lt;span class="x"&gt;        return false;  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$files&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;file1.jpg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;file2.jpg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;file3.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;  
+&lt;span class="nx"&gt;create_zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$files&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;myzipfile.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;16. 解压文件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function unzip($location,$newLocation)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;        if(exec(&amp;quot;unzip $location&amp;quot;,$arr)){&lt;/span&gt;
+&lt;span class="x"&gt;            mkdir($newLocation);&lt;/span&gt;
+&lt;span class="x"&gt;            for($i = 1;$i&amp;lt; count($arr);$i++){&lt;/span&gt;
+&lt;span class="x"&gt;                $file = trim(preg_replace(&amp;quot;~inflating: ~&amp;quot;,&amp;quot;&amp;quot;,$arr[$i]));&lt;/span&gt;
+&lt;span class="x"&gt;                copy($location.&amp;#39;/&amp;#39;.$file,$newLocation.&amp;#39;/&amp;#39;.$file);&lt;/span&gt;
+&lt;span class="x"&gt;                unlink($location.&amp;#39;/&amp;#39;.$file);&lt;/span&gt;
+&lt;span class="x"&gt;            }&lt;/span&gt;
+&lt;span class="x"&gt;            return TRUE;&lt;/span&gt;
+&lt;span class="x"&gt;        }else{&lt;/span&gt;
+&lt;span class="x"&gt;            return FALSE;&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nx"&gt;unzip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;unziped/test&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;//File would be unzipped in unziped/test folder&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;17. 缩放图片&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function resize_image($filename, $tmpname, $xmax, $ymax)  &lt;/span&gt;
+&lt;span class="x"&gt;{  &lt;/span&gt;
+&lt;span class="x"&gt;    $ext = explode(&amp;quot;.&amp;quot;, $filename);  &lt;/span&gt;
+&lt;span class="x"&gt;    $ext = $ext[count($ext)-1];  &lt;/span&gt;
+
+&lt;span class="x"&gt;    if($ext == &amp;quot;jpg&amp;quot; || $ext == &amp;quot;jpeg&amp;quot;)  &lt;/span&gt;
+&lt;span class="x"&gt;        $im = imagecreatefromjpeg($tmpname);  &lt;/span&gt;
+&lt;span class="x"&gt;    elseif($ext == &amp;quot;png&amp;quot;)  &lt;/span&gt;
+&lt;span class="x"&gt;        $im = imagecreatefrompng($tmpname);  &lt;/span&gt;
+&lt;span class="x"&gt;    elseif($ext == &amp;quot;gif&amp;quot;)  &lt;/span&gt;
+&lt;span class="x"&gt;        $im = imagecreatefromgif($tmpname);  &lt;/span&gt;
+
+&lt;span class="x"&gt;    $x = imagesx($im);  &lt;/span&gt;
+&lt;span class="x"&gt;    $y = imagesy($im);  &lt;/span&gt;
+
+&lt;span class="x"&gt;    if($x &amp;lt;= $xmax &amp;amp;&amp;amp; $y &amp;lt;= $ymax)  &lt;/span&gt;
+&lt;span class="x"&gt;        return $im;  &lt;/span&gt;
+
+&lt;span class="x"&gt;    if($x &amp;gt;= $y) {  &lt;/span&gt;
+&lt;span class="x"&gt;        $newx = $xmax;  &lt;/span&gt;
+&lt;span class="x"&gt;        $newy = $newx * $y / $x;  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+&lt;span class="x"&gt;    else {  &lt;/span&gt;
+&lt;span class="x"&gt;        $newy = $ymax;  &lt;/span&gt;
+&lt;span class="x"&gt;        $newx = $x / $y * $newy;  &lt;/span&gt;
+&lt;span class="x"&gt;    }  &lt;/span&gt;
+
+&lt;span class="x"&gt;    $im2 = imagecreatetruecolor($newx, $newy);  &lt;/span&gt;
+&lt;span class="x"&gt;    imagecopyresized($im2, $im, 0, 0, 0, 0, floor($newx), floor($newy), $x, $y);  &lt;/span&gt;
+&lt;span class="x"&gt;    return $im2;   &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;18. 使用 mail() 发送邮件&lt;/h3&gt;
+&lt;p&gt;之前我们提供了如何使用 Mandrill 发送邮件的 PHP 代码片段，但是如果你不想使用第三方服务，那么可以使用下面的 PHP 代码片段。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function send_mail($to,$subject,$body)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$headers = &amp;quot;From: KOONK\r\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;$headers .= &amp;quot;Reply-To: blog@koonk.com\r\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;$headers .= &amp;quot;Return-Path: blog@koonk.com\r\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;$headers .= &amp;quot;X-Mailer: PHP5\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;$headers .= &amp;#39;MIME-Version: 1.0&amp;#39; . &amp;quot;\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;$headers .= &amp;#39;Content-type: text/html; charset=iso-8859-1&amp;#39; . &amp;quot;\r\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;mail($to,$subject,$body,$headers);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$to&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;admin@koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$subject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;This is a test mail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;send_mail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$to&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$subject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$body&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;19. 把秒转换成天数，小时数和分钟&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function secsToStr($secs) {&lt;/span&gt;
+&lt;span class="x"&gt;    if($secs&amp;gt;=86400){$days=floor($secs/86400);$secs=$secs%86400;$r=$days.&amp;#39; day&amp;#39;;if($days&amp;lt;&amp;gt;1){$r.=&amp;#39;s&amp;#39;;}if($secs&amp;gt;0){$r.=&amp;#39;, &amp;#39;;}}&lt;/span&gt;
+&lt;span class="x"&gt;    if($secs&amp;gt;=3600){$hours=floor($secs/3600);$secs=$secs%3600;$r.=$hours.&amp;#39; hour&amp;#39;;if($hours&amp;lt;&amp;gt;1){$r.=&amp;#39;s&amp;#39;;}if($secs&amp;gt;0){$r.=&amp;#39;, &amp;#39;;}}&lt;/span&gt;
+&lt;span class="x"&gt;    if($secs&amp;gt;=60){$minutes=floor($secs/60);$secs=$secs%60;$r.=$minutes.&amp;#39; minute&amp;#39;;if($minutes&amp;lt;&amp;gt;1){$r.=&amp;#39;s&amp;#39;;}if($secs&amp;gt;0){$r.=&amp;#39;, &amp;#39;;}}&lt;/span&gt;
+&lt;span class="x"&gt;    $r.=$secs.&amp;#39; second&amp;#39;;if($secs&amp;lt;&amp;gt;1){$r.=&amp;#39;s&amp;#39;;}&lt;/span&gt;
+&lt;span class="x"&gt;    return $r;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$seconds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;56789&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;secsToStr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$seconds&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$output&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;20. 数据库连接&lt;/h3&gt;
+&lt;p&gt;连接 MySQL 数据库&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$DBNAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;koonk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$HOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$DBUSER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$DBPASS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;koonk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$CONNECT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;mysql_connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$HOST&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$DBUSER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$DBPASS&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nv"&gt;$CONNECT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MySQL Error: &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;mysql_error&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nv"&gt;$SELECT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;mysql_select_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$DBNAME&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nv"&gt;$SELECT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MySQL Error: &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;mysql_error&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;21. 目录清单&lt;/h3&gt;
+&lt;p&gt;使用下面的 PHP 代码片段可以在一个目录中列出所有文件和文件夹&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function list_files($dir)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    if(is_dir($dir))&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        if($handle = opendir($dir))&lt;/span&gt;
+&lt;span class="x"&gt;        {&lt;/span&gt;
+&lt;span class="x"&gt;            while(($file = readdir($handle)) !== false)&lt;/span&gt;
+&lt;span class="x"&gt;            {&lt;/span&gt;
+&lt;span class="x"&gt;                if($file != &amp;quot;.&amp;quot; &amp;amp;amp;&amp;amp;amp; $file != &amp;quot;..&amp;quot; &amp;amp;amp;&amp;amp;amp; $file != &amp;quot;Thumbs.db&amp;quot;/*pesky windows, images..*/)&lt;/span&gt;
+&lt;span class="x"&gt;                {&lt;/span&gt;
+&lt;span class="x"&gt;                    echo &amp;#39;&amp;lt;a target=&amp;quot;_blank&amp;quot; href=&amp;quot;&amp;#39;.$dir.$file.&amp;#39;&amp;quot;&amp;gt;&amp;#39;.$file.&amp;#39;&amp;lt;/a&amp;gt;&amp;lt;br&amp;gt;&amp;#39;.&amp;quot;\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;                }&lt;/span&gt;
+&lt;span class="x"&gt;            }&lt;/span&gt;
+&lt;span class="x"&gt;            closedir($handle);&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+    &lt;span class="nx"&gt;list_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;//This will list all files of images folder&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;22. 检测用户语言&lt;/h3&gt;
+&lt;p&gt;使用下面的 PHP 代码片段可以检测用户浏览器所使用的语言&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function get_client_language($availableLanguages, $default=&amp;#39;en&amp;#39;){&lt;/span&gt;
+&lt;span class="x"&gt;    if (isset($_SERVER[&amp;#39;HTTP_ACCEPT_LANGUAGE&amp;#39;])) {&lt;/span&gt;
+&lt;span class="x"&gt;        $langs=explode(&amp;#39;,&amp;#39;,$_SERVER[&amp;#39;HTTP_ACCEPT_LANGUAGE&amp;#39;]);&lt;/span&gt;
+&lt;span class="x"&gt;        foreach ($langs as $value){&lt;/span&gt;
+&lt;span class="x"&gt;            $choice=substr($value,0,2);&lt;/span&gt;
+&lt;span class="x"&gt;            if(in_array($choice, $availableLanguages)){&lt;/span&gt;
+&lt;span class="x"&gt;                return $choice;&lt;/span&gt;
+&lt;span class="x"&gt;            }&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;    } &lt;/span&gt;
+&lt;span class="x"&gt;    return $default;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;23. 查看 CSV 文件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function readCSV($csvFile){&lt;/span&gt;
+&lt;span class="x"&gt;    $file_handle = fopen($csvFile, &amp;#39;r&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;    while (!feof($file_handle) ) {&lt;/span&gt;
+&lt;span class="x"&gt;        $line_of_text[] = fgetcsv($file_handle, 1024);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    fclose($file_handle);&lt;/span&gt;
+&lt;span class="x"&gt;    return $line_of_text;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$csvFile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;test.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$csv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;readCSV&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$csvFile&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// This will get value of Column 1 &amp;amp; Row 1&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;24. 从 PHP 数据创建 CSV 文件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function generateCsv($data, $delimiter = &amp;#39;,&amp;#39;, $enclosure = &amp;#39;&amp;quot;&amp;#39;) {&lt;/span&gt;
+&lt;span class="x"&gt;   $handle = fopen(&amp;#39;php://temp&amp;#39;, &amp;#39;r+&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;   foreach ($data as $line) {&lt;/span&gt;
+&lt;span class="x"&gt;           fputcsv($handle, $line, $delimiter, $enclosure);&lt;/span&gt;
+&lt;span class="x"&gt;   }&lt;/span&gt;
+&lt;span class="x"&gt;   rewind($handle);&lt;/span&gt;
+&lt;span class="x"&gt;   while (!feof($handle)) {&lt;/span&gt;
+&lt;span class="x"&gt;           $contents .= fread($handle, 8192);&lt;/span&gt;
+&lt;span class="x"&gt;   }&lt;/span&gt;
+&lt;span class="x"&gt;   fclose($handle);&lt;/span&gt;
+&lt;span class="x"&gt;   return $contents;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;apple&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;oranges&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;generateCsv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$delimiter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$enclosure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;25. 解析 XML 数据&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;$xml_string=&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?&lt;/span&gt;&lt;span class="nx"&gt;xml&lt;/span&gt; &lt;span class="nx"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1.0&amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;&amp;lt;moleculedb&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;molecule name=&amp;#39;Benzine&amp;#39;&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;symbol&amp;gt;ben&amp;lt;/symbol&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;code&amp;gt;A&amp;lt;/code&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;/molecule&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;molecule name=&amp;#39;Water&amp;#39;&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;symbol&amp;gt;h2o&amp;lt;/symbol&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;code&amp;gt;K&amp;lt;/code&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;/molecule&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;&amp;lt;/moleculedb&amp;gt;&amp;quot;;&lt;/span&gt;
+
+&lt;span class="x"&gt;//load the xml string using simplexml function&lt;/span&gt;
+&lt;span class="x"&gt;$xml = simplexml_load_string($xml_string);&lt;/span&gt;
+
+&lt;span class="x"&gt;//loop through the each node of molecule&lt;/span&gt;
+&lt;span class="x"&gt;foreach ($xml-&amp;gt;molecule as $record)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;   //attribute are accessted by&lt;/span&gt;
+&lt;span class="x"&gt;   echo $record[&amp;#39;name&amp;#39;], &amp;#39;  &amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;   //node are accessted by -&amp;gt; operator&lt;/span&gt;
+&lt;span class="x"&gt;   echo $record-&amp;gt;symbol, &amp;#39;  &amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;   echo $record-&amp;gt;code, &amp;#39;&amp;lt;br /&amp;gt;&amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;26. 解析 JSON 数据&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;$json_string=&amp;#39;{&amp;quot;id&amp;quot;:1,&amp;quot;name&amp;quot;:&amp;quot;rolf&amp;quot;,&amp;quot;country&amp;quot;:&amp;quot;russia&amp;quot;,&amp;quot;office&amp;quot;:[&amp;quot;google&amp;quot;,&amp;quot;oracle&amp;quot;]} &amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;$obj=json_decode($json_string);&lt;/span&gt;
+&lt;span class="x"&gt;//print the parsed data&lt;/span&gt;
+&lt;span class="x"&gt;echo $obj-&amp;gt;name; //displays rolf&lt;/span&gt;
+&lt;span class="x"&gt;echo $obj-&amp;gt;office[0]; //displays google&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;27. 获取当前页面 URL&lt;/h3&gt;
+&lt;p&gt;这个 PHP 片段可以帮助你让用户登录后直接跳转到之前浏览的页面&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function current_url()&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$url = &amp;quot;http://&amp;quot; . $_SERVER[&amp;#39;HTTP_HOST&amp;#39;] . $_SERVER[&amp;#39;REQUEST_URI&amp;#39;];&lt;/span&gt;
+&lt;span class="x"&gt;$validURL = str_replace(&amp;quot;&amp;amp;&amp;quot;, &amp;quot;&amp;amp;amp;&amp;quot;, $url);&lt;/span&gt;
+&lt;span class="x"&gt;return validURL;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Currently you are on: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;current_url&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;28. 从任意的 Twitter 账号获取最新的 Tweet&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function my_twitter($username) &lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;     $no_of_tweets = 1;&lt;/span&gt;
+&lt;span class="x"&gt;     $feed = &amp;quot;http://search.twitter.com/search.atom?q=from:&amp;quot; . $username . &amp;quot;&amp;amp;rpp=&amp;quot; . $no_of_tweets;&lt;/span&gt;
+&lt;span class="x"&gt;     $xml = simplexml_load_file($feed);&lt;/span&gt;
+&lt;span class="x"&gt;    foreach($xml-&amp;gt;children() as $child) {&lt;/span&gt;
+&lt;span class="x"&gt;        foreach ($child as $value) {&lt;/span&gt;
+&lt;span class="x"&gt;            if($value-&amp;gt;getName() == &amp;quot;link&amp;quot;) $link = $value[&amp;#39;href&amp;#39;];&lt;/span&gt;
+&lt;span class="x"&gt;            if($value-&amp;gt;getName() == &amp;quot;content&amp;quot;) {&lt;/span&gt;
+&lt;span class="x"&gt;                $content = $value . &amp;quot;&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;        echo &amp;#39;&amp;lt;p class=&amp;quot;twit&amp;quot;&amp;gt;&amp;#39;.$content.&amp;#39; &amp;lt;a class=&amp;quot;twt&amp;quot; href=&amp;quot;&amp;#39;.$link.&amp;#39;&amp;quot; title=&amp;quot;&amp;quot;&amp;gt;&amp;amp;nbsp; &amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;            }    &lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;    }    &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$handle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;koonktech&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;my_twitter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$handle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;29. 转发数量&lt;/h3&gt;
+&lt;p&gt;使用这个 PHP 片段可以检测你的页面 URL 有多少转发数量&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function tweetCount($url) {&lt;/span&gt;
+&lt;span class="x"&gt;    $content = file_get_contents(&amp;quot;http://api.tweetmeme.com/url_info?url=&amp;quot;.$url);&lt;/span&gt;
+&lt;span class="x"&gt;    $element = new SimpleXmlElement($content);&lt;/span&gt;
+&lt;span class="x"&gt;    $retweets = $element-&amp;gt;story-&amp;gt;url_count;&lt;/span&gt;
+&lt;span class="x"&gt;    if($retweets){&lt;/span&gt;
+&lt;span class="x"&gt;        return $retweets;&lt;/span&gt;
+&lt;span class="x"&gt;    } else {&lt;/span&gt;
+&lt;span class="x"&gt;        return 0;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://blog.koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;tweetCount&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;30. 计算两个日期的差&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$date1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Y-m-d&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$date2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2015-12-04&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$diff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;strtotime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$date2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;strtotime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$date1&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nv"&gt;$years&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;floor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$diff&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;365&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nv"&gt;$months&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;floor&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;$diff&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$years&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;365&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nv"&gt;$days&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;floor&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;$diff&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$years&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;365&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$months&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nb"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;%d years, %d months, %d days&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$years&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$months&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$days&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;--------------------------------------------------------&lt;/span&gt; &lt;span class="k"&gt;OR&lt;/span&gt;
+&lt;span class="nv"&gt;$date1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;2007-03-24&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$date2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;2009-06-26&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$interval&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$date1&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;diff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$date2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;difference &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;$interval&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;y&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; years, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;$interval&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; months, &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$interval&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; days &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+&lt;span class="c1"&gt;// shows the total amount of days (not divided into years, months and days like above)&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;difference &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;$interval&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;days&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; days &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;--------------------------------------------------------&lt;/span&gt; &lt;span class="k"&gt;OR&lt;/span&gt;
+
+
+&lt;span class="sd"&gt;/**&lt;/span&gt;
+&lt;span class="sd"&gt; * Calculate differences between two dates with precise semantics. Based on PHPs DateTime::diff()&lt;/span&gt;
+&lt;span class="sd"&gt; * implementation by Derick Rethans. Ported to PHP by Emil H, 2011-05-02. No rights reserved.&lt;/span&gt;
+&lt;span class="sd"&gt; * &lt;/span&gt;
+&lt;span class="sd"&gt; * See here for original code:&lt;/span&gt;
+&lt;span class="sd"&gt; * http://svn.php.net/viewvc/php/php-src/trunk/ext/date/lib/tm2unixtime.c?revision=302890&amp;amp;view=markup&lt;/span&gt;
+&lt;span class="sd"&gt; * http://svn.php.net/viewvc/php/php-src/trunk/ext/date/lib/interval.c?revision=298973&amp;amp;view=markup&lt;/span&gt;
+&lt;span class="sd"&gt; */&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$end&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nv"&gt;$start&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="nb"&gt;intval&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;$start&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;intval&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;$start&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="nv"&gt;$end&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="nb"&gt;intval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;intval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;$adj&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;_date_range_limit_days&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nv"&gt;$days_in_month_leap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$days_in_month&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;28&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$month&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;invert&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nv"&gt;$month&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$month&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$month&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="nv"&gt;$year&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="nv"&gt;$leapyear&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="nv"&gt;$days&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$leapyear&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nv"&gt;$days_in_month_leap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$month&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;$days_in_month&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$month&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+            &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="nv"&gt;$days&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nv"&gt;$leapyear&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;$year&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="nv"&gt;$days&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$leapyear&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="nv"&gt;$days_in_month_leap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$month&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;$days_in_month&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$month&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+            &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="nv"&gt;$days&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="nv"&gt;$month&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$month&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$month&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="nv"&gt;$year&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;_date_normalize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;_date_range_limit_days&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;_date_range_limit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="sd"&gt;/**&lt;/span&gt;
+&lt;span class="sd"&gt; * Accepts two unix timestamps.&lt;/span&gt;
+&lt;span class="sd"&gt; */&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;_date_diff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$one&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$two&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nv"&gt;$invert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$one&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$two&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$one&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$two&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$two&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$one&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="nv"&gt;$invert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nv"&gt;$key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;array_combine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;array_map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;intval&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;explode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Y m d H i s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$one&lt;/span&gt;&lt;span class="p"&gt;))));&lt;/span&gt;
+    &lt;span class="nv"&gt;$b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;array_combine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;array_map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;intval&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;explode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Y m d H i s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$two&lt;/span&gt;&lt;span class="p"&gt;))));&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;invert&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$invert&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;days&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;intval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;$one&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;$two&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;86400&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$invert&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;_date_normalize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;_date_normalize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nv"&gt;$date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2014-12-04 19:37:22&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;pre&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;print_r&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nx"&gt;_date_diff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="nb"&gt;strtotime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$date&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="nb"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;/pre&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;31. 删除文件夹内容&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function Delete($path)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    if (is_dir($path) === true)&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        $files = array_diff(scandir($path), array(&amp;#39;.&amp;#39;, &amp;#39;..&amp;#39;));&lt;/span&gt;
+&lt;span class="x"&gt;        foreach ($files as $file)&lt;/span&gt;
+&lt;span class="x"&gt;        {&lt;/span&gt;
+&lt;span class="x"&gt;            Delete(realpath($path) . &amp;#39;/&amp;#39; . $file);&lt;/span&gt;
+&lt;span class="x"&gt;        }&lt;/span&gt;
+&lt;span class="x"&gt;        return rmdir($path);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    else if (is_file($path) === true)&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        return unlink($path);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    return false;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;images/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;Delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$path&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// This will delete images folder along with its contents.&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;32. 搜索和高亮字符串中的关键字&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function highlighter_text($text, $words)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    $split_words = explode( &amp;quot; &amp;quot; , $words );&lt;/span&gt;
+&lt;span class="x"&gt;    foreach($split_words as $word)&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        $color = &amp;quot;#4285F4&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;        $text = preg_replace(&amp;quot;|($word)|Ui&amp;quot; ,&lt;/span&gt;
+&lt;span class="x"&gt;            &amp;quot;&amp;lt;span style=\&amp;quot;color:&amp;quot;.$color.&amp;quot;;\&amp;quot;&amp;gt;&amp;lt;b&amp;gt;$1&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;&amp;quot; , $text );&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    return $text;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;I like chocolates and I like apples&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;apple&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nx"&gt;highlighter_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$string&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$words&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;33. 写入文件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?&lt;/span&gt;
+&lt;span class="nv"&gt;$filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;blog.csv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$fp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;fopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; Hello &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$output&lt;/span&gt; &lt;span class="o"&gt;.=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; World! &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$output&lt;/span&gt; &lt;span class="o"&gt;.=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;fputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$fp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$output&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;fclose&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$fp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;34. 根据 URL 下载图片&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function imagefromURL($image,$rename)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$ch = curl_init($image);&lt;/span&gt;
+&lt;span class="x"&gt;curl_setopt($ch, CURLOPT_HEADER, 0);&lt;/span&gt;
+&lt;span class="x"&gt;curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);&lt;/span&gt;
+&lt;span class="x"&gt;curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);&lt;/span&gt;
+&lt;span class="x"&gt;$rawdata=curl_exec ($ch);&lt;/span&gt;
+&lt;span class="x"&gt;curl_close ($ch);&lt;/span&gt;
+&lt;span class="x"&gt;$fp = fopen(&amp;quot;$rename&amp;quot;,&amp;#39;w&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;fwrite($fp, $rawdata); &lt;/span&gt;
+&lt;span class="x"&gt;fclose($fp);&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://koonk.com/images/logo.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$rename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;koonk.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;imagefromURL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;$rename&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;35. 检测 URL 是否有效&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function isvalidURL($url)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;$check = 0;&lt;/span&gt;
+&lt;span class="x"&gt;if (filter_var($url, FILTER_VALIDATE_URL) !== false) {&lt;/span&gt;
+&lt;span class="x"&gt;  $check = 1;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;span class="x"&gt;return $check;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$check&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;checkvalidURL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$check&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;//if returns 1 then URL is valid.&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;36. 生成二维码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function qr_code($data, $type = &amp;quot;TXT&amp;quot;, $size =&amp;#39;150&amp;#39;, $ec=&amp;#39;L&amp;#39;, $margin=&amp;#39;0&amp;#39;)  &lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;     $types = array(&amp;quot;URL&amp;quot; =--&amp;gt; &amp;quot;http://&amp;quot;, &amp;quot;TEL&amp;quot; =&amp;gt; &amp;quot;TEL:&amp;quot;, &amp;quot;TXT&amp;quot;=&amp;gt;&amp;quot;&amp;quot;, &amp;quot;EMAIL&amp;quot; =&amp;gt; &amp;quot;MAILTO:&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;    if(!in_array($type,array(&amp;quot;URL&amp;quot;, &amp;quot;TEL&amp;quot;, &amp;quot;TXT&amp;quot;, &amp;quot;EMAIL&amp;quot;)))&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        $type = &amp;quot;TXT&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    if (!preg_match(&amp;#39;/^&amp;#39;.$types[$type].&amp;#39;/&amp;#39;, $data))&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        $data = str_replace(&amp;quot;\\&amp;quot;, &amp;quot;&amp;quot;, $types[$type]).$data;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    $ch = curl_init();&lt;/span&gt;
+&lt;span class="x"&gt;    $data = urlencode($data);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_URL, &amp;#39;http://chart.apis.google.com/chart&amp;#39;);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_POST, true);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_POSTFIELDS, &amp;#39;chs=&amp;#39;.$size.&amp;#39;x&amp;#39;.$size.&amp;#39;&amp;amp;cht=qr&amp;amp;chld=&amp;#39;.$ec.&amp;#39;|&amp;#39;.$margin.&amp;#39;&amp;amp;chl=&amp;#39;.$data);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_HEADER, false);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_TIMEOUT, 30);&lt;/span&gt;
+&lt;span class="x"&gt;    $response = curl_exec($ch);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_close($ch);&lt;/span&gt;
+&lt;span class="x"&gt;    return $response;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nb"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content-type: image/png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nx"&gt;qr_code&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://koonk.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;37. 计算两个地图坐标之间的距离&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function getDistanceBetweenPointsNew($latitude1, $longitude1, $latitude2, $longitude2) {&lt;/span&gt;
+&lt;span class="x"&gt;    $theta = $longitude1 - $longitude2;&lt;/span&gt;
+&lt;span class="x"&gt;    $miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));&lt;/span&gt;
+&lt;span class="x"&gt;    $miles = acos($miles);&lt;/span&gt;
+&lt;span class="x"&gt;    $miles = rad2deg($miles);&lt;/span&gt;
+&lt;span class="x"&gt;    $miles = $miles * 60 * 1.1515;&lt;/span&gt;
+&lt;span class="x"&gt;    $feet = $miles * 5280;&lt;/span&gt;
+&lt;span class="x"&gt;    $yards = $feet / 3;&lt;/span&gt;
+&lt;span class="x"&gt;    $kilometers = $miles * 1.609344;&lt;/span&gt;
+&lt;span class="x"&gt;    $meters = $kilometers * 1000;&lt;/span&gt;
+&lt;span class="x"&gt;    return compact(&amp;#39;miles&amp;#39;,&amp;#39;feet&amp;#39;,&amp;#39;yards&amp;#39;,&amp;#39;kilometers&amp;#39;,&amp;#39;meters&amp;#39;); &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$point1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;lat&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;40.770623&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;long&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;73.964367&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$point2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;lat&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;40.758224&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;long&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;73.917404&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$distance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;getDistanceBetweenPointsNew&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$point1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;lat&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nv"&gt;$point1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;long&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nv"&gt;$point2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;lat&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nv"&gt;$point2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;long&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+&lt;span class="k"&gt;foreach&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$distance&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;$unit&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$unit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;: &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;number_format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;br /&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;38. 获取一个特定话题标签的所有 Tweets&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function getTweets($hash_tag) {&lt;/span&gt;
+&lt;span class="x"&gt;    $url = &amp;#39;http://search.twitter.com/search.atom?q=&amp;#39;.urlencode($hash_tag) ;&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;quot;&amp;lt;p&amp;gt;Connecting to &amp;lt;strong&amp;gt;$url&amp;lt;/strong&amp;gt; ...&amp;lt;/p&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    $ch = curl_init($url);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, TRUE);&lt;/span&gt;
+&lt;span class="x"&gt;    $xml = curl_exec ($ch);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_close ($ch);&lt;/span&gt;
+&lt;span class="x"&gt;    //If you want to see the response from Twitter, uncomment this next part out:&lt;/span&gt;
+&lt;span class="x"&gt;    //echo &amp;quot;&amp;lt;p&amp;gt;Response:&amp;lt;/p&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    //echo &amp;quot;&amp;lt;pre&amp;gt;&amp;quot;.htmlspecialchars($xml).&amp;quot;&amp;lt;/pre&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    $affected = 0;&lt;/span&gt;
+&lt;span class="x"&gt;    $twelement = new SimpleXMLElement($xml);&lt;/span&gt;
+&lt;span class="x"&gt;    foreach ($twelement-&amp;gt;entry as $entry) {&lt;/span&gt;
+&lt;span class="x"&gt;        $text = trim($entry-&amp;gt;title);&lt;/span&gt;
+&lt;span class="x"&gt;        $author = trim($entry-&amp;gt;author-&amp;gt;name);&lt;/span&gt;
+&lt;span class="x"&gt;        $time = strtotime($entry-&amp;gt;published);&lt;/span&gt;
+&lt;span class="x"&gt;        $id = $entry-&amp;gt;id;&lt;/span&gt;
+&lt;span class="x"&gt;        echo &amp;quot;&amp;lt;p&amp;gt;Tweet from &amp;quot;.$author.&amp;quot;: &amp;lt;strong&amp;gt;&amp;quot;.$text.&amp;quot;&amp;lt;/strong&amp;gt;  &amp;lt;em&amp;gt;Posted &amp;quot;.date(&amp;#39;n/j/y g:i a&amp;#39;,$time).&amp;quot;&amp;lt;/em&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    return true ;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;39. 添加 th,st,nd 或者 rd 作为数字的后缀&lt;/h3&gt;
+&lt;p&gt;Friday the 13th&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function ordinal($cdnl){ &lt;/span&gt;
+&lt;span class="x"&gt;    $test_c = abs($cdnl) % 10; &lt;/span&gt;
+&lt;span class="x"&gt;    $ext = ((abs($cdnl) %100 &amp;lt; 21 &amp;amp;&amp;amp; abs($cdnl) %100 &amp;gt; 4) ? &amp;#39;th&amp;#39;&lt;/span&gt;
+&lt;span class="x"&gt;            : (($test_c &amp;lt; 4) ? ($test_c &amp;lt; 3) ? ($test_c &amp;lt; 2) ? ($test_c &amp;lt; 1) &lt;/span&gt;
+&lt;span class="x"&gt;            ? &amp;#39;th&amp;#39; : &amp;#39;st&amp;#39; : &amp;#39;nd&amp;#39; : &amp;#39;rd&amp;#39; : &amp;#39;th&amp;#39;)); &lt;/span&gt;
+&lt;span class="x"&gt;    return $cdnl.$ext; &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$number&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nx"&gt;ordinal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$number&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;//output is 10th&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;40. 限制文件下载的速度&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="c1"&gt;// local file that should be send to the client&lt;/span&gt;
+&lt;span class="nv"&gt;$local_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test-file.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;// filename that the user gets as default&lt;/span&gt;
+&lt;span class="nv"&gt;$download_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your-download-name.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;// set the download rate limit (=&amp;gt; 20,5 kb/s)&lt;/span&gt;
+&lt;span class="nv"&gt;$download_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;20.5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file_exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$local_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;is_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$local_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// send headers&lt;/span&gt;
+    &lt;span class="nb"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Cache-control: private&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nb"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Type: application/octet-stream&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="nb"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Length: &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;filesize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$local_file&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="nb"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Disposition: filename=&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$download_file&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// flush content&lt;/span&gt;
+    &lt;span class="nb"&gt;flush&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;    
+    &lt;span class="c1"&gt;// open file stream&lt;/span&gt;
+    &lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;fopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$local_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nb"&gt;feof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// send the current file part to the browser&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;fread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$download_rate&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;    
+
+        &lt;span class="c1"&gt;// flush the content to the browser&lt;/span&gt;
+        &lt;span class="nb"&gt;flush&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// sleep one second&lt;/span&gt;
+        &lt;span class="nb"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
+    &lt;span class="p"&gt;}&lt;/span&gt;    
+
+    &lt;span class="c1"&gt;// close file stream&lt;/span&gt;
+    &lt;span class="nb"&gt;fclose&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;die&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Error: The file &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$local_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; does not exist!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;41. 把文本转换成图片&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nb"&gt;header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content-type: image/png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$_GET&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="nv"&gt;$im&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;imagecreatefrompng&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images/button.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;imagecolorallocate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$im&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nv"&gt;$px&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;imagesx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mf"&gt;7.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;strlen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$string&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$py&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$fontSize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nb"&gt;imagestring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$im&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;fontSize&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$px&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$py&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$color&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;imagepng&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$im&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;imagedestroy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$im&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;42. 获取远程文件的大小&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function remote_filesize($url, $user = &amp;quot;&amp;quot;, $pw = &amp;quot;&amp;quot;)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    ob_start();&lt;/span&gt;
+&lt;span class="x"&gt;    $ch = curl_init($url);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_HEADER, 1);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch, CURLOPT_NOBODY, 1);&lt;/span&gt;
+&lt;span class="x"&gt;    if(!empty($user) &amp;amp;&amp;amp; !empty($pw))&lt;/span&gt;
+&lt;span class="x"&gt;    {&lt;/span&gt;
+&lt;span class="x"&gt;        $headers = array(&amp;#39;Authorization: Basic &amp;#39; .  base64_encode(&amp;quot;$user:$pw&amp;quot;));&lt;/span&gt;
+&lt;span class="x"&gt;        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    $ok = curl_exec($ch);&lt;/span&gt;
+&lt;span class="x"&gt;    curl_close($ch);&lt;/span&gt;
+&lt;span class="x"&gt;    $head = ob_get_contents();&lt;/span&gt;
+&lt;span class="x"&gt;    ob_end_clean();&lt;/span&gt;
+&lt;span class="x"&gt;    $regex = &amp;#39;/Content-Length:\s([0-9].+?)\s/&amp;#39;;&lt;/span&gt;
+&lt;span class="x"&gt;    $count = preg_match($regex, $head, $matches);&lt;/span&gt;
+&lt;span class="x"&gt;    return isset($matches[1]) ? $matches[1] : &amp;quot;unknown&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://koonk.com/images/logo.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;remote_filesize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;43. 使用 imagebrick 进行 pdf 到图像的转换&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$pdf_file&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./pdf/demo.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$save_to&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./jpg/demo.jpg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;     &lt;span class="c1"&gt;//make sure that apache has permissions to write in this folder! (common problem)&lt;/span&gt;
+&lt;span class="c1"&gt;//execute ImageMagick command &amp;#39;convert&amp;#39; and convert PDF to JPG with applied settings&lt;/span&gt;
+&lt;span class="nb"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;convert &amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$pdf_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot; -colorspace RGB -resize 800 &amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$save_to&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$output&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$return_var&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$return_var&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;              &lt;span class="c1"&gt;//if exec successfuly converted pdf to jpg&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Conversion OK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Conversion failed.&amp;lt;br /&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$output&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;44. 使用 tinyurl 生成短网址&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function get_tiny_url($url)  &lt;/span&gt;
+&lt;span class="x"&gt;{  &lt;/span&gt;
+&lt;span class="x"&gt;    $ch = curl_init();  &lt;/span&gt;
+&lt;span class="x"&gt;    $timeout = 5;  &lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch,CURLOPT_URL,&amp;#39;http://tinyurl.com/api-create.php?url=&amp;#39;.$url);  &lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);  &lt;/span&gt;
+&lt;span class="x"&gt;    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);  &lt;/span&gt;
+&lt;span class="x"&gt;    $data = curl_exec($ch);  &lt;/span&gt;
+&lt;span class="x"&gt;    curl_close($ch);  &lt;/span&gt;
+&lt;span class="x"&gt;    return $data;  &lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://blog.koonk.com/2015/07/Hello-World&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$tinyurl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;get_tiny_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$tinyurl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;45. youtube 下载链接生成器&lt;/h3&gt;
+&lt;p&gt;使用下面的 PHP 片段可以让你的用户下载 Youtube 视频&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function str_between($string, $start, $end)&lt;/span&gt;
+&lt;span class="x"&gt;{ &lt;/span&gt;
+&lt;span class="x"&gt;$string = &amp;quot; &amp;quot;.$string; $ini = strpos($string,$start); if ($ini == 0) return &amp;quot;&amp;quot;; $ini += strlen($start); $len = strpos($string,$end,$ini) - $ini; return substr($string,$ini,$len); }&lt;/span&gt;
+&lt;span class="x"&gt;function get_youtube_download_link(){&lt;/span&gt;
+&lt;span class="x"&gt;    $youtube_link = $_GET[&amp;#39;youtube&amp;#39;];&lt;/span&gt;
+&lt;span class="x"&gt;    $youtube_page = file_get_contents($youtube_link);&lt;/span&gt;
+&lt;span class="x"&gt;    $v_id = str_between($youtube_page, &amp;quot;&amp;amp;video_id=&amp;quot;, &amp;quot;&amp;amp;&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;    $t_id = str_between($youtube_page, &amp;quot;&amp;amp;t=&amp;quot;, &amp;quot;&amp;amp;&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;    $flv_link = &amp;quot;http://www.youtube.com/get_video?video_id=$v_id&amp;amp;t=$t_id&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    $hq_flv_link = &amp;quot;http://www.youtube.com/get_video?video_id=$v_id&amp;amp;t=$t_id&amp;amp;fmt=6&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    $mp4_link = &amp;quot;http://www.youtube.com/get_video?video_id=$v_id&amp;amp;t=$t_id&amp;amp;fmt=18&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    $threegp_link = &amp;quot;http://www.youtube.com/get_video?video_id=$v_id&amp;amp;t=$t_id&amp;amp;fmt=17&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;quot;\t\tDownload (right-click &amp;amp;gt; save as)&amp;amp;#58;\n\t\t&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;quot;&amp;lt;a href=\&amp;quot;$flv_link\&amp;quot;&amp;gt;FLV&amp;lt;/a&amp;gt;\n\t\t&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;quot;&amp;lt;a href=\&amp;quot;$hq_flv_link\&amp;quot;&amp;gt;HQ FLV (if available)&amp;lt;/a&amp;gt;\n\t\t&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;quot;&amp;lt;a href=\&amp;quot;$mp4_link\&amp;quot;&amp;gt;MP4&amp;lt;/a&amp;gt;\n\t\t&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    echo &amp;quot;&amp;lt;a href=\&amp;quot;$threegp_link\&amp;quot;&amp;gt;3GP&amp;lt;/a&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;\n&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;46. Facebook 样式的时间戳&lt;/h3&gt;
+&lt;p&gt;Facebook (x mins age, y hours ago etc)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;function nicetime($date)&lt;/span&gt;
+&lt;span class="x"&gt;{&lt;/span&gt;
+&lt;span class="x"&gt;    if(empty($date)) {&lt;/span&gt;
+&lt;span class="x"&gt;        return &amp;quot;No date provided&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+
+&lt;span class="x"&gt;    $periods         = array(&amp;quot;second&amp;quot;, &amp;quot;minute&amp;quot;, &amp;quot;hour&amp;quot;, &amp;quot;day&amp;quot;, &amp;quot;week&amp;quot;, &amp;quot;month&amp;quot;, &amp;quot;year&amp;quot;, &amp;quot;decade&amp;quot;);&lt;/span&gt;
+&lt;span class="x"&gt;    $lengths         = array(&amp;quot;60&amp;quot;,&amp;quot;60&amp;quot;,&amp;quot;24&amp;quot;,&amp;quot;7&amp;quot;,&amp;quot;4.35&amp;quot;,&amp;quot;12&amp;quot;,&amp;quot;10&amp;quot;);&lt;/span&gt;
+
+&lt;span class="x"&gt;    $now             = time();&lt;/span&gt;
+&lt;span class="x"&gt;    $unix_date         = strtotime($date);&lt;/span&gt;
+
+&lt;span class="x"&gt;       // check validity of date&lt;/span&gt;
+&lt;span class="x"&gt;    if(empty($unix_date)) {    &lt;/span&gt;
+&lt;span class="x"&gt;        return &amp;quot;Bad date&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+&lt;span class="x"&gt;    // is it future date or past date&lt;/span&gt;
+&lt;span class="x"&gt;    if($now &amp;gt; $unix_date) {    &lt;/span&gt;
+&lt;span class="x"&gt;        $difference     = $now - $unix_date;&lt;/span&gt;
+&lt;span class="x"&gt;        $tense         = &amp;quot;ago&amp;quot;;&lt;/span&gt;
+
+&lt;span class="x"&gt;    } else {&lt;/span&gt;
+&lt;span class="x"&gt;        $difference     = $unix_date - $now;&lt;/span&gt;
+&lt;span class="x"&gt;        $tense         = &amp;quot;from now&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+
+&lt;span class="x"&gt;    for($j = 0; $difference &amp;gt;= $lengths[$j] &amp;amp;&amp;amp; $j &amp;lt; count($lengths)-1; $j++) {&lt;/span&gt;
+&lt;span class="x"&gt;        $difference /= $lengths[$j];&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+
+&lt;span class="x"&gt;    $difference = round($difference);&lt;/span&gt;
+
+&lt;span class="x"&gt;    if($difference != 1) {&lt;/span&gt;
+&lt;span class="x"&gt;        $periods[$j].= &amp;quot;s&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;    }&lt;/span&gt;
+
+&lt;span class="x"&gt;    return &amp;quot;$difference $periods[$j] {$tense}&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="nv"&gt;$date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2015-07-05 03:45&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;$result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;nicetime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$date&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 2 days ago&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;摘自：&lt;a href="http://www.oschina.net/question/2012764_246023"&gt;开源中国&lt;/a&gt;&lt;/p&gt;</content><category term="php"></category><category term="code"></category></entry></feed>

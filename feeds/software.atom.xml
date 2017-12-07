@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>STEP UP - Software</title><link href="/" rel="alternate"></link><link href="/feeds/software.atom.xml" rel="self"></link><id>/</id><updated>2015-10-30T00:13:00+08:00</updated><entry><title>WPS for Linux 安装手记</title><link href="/wps-for-linux-an-zhuang-shou-ji.html" rel="alternate"></link><published>2015-10-30T00:13:00+08:00</published><updated>2015-10-30T00:13:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-10-30:/wps-for-linux-an-zhuang-shou-ji.html</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;问题:&lt;/strong&gt; 我听说一个好东西Kingsoft Office（译注：就是WPS），所以我想在我的Linux上试试。我怎样才能安装Kingsoft Office呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Kingsoft Office 是一套办公套件，支持多个平台，包括Windows, Linux, iOS 和 Android。它包含三个组件：Writer（WPS文字）用来文字处理，Presentation（WPS演示）支持幻灯片，Spereadsheets（WPS表格）是电子表格。其使用免费增值模式，其中基础版本是免费使用。比较其他的linux办公套件，如LibreOffice、 OpenOffice，其最大优势在于，Kingsoft Office能最好的兼容微软的Office（译注：版权问题？了解下wps和Office的历史问题，可以得到一些结论）。因此如果你需要在windows和linux平台间交互，Kingsoft office是一个很好的选择。&lt;/p&gt;
+&lt;p&gt;WPS for Linux 官方下载地址： &lt;a href="http://community.wps.cn/download/"&gt;http://community.wps.cn …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;问题:&lt;/strong&gt; 我听说一个好东西Kingsoft Office（译注：就是WPS），所以我想在我的Linux上试试。我怎样才能安装Kingsoft Office呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Kingsoft Office 是一套办公套件，支持多个平台，包括Windows, Linux, iOS 和 Android。它包含三个组件：Writer（WPS文字）用来文字处理，Presentation（WPS演示）支持幻灯片，Spereadsheets（WPS表格）是电子表格。其使用免费增值模式，其中基础版本是免费使用。比较其他的linux办公套件，如LibreOffice、 OpenOffice，其最大优势在于，Kingsoft Office能最好的兼容微软的Office（译注：版权问题？了解下wps和Office的历史问题，可以得到一些结论）。因此如果你需要在windows和linux平台间交互，Kingsoft office是一个很好的选择。&lt;/p&gt;
+&lt;p&gt;WPS for Linux 官方下载地址： &lt;a href="http://community.wps.cn/download/"&gt;http://community.wps.cn/download/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;CentOS, Fedora 或 RHEL中安装Kingsoft Office&lt;/h2&gt;
+&lt;p&gt;在官方页面下载RPM文件。&lt;/p&gt;
+&lt;p&gt;需要使用yum命令并用"localinstall"选项来本地安装这个RPM包&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum localinstall kingsoft-office-9.1.0.4244-0.1.a12p3.i686.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意不要使用rpm命令安装。否者，你会得到依赖错误，而且很难解决：&lt;/p&gt;
+&lt;p&gt;错误: 依赖失败:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;libICE.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libSM.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libX11.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libXext.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libXrender.so.1 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libc.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;基于Red Hat的发行版有多重库支持。如果你要想安装的RPM包是32位的并有32位库依赖（你的系统是64位的），一个很好的解决方法就是使用yum来安装。只要RPM在构建时候已经添加所有依赖关系，yum就可以自动使用yum库解决依赖关系。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Debian, Ubuntu 和 Linux Mint 中安装Kingsoft Office&lt;/h2&gt;
+&lt;p&gt;在官方页面下载DEB包。官方RPM包同样只支持32位版本linux，但是你可以在64位中安装。&lt;/p&gt;
+&lt;p&gt;DEB包同样遇到一堆依赖。因此使用gdebi命令来代替dpkg来自动解决依赖。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install gdebi-core
+$ sudo gdebi kingsoft-office_9.1.0.4244~a12p3_i386.deb 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动 Kingsoft Office&lt;/p&gt;
+&lt;p&gt;安装完成后，你就可以在桌面管理器轻松启动Witer（WPS文字）, Presentation（WPS演示）, and Spreadsheets（WPS表格）。&lt;/p&gt;
+&lt;p&gt;不但如此，你也可以在命令行中启动Kingsoft Office。&lt;/p&gt;
+&lt;p&gt;启动Wirter（WPS文字），使用这个命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wps &lt;span class="o"&gt;(&lt;/span&gt;译注：原文丢失此命令&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动Presentation（WPS演示），使用这个命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wpp
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动Spreadsheets（WPS表格），使用这个命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ et
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;安装缺失的字体&lt;/h2&gt;
+&lt;p&gt;首次运行wps时会提示缺失字体：wingding、wingding2、wingding3、webdings、MT Extra&lt;/p&gt;
+&lt;p&gt;字体文件可以从Windows系统的&lt;code&gt;C:\Windows\fonts&lt;/code&gt;复制，复制到&lt;code&gt;～/.fonts&lt;/code&gt;，没有目录就创建一个啦。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PS. 没有找到&lt;code&gt;MT Extra&lt;/code&gt;字体&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="WPS"></category></entry><entry><title>Linux下安装Haroopad</title><link href="/linuxxia-an-zhuang-haroopad.html" rel="alternate"></link><published>2015-10-28T23:02:00+08:00</published><updated>2015-10-28T23:02:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-10-28:/linuxxia-an-zhuang-haroopad.html</id><summary type="html">&lt;p&gt;在&lt;code&gt;Linux&lt;/code&gt;下安装&lt;code&gt;haroopad&lt;/code&gt;还是比较简单的。&lt;/p&gt;
+&lt;p&gt;由于我用的是 &lt;code&gt;Linux Mint 17.2&lt;/code&gt;， 是基于 &lt;code&gt;Ubuntu 14.04&lt;/code&gt; 的发行版本，所以只要下载 &lt;code&gt;.deb&lt;/code&gt; 的安装包就可以安装了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget -c https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;虽然安装包只有40M，可以下载速度实在太慢，好久才下全。&lt;/p&gt;
+&lt;p&gt;下载完成后直接双击安装包就可以安装了，简单～&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;另外说下&lt;code&gt;Haroopad&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Haroopad&lt;/code&gt;是我用过&lt;code&gt;Markdown&lt;/code&gt;编辑器是比较满意的工具了，而且支持Win/Linux，这点我比较喜欢，而且就试用的情况，感觉Linux版本比Win版本用着更稳定，因为Win版本在一些机子上还有显示的问题，所以感觉就不太爽。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Haroopad&lt;/code&gt;对 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;在&lt;code&gt;Linux&lt;/code&gt;下安装&lt;code&gt;haroopad&lt;/code&gt;还是比较简单的。&lt;/p&gt;
+&lt;p&gt;由于我用的是 &lt;code&gt;Linux Mint 17.2&lt;/code&gt;， 是基于 &lt;code&gt;Ubuntu 14.04&lt;/code&gt; 的发行版本，所以只要下载 &lt;code&gt;.deb&lt;/code&gt; 的安装包就可以安装了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget -c https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;虽然安装包只有40M，可以下载速度实在太慢，好久才下全。&lt;/p&gt;
+&lt;p&gt;下载完成后直接双击安装包就可以安装了，简单～&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;另外说下&lt;code&gt;Haroopad&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Haroopad&lt;/code&gt;是我用过&lt;code&gt;Markdown&lt;/code&gt;编辑器是比较满意的工具了，而且支持Win/Linux，这点我比较喜欢，而且就试用的情况，感觉Linux版本比Win版本用着更稳定，因为Win版本在一些机子上还有显示的问题，所以感觉就不太爽。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Haroopad&lt;/code&gt;对&lt;code&gt;Markdown&lt;/code&gt;语法的支持没得说的，都不知道要比&lt;code&gt;Retext&lt;/code&gt;好多少，所以严重支持一下～&lt;/p&gt;</content><category term="haroopad"></category></entry><entry><title>Fedora下安装Sublime Text 3</title><link href="/fedoraxia-an-zhuang-sublime-text-3.html" rel="alternate"></link><published>2015-08-11T23:42:00+08:00</published><updated>2015-08-11T23:42:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-08-11:/fedoraxia-an-zhuang-sublime-text-3.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Sublime Text 3&lt;/code&gt; 官网上有 Windown版本的，Ubuntu版本的，MAC版本的，唯独没有 Fedora/RedHat版本的。&lt;/p&gt;
+&lt;p&gt;网上找到了安装方法&lt;/p&gt;
+&lt;h2&gt;1. 下载安装脚本文件&lt;/h2&gt;
+&lt;p&gt;下载32位版本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget https://gist.githubusercontent.com/dkd903/531a2409c40c926c66d6/raw/2c83194719f1216a7321e4b48f6b604dc8779faf/Install_Sublime_Text_3.sh -O install-sublime-text.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下载64位版本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget https://gist.githubusercontent.com/dkd903/8ba3f51313c1781cc571/raw/f37b1c18547d086cd45e8b484efc518260106ea9/Install_Sublime_Text_3_64.sh -O install-sublime-text.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;2. 修改文件属性为可执行&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod +x install-sublime-text.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;3 …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;Sublime Text 3&lt;/code&gt; 官网上有 Windown版本的，Ubuntu版本的，MAC版本的，唯独没有 Fedora/RedHat版本的。&lt;/p&gt;
+&lt;p&gt;网上找到了安装方法&lt;/p&gt;
+&lt;h2&gt;1. 下载安装脚本文件&lt;/h2&gt;
+&lt;p&gt;下载32位版本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget https://gist.githubusercontent.com/dkd903/531a2409c40c926c66d6/raw/2c83194719f1216a7321e4b48f6b604dc8779faf/Install_Sublime_Text_3.sh -O install-sublime-text.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下载64位版本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget https://gist.githubusercontent.com/dkd903/8ba3f51313c1781cc571/raw/f37b1c18547d086cd45e8b484efc518260106ea9/Install_Sublime_Text_3_64.sh -O install-sublime-text.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;2. 修改文件属性为可执行&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod +x install-sublime-text.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;3. 执行安装脚本&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su -c &lt;span class="s2"&gt;&amp;quot;sh install-sublime-text.sh&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在你就可以在从菜单里找到 &lt;code&gt;Sublime Text 3&lt;/code&gt; 了，或者在命令行里执行 &lt;code&gt;subl&lt;/code&gt; 来运行它。&lt;/p&gt;
+&lt;p&gt;如果先前你有安装过 &lt;code&gt;Sublime Text 2&lt;/code&gt;，那么安装完成后就会被 &lt;code&gt;Sublime Text 3&lt;/code&gt; 所替代。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;这里列出脚本内容以供参考：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="nv"&gt;SHORTCUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[Desktop Entry]&lt;/span&gt;
+&lt;span class="s2"&gt;Name=Sublime Text 3&lt;/span&gt;
+&lt;span class="s2"&gt;Comment=Edit text files&lt;/span&gt;
+&lt;span class="s2"&gt;Exec=/usr/local/sublime-text-3/sublime_text&lt;/span&gt;
+&lt;span class="s2"&gt;Icon=/usr/local/sublime-text-3/Icon/128x128/sublime_text.png&lt;/span&gt;
+&lt;span class="s2"&gt;Terminal=false&lt;/span&gt;
+&lt;span class="s2"&gt;Type=Application&lt;/span&gt;
+&lt;span class="s2"&gt;Encoding=UTF-8&lt;/span&gt;
+&lt;span class="s2"&gt;Categories=Utility;TextEditor;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;SCRIPT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#!/bin/sh&lt;/span&gt;
+&lt;span class="s2"&gt;if [ \${1} == \&amp;quot;--help\&amp;quot; ]; then&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/local/sublime-text-3/sublime_text --help&lt;/span&gt;
+&lt;span class="s2"&gt;else&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/local/sublime-text-3/sublime_text \$@ &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&lt;/span&gt;
+&lt;span class="s2"&gt;fi&amp;quot;&lt;/span&gt;
+
+curl -L &lt;span class="s2"&gt;&amp;quot;http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3059_x64.tar.bz2&amp;quot;&lt;/span&gt; -o &lt;span class="s2"&gt;&amp;quot;/usr/src/Sublime Text 3.tar.bz2&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/src
+tar -xvjf &lt;span class="s2"&gt;&amp;quot;Sublime Text 3.tar.bz2&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Sublime Text 3&amp;quot;&lt;/span&gt;
+mkdir -pv &lt;span class="s2"&gt;&amp;quot;/usr/local/sublime-text-3&amp;quot;&lt;/span&gt;
+mv -fv * &lt;span class="s2"&gt;&amp;quot;/usr/local/sublime-text-3/&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;SCRIPT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &amp;gt; &lt;span class="s2"&gt;&amp;quot;/usr/local/bin/subl&amp;quot;&lt;/span&gt;
+chmod +x &lt;span class="s2"&gt;&amp;quot;/usr/local/bin/subl&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;SHORTCUT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &amp;gt; &lt;span class="s2"&gt;&amp;quot;/usr/share/applications/sublime-text-3.desktop&amp;quot;&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Finish!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Fedora"></category><category term="Sublime Text 3"></category></entry><entry><title>Fedora22下安装五笔</title><link href="/fedora22xia-an-zhuang-wu-bi.html" rel="alternate"></link><published>2015-07-31T23:48:00+08:00</published><updated>2015-07-31T23:48:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-07-31:/fedora22xia-an-zhuang-wu-bi.html</id><summary type="html">&lt;p&gt;Fedora22输入法以ibus为框架，因此要安装五笔输入法，也应该安装安装ibus框架下的极点或海峰五笔。&lt;/p&gt;
+&lt;h2&gt;输入法安装&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ su
+Password:
+&lt;span class="c1"&gt;# dnf install -y ibus*wubi*&lt;/span&gt;
+&lt;span class="c1"&gt;# reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;后面一个操作就是重启系统
+重启登录系统后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点击屏幕右上角，点击&lt;code&gt;工具图标&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;在打开的窗口里点击&lt;code&gt;个人&lt;/code&gt;，点击&lt;code&gt;区域和语言&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;点击&lt;code&gt;区域和语言&lt;/code&gt;对话框的&lt;code&gt;输入源&lt;/code&gt;下的&lt;code&gt;+&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;选择&lt;code&gt;添加输入源&lt;/code&gt;里的&lt;code&gt;汉语（中国）&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;选择&lt;code&gt;汉语（极点五笔86（极爽词库 6.0））&lt;/code&gt;或&lt;code&gt;汉语（海峰五笔86）&lt;/code&gt;，点击&lt;code&gt;添加&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;输入法切换&lt;/h2&gt;
+&lt;p&gt;ibus输入法切换使用&lt;code&gt;WIN&lt;/code&gt;键加&lt;code&gt;空格&lt;/code&gt;键来切换。&lt;/p&gt;</summary><content type="html">&lt;p&gt;Fedora22输入法以ibus为框架，因此要安装五笔输入法，也应该安装安装ibus框架下的极点或海峰五笔。&lt;/p&gt;
+&lt;h2&gt;输入法安装&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ su
+Password:
+&lt;span class="c1"&gt;# dnf install -y ibus*wubi*&lt;/span&gt;
+&lt;span class="c1"&gt;# reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;后面一个操作就是重启系统
+重启登录系统后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点击屏幕右上角，点击&lt;code&gt;工具图标&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;在打开的窗口里点击&lt;code&gt;个人&lt;/code&gt;，点击&lt;code&gt;区域和语言&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;点击&lt;code&gt;区域和语言&lt;/code&gt;对话框的&lt;code&gt;输入源&lt;/code&gt;下的&lt;code&gt;+&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;选择&lt;code&gt;添加输入源&lt;/code&gt;里的&lt;code&gt;汉语（中国）&lt;/code&gt;，&lt;/li&gt;
+&lt;li&gt;选择&lt;code&gt;汉语（极点五笔86（极爽词库 6.0））&lt;/code&gt;或&lt;code&gt;汉语（海峰五笔86）&lt;/code&gt;，点击&lt;code&gt;添加&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;输入法切换&lt;/h2&gt;
+&lt;p&gt;ibus输入法切换使用&lt;code&gt;WIN&lt;/code&gt;键加&lt;code&gt;空格&lt;/code&gt;键来切换。&lt;/p&gt;</content><category term="五笔"></category></entry><entry><title>Fedora22 安装 Chrome</title><link href="/fedora22-an-zhuang-chrome.html" rel="alternate"></link><published>2015-07-30T23:41:00+08:00</published><updated>2015-07-30T23:41:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-07-30:/fedora22-an-zhuang-chrome.html</id><summary type="html">&lt;p&gt;Fedora22 无法直接安装 Chrome，需要先添加&lt;code&gt;Chrome&lt;/code&gt;的软件仓库&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ su -
+Password:
+&lt;span class="c1"&gt;# cat &amp;lt;&amp;lt; EOF &amp;gt; /etc/yum.repos.d/google-chrome.repo&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;google-chrome&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;google-chrome - &lt;span class="se"&gt;\$&lt;/span&gt;basearch
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://dl.google.com/linux/chrome/rpm/stable/&lt;span class="se"&gt;\$&lt;/span&gt;basearch
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;gpgkey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://dl-ssl.google.com/linux/linux_signing_key.pub
+EOF
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在可以安装了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# dnf install -y google-chrome-stable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;但是会有一个&lt;code&gt;获取GPG密钥错误 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Fedora22 无法直接安装 Chrome，需要先添加&lt;code&gt;Chrome&lt;/code&gt;的软件仓库&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ su -
+Password:
+&lt;span class="c1"&gt;# cat &amp;lt;&amp;lt; EOF &amp;gt; /etc/yum.repos.d/google-chrome.repo&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;google-chrome&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;google-chrome - &lt;span class="se"&gt;\$&lt;/span&gt;basearch
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://dl.google.com/linux/chrome/rpm/stable/&lt;span class="se"&gt;\$&lt;/span&gt;basearch
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;gpgkey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://dl-ssl.google.com/linux/linux_signing_key.pub
+EOF
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在可以安装了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# dnf install -y google-chrome-stable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;但是会有一个&lt;code&gt;获取GPG密钥错误&lt;/code&gt;的提示，加一个参数就可以了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# dnf install -y google-chrome-stable --nogpg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Chrome"></category></entry><entry><title>CentOS7本地yum安装LNMP建站组合</title><link href="/centos7ben-di-yuman-zhuang-lnmpjian-zhan-zu-he.html" rel="alternate"></link><published>2015-06-15T01:08:00+08:00</published><updated>2015-06-15T01:08:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-06-15:/centos7ben-di-yuman-zhuang-lnmpjian-zhan-zu-he.html</id><summary type="html">&lt;h2&gt;简介：&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;LNMP代表的就是：Linux系统下Nginx+MySQL(Mariadb)+PHP这种网站服务器架构。
+Linux是一类Unix计算机操作系统的统称，是目前最流行的免费操作系统。代表版本有：Debian、CentOS、Ubuntu、Fedora、Gentoo等。
+Nginx是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。
+Mysql是一个小型关系型数据库管理系统，目前使用Mariadb替代之。
+PHP是一种在服务器端执行的嵌入HTML文档的脚本语言。Jun 14, 2015
+这四种软件均为免费开源软件，组合到一起，成为一个免费、高效、扩展性强的网站服务系统。
+下面我们针对这个组合逐步说明各个组件在内网环境的安装步骤及协调配置。
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;一、CentOS7的安装及本地yum库的创建&lt;/h2&gt;
+&lt;p&gt;CentOS7的安装及本地yum库的创建不再复述，我们这里假定CentOS7已安装好并配置内网可以联通，并且已按照前述方法创建好了本地yum库，并且防火墙已先关闭。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为了方便测试，先&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# systemctl stop firewalld &amp;amp;&amp;amp; systemctl disable firewalld
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;以方便调试。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;二、Nginx安装&lt;/h2&gt;
+&lt;p&gt;由于Nginx不在内置的Packages里，我们需要先创建Nginx的本地yum库。&lt;/p&gt;
+&lt;h3&gt;1 …&lt;/h3&gt;</summary><content type="html">&lt;h2&gt;简介：&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;LNMP代表的就是：Linux系统下Nginx+MySQL(Mariadb)+PHP这种网站服务器架构。
+Linux是一类Unix计算机操作系统的统称，是目前最流行的免费操作系统。代表版本有：Debian、CentOS、Ubuntu、Fedora、Gentoo等。
+Nginx是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。
+Mysql是一个小型关系型数据库管理系统，目前使用Mariadb替代之。
+PHP是一种在服务器端执行的嵌入HTML文档的脚本语言。Jun 14, 2015
+这四种软件均为免费开源软件，组合到一起，成为一个免费、高效、扩展性强的网站服务系统。
+下面我们针对这个组合逐步说明各个组件在内网环境的安装步骤及协调配置。
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;一、CentOS7的安装及本地yum库的创建&lt;/h2&gt;
+&lt;p&gt;CentOS7的安装及本地yum库的创建不再复述，我们这里假定CentOS7已安装好并配置内网可以联通，并且已按照前述方法创建好了本地yum库，并且防火墙已先关闭。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为了方便测试，先&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# systemctl stop firewalld &amp;amp;&amp;amp; systemctl disable firewalld
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;以方便调试。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;二、Nginx安装&lt;/h2&gt;
+&lt;p&gt;由于Nginx不在内置的Packages里，我们需要先创建Nginx的本地yum库。&lt;/p&gt;
+&lt;h3&gt;1. 仓库Yum仓库目录&lt;/h3&gt;
+&lt;p&gt;（这里假定Nginx的yum库目录是&lt;code&gt;/home/yum-other/nginx/&lt;/code&gt;）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # mkdir -p /home/yum-other/nginx/RPMS
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 下载所有Nginx的rpm软件包&lt;/h3&gt;
+&lt;p&gt;从&lt;code&gt;http://nginx.org/packages/centos/7/x86_64/RPMS/&lt;/code&gt;下载所有Nginx的rpm软件包，并上传到&lt;code&gt;/home/yum-other/nginx/RPMS&lt;/code&gt;下&lt;/p&gt;
+&lt;h3&gt;3. 创建yum索引&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # createrepo /home/yum-other/nginx/
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. 创建nginx.repo更新源配置文件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # vim /etc/yum.repos.d/nginx.repo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;nginx.repo文件内容如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```
+[nginx]
+name=nginx repo
+baseurl=file:///home/yum-other/nginx/
+gpgcheck=0
+enabled=1
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;5. yum安装Nginx了&lt;/h3&gt;
+&lt;p&gt;OK！现在可以直接yum安装Nginx了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yum install -y nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;6. 启动Nginx服务并设为开机启动&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctl start nginx
+    # systemctl enable nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;7. 查看服务是否运行&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # ps -A|grep nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;应该有两个nginx进程
+注：可以测试采用&lt;code&gt;yumdownloader&lt;/code&gt;的方式下载nginx软件包到本地安装&lt;/p&gt;
+&lt;h3&gt;8. 测试网站是否建立成功&lt;/h3&gt;
+&lt;p&gt;在其它电脑浏览器里打开&lt;a href="http://CentOS7ServerIP/"&gt;http://CentOS7ServerIP/&lt;/a&gt;
+看看是不是出现了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    Welcome to Nginx!
+    ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;的页面了！如有则安装成功。
+这时默认的网站目录是&lt;code&gt;/usr/share/nginx/html&lt;/code&gt;，这个路径可以改为你的实际路径，但相应的Nginx配置里也要同时修改。
+下面所涉及的网站目录我们还是先以这个来说明。
+下面我们将其它组件的安装再来涉及Nginx的配置。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;另附在线安装Nginx的步骤&lt;/h2&gt;
+&lt;h3&gt;1. 在线安装Nginx更新源&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 安装Nginx&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yum install -y nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;三、安装Mariadb&lt;/h2&gt;
+&lt;h3&gt;1. 安装Mariadb软件，&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在CentOS7中已经使用Mariadb替代了MySQL&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yum install -y mariadb-server mariadb
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 启动Mariadb服务并加入开机启动&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctl start mariadb
+    # systemctl enable mariadb
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;3. Mariadb的初始化配置&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # mysql_secure_installation
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;因为是初始安装，还没配置过数据库的密码，所以出现如下提示，按提示操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    Enter current password for root (enter for none): 回车
+    Set root password? [Y/n] 回车
+    New password: 输入Mariadb的root密码
+    Re-enter new password: 再次输入以检验确认
+    Remove anonymous users? [Y/n] 回车
+    Disallow root login remotely? [Y/n] 回车
+    Remove test database and access to it? [Y/n] 回车
+    Reload privilege tables now? [Y/n] 回车
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. 查看服务是否运行&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # ps -A|grep mysqld
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;有两个进程&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; mysqld_safe
+&amp;gt;
+&amp;gt; mysqld
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;四、安装PHP&lt;/h2&gt;
+&lt;h3&gt;1. 安装PHP及MySQL和CGI支持组件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yum install php php-mysql php-fpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 配置PHP&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # vim /etc/php.ini
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;找到&lt;code&gt;;cgi.fix_pathinfo=1&lt;/code&gt;这行并改为&lt;code&gt;cgi.fix_pathinfo=0&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;3. 配置CGI&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # vim /etc/php-fpm.d/www.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;找到Listen这行，改为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    listen = /var/run/php-fpm/php-fpm.sock
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. 启动CGI并设为开机启动&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctl start php-fpm
+    # systemctl enable php-fpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;5. 测试服务是否运行&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ＃ ps -A|grep php-fpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;应该有6个php-fpm进程&lt;/p&gt;
+&lt;h2&gt;五、配置Nginx使之可以支持PHP&lt;/h2&gt;
+&lt;h3&gt;1. 修改nginx的服务段配置&lt;/h3&gt;
+&lt;p&gt;备份下Nginx配置先&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # cp  /etc/nginx/nginx.conf   /etc/nginx/nginx.conf.bak
+    # vim   /etc/nginx/nginx.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;看看配置后面有没有server 80的配置，如果有，把整段#注释掉，我们使用default.conf的服务配置。&lt;/p&gt;
+&lt;h3&gt;2. 修改default.conf的配置&lt;/h3&gt;
+&lt;p&gt;同样先备份&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # cp /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf.conf
+    # vim /etc/nginx/conf.d/default.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;找到&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```
+server {
+    listen       80;
+    server_name  localhost;
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这部分，并修改为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;```&lt;/span&gt;
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt;       &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;localhost&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;root&lt;/span&gt;   &lt;span class="err"&gt;/usr/share/nginx/html&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="err"&gt;#这里改为实际网站路径&lt;/span&gt;
+    &lt;span class="err"&gt;index&lt;/span&gt; &lt;span class="err"&gt;index.php&lt;/span&gt; &lt;span class="err"&gt;index.html&lt;/span&gt; &lt;span class="err"&gt;index.htm&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;try_files&lt;/span&gt; &lt;span class="err"&gt;$uri&lt;/span&gt; &lt;span class="err"&gt;$uri/&lt;/span&gt; &lt;span class="err"&gt;=404&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nt"&gt;error_page&lt;/span&gt; &lt;span class="nt"&gt;404&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;404&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;html&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="nt"&gt;error_page&lt;/span&gt; &lt;span class="nt"&gt;500&lt;/span&gt; &lt;span class="nt"&gt;502&lt;/span&gt; &lt;span class="nt"&gt;503&lt;/span&gt; &lt;span class="nt"&gt;504&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;50x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;html&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;50x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;html&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;root&lt;/span&gt; &lt;span class="err"&gt;/usr/share/nginx/html&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="err"&gt;#这里改为实际50x.html所在的路径&lt;/span&gt;
+     &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;php&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;try_files&lt;/span&gt; &lt;span class="err"&gt;$uri&lt;/span&gt; &lt;span class="err"&gt;=404&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;fastcgi_pass&lt;/span&gt; &lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;php-fpm&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;php-fpm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;fastcgi_index&lt;/span&gt; &lt;span class="err"&gt;index.php&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;fastcgi_param&lt;/span&gt; &lt;span class="err"&gt;SCRIPT_FILENAME&lt;/span&gt; &lt;span class="err"&gt;$document_root$fastcgi_script_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;fastcgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;```&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;3. 测试一下Nginx配置是否正确&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # nginx -t
+    nginx: the configuration file /etc/nginx/nginx.conf syntax is ok 
+    nginx: configuration file /etc/nginx/nginx.conf test is successful
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. 重启Nginx服务&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctl restart nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;5. 创建测试脚本&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;vim&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;php&lt;/span&gt;
+&lt;span class="sb"&gt;```php&lt;/span&gt;
+&lt;span class="cp"&gt;&amp;lt;?&lt;/span&gt;
+&lt;span class="nx"&gt;php&lt;/span&gt; &lt;span class="nb"&gt;phpinfo&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="sb"&gt;&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;6. 在其它电脑里打开浏览器测试&lt;/h3&gt;
+&lt;p&gt;http://http://CentOS7服务器IP/info.php
+如果没有问题的话应该显示php的信息页面&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    PHP Version 5.4.16
+    ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;7. 删除测试文件&lt;/h3&gt;
+&lt;p&gt;测试成功后记得删除测试文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # rm /usr/share/nginx/html/info.php
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;六、安装phpmyadmin&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：在可在线的CentOS7系统先下载phpMyAdmin&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;1. 安装epel更新源&lt;/h3&gt;
+&lt;p&gt;因为php-mcrypt是phpmyadmin需要用到的，而官方的更新源没有这个包，所以才需要安装epel更新源&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 下载 php-mcrypt 及依赖文件 libmcrypt&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yumdownloader  php-mcrypt
+    # yumdownloader  libmcrypt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下载 phpmyadmin&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yumdownloader  phpmyadmin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将上述文件复制到内网本地yum仓库并按照上面本地yum所述方式刷新。&lt;/p&gt;
+&lt;h3&gt;3. yum安装上述软件包&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # yum install -y php-mcrypt
+    # yum install -y phpmyadmin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;安装时自动安装依赖文件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;libtidy
+php-bcmath
+php-gd
+php-mbstring
+php-php-gettext
+php-tcpdf
+php-tcpdf-dejavu-sans-fonts
+php-tidy
+php-xml
+t1lib
+如果遇到依赖文件本地yum仓库没有重复2、3步骤下载安装之&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;4. 配置phpmyadmin&lt;/h3&gt;
+&lt;p&gt;phpmyadmin的配置文件为：&lt;code&gt;/etc/phpMyAdmin/config.inc.php&lt;/code&gt;
+同目录下还有一个&lt;code&gt;config.inc.php.rpmsave&lt;/code&gt;，不知何用。&lt;/p&gt;
+&lt;h3&gt;5. 链接到网站下&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # ln -s /usr/share/phpMyAdmin /home/html/phpMyAdmin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在可以通过&lt;code&gt;http://域名/phpMyAdmin&lt;/code&gt;来访问数据库了。
+至此LNMP建站组合已安装完毕，你可以试着上传一些php网站上去试用了，这个组合应该可以满足大多数php应用的使用要求。&lt;/p&gt;
+&lt;h2&gt;七、指定新的网站目录&lt;/h2&gt;
+&lt;p&gt;通常情况下我们的网站目录不是在&lt;code&gt;/usr/share/nginx/html/&lt;/code&gt;下
+那么我们需要重新指定新的网站目录
+假定我们新的网站目录是放在&lt;code&gt;/home/html/&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;1. 现在来修改nginx的配置&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # vim /etc/nginx/conf.d/default.conf
+找到两处
+
+```nginx
+root  /usr/share/nginx/html;
+```
+的位置， 修改为
+
+```nginx
+root  /home/html;
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;2. 重启下nginx服务&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctrl restart nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;3. 现在再建个测试脚本&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;vim&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;php&lt;/span&gt;
+&lt;span class="sb"&gt;```php&lt;/span&gt;
+&lt;span class="sb"&gt; &lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?&lt;/span&gt;
+ &lt;span class="nx"&gt;php&lt;/span&gt; &lt;span class="nb"&gt;phpinfo&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+ &lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="sb"&gt;&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. 在其它电脑上测试一下链接&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;http://http://CentOS7ServerIP/info.php&amp;gt;
+
+耶，403/404错误，无法访问是怎么回事呢，没改变网站目录前还可以访问的呀～～
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;5. 复制原网站目录的SELinux安全性本文&lt;/h3&gt;
+&lt;p&gt;原来是SELinux的安全机制限制了你的访问权限，好在我们有原来的网站目录可以参照
+查看一下原网站目录文件的SELinux安全性本文&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ＃ ls -Z /usr/share/nginx/html
+    -rw-r--r--. root root system_u:object_r:usr_t:s0       50x.html
+    -rw-r--r--. root root system_u:object_r:usr_t:s0       index.html
+    -rw-r--r--. root root unconfined_u:object_r:usr_t:s0   info.php
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里的&lt;code&gt;system_u:object_r:usr_t&lt;/code&gt;分别代表了 用户:角色:类型的三个设置
+先不用知道这是什么意思，我们先参照该安全性本文对现在的 /home/html 进行设置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # chcon -R -u system_u -r object_r -t usr_t /home/html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在再刷新一下浏览器，可以正常显示页面了。
+(上述这种不是最好的解决方式，在没有正确的解决方法前建议是把SELINUX关闭)
+总结一下，在没有设开机启动的情况下，开启这个建站组合我们需要开启下面几个服务&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctl start nginx
+    # systemctl start mariadb
+    # systemctl start php-fpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;才能正常打开网页，如果要加入开机启动，只要&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    # systemctl enable nginx
+    # systemctl enable mariadb
+    # systemctl enable php-fpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行一次就可以了。&lt;/p&gt;
+&lt;h2&gt;八、存在问题：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;重启后 发现&lt;code&gt;/etc/nginx/conf.d/default.conf&lt;/code&gt;被改名为&lt;code&gt;default.conf.rpmsave&lt;/code&gt; 了，于是&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# cp  /etc/nginx/conf.d/default.conf.rpmsave  /etc/nginx/conf.d/default.conf
+# systemctl restart nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;首页重新回来了
+再观察一下还会不会出现这种情况&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="CentOS7"></category><category term="Yum"></category><category term="LNMP"></category></entry></feed>

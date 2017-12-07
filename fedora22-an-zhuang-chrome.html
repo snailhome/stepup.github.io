@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Fedora22 安装 Chrome — STEP UP</title>
+	<meta name="description" content="标题: Fedora22 安装 Chrome; 日期: 2015-07-30; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Fedora22 安装 Chrome</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-07-30T23:41:00+08:00" itemprop="datePublished">2015-07-30 23:41:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/software.html" rel="category">Software</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/chrome.html" rel="tag">Chrome</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>Fedora22 无法直接安装 Chrome，需要先添加<code>Chrome</code>的软件仓库</p>
+<div class="highlight"><pre><span></span>$ su -
+Password:
+<span class="c1"># cat &lt;&lt; EOF &gt; /etc/yum.repos.d/google-chrome.repo</span>
+<span class="o">[</span>google-chrome<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>google-chrome - <span class="se">\$</span>basearch
+<span class="nv">baseurl</span><span class="o">=</span>http://dl.google.com/linux/chrome/rpm/stable/<span class="se">\$</span>basearch
+<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">gpgkey</span><span class="o">=</span>https://dl-ssl.google.com/linux/linux_signing_key.pub
+EOF
+</pre></div>
+
+
+<p>现在可以安装了</p>
+<div class="highlight"><pre><span></span><span class="c1"># dnf install -y google-chrome-stable</span>
+</pre></div>
+
+
+<p>但是会有一个<code>获取GPG密钥错误</code>的提示，加一个参数就可以了：</p>
+<div class="highlight"><pre><span></span><span class="c1"># dnf install -y google-chrome-stable --nogpg</span>
+</pre></div></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

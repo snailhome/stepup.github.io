@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>STEP UP - Python</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2015-08-05T01:21:00+08:00</updated><entry><title>Python虚拟环境工具：virtualenv</title><link href="/pythonxu-ni-huan-jing-gong-ju-virtualenv.html" rel="alternate"></link><published>2015-08-05T01:21:00+08:00</published><updated>2015-08-05T01:21:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-08-05:/pythonxu-ni-huan-jing-gong-ju-virtualenv.html</id><summary type="html">&lt;p&gt;virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响，它能够：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在没有权限的情况下安装新套件&lt;/li&gt;
+&lt;li&gt;不同应用可以使用不同的套件版本&lt;/li&gt;
+&lt;li&gt;套件升级不影响其他应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    sudo apt-get install python-virtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;使用方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如，创建&lt;strong&gt;ENV&lt;/strong&gt;的虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv ENV
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果系统中存在python2和python3两个版本，我们要让虚拟环境基于其中一个版本，可以这样操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv -p python2 ENV  #基于python2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv -p python3 ENV  #基于python3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 &lt;code&gt;--no-site-packages&lt;/code&gt; 建立虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv --no-site-packages [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;但在新版本virtualenv中这个选项已经是默认项了。&lt;/p&gt;
+&lt;p&gt;启动虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cd ENV …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响，它能够：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在没有权限的情况下安装新套件&lt;/li&gt;
+&lt;li&gt;不同应用可以使用不同的套件版本&lt;/li&gt;
+&lt;li&gt;套件升级不影响其他应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    sudo apt-get install python-virtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;使用方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如，创建&lt;strong&gt;ENV&lt;/strong&gt;的虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv ENV
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果系统中存在python2和python3两个版本，我们要让虚拟环境基于其中一个版本，可以这样操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv -p python2 ENV  #基于python2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv -p python3 ENV  #基于python3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 &lt;code&gt;--no-site-packages&lt;/code&gt; 建立虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    virtualenv --no-site-packages [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;但在新版本virtualenv中这个选项已经是默认项了。&lt;/p&gt;
+&lt;p&gt;启动虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cd ENV
+    source ./bin/activate
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意此时命令行会多一个(ENV)，ENV为虚拟环境名称，接下来所有模块都只会安装到该目录中去。&lt;/p&gt;
+&lt;p&gt;退出虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    deactivate
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在虚拟环境安装Python套件
+Virtualenv 附带有pip安装工具，因此需要安装的套件可以直接运行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    pip install [套件名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果没有启动虚拟环境，系统也安装了pip工具，那么套件将被安装在系统环境中，为了避免发生此事，可以在&lt;code&gt;~/.bashrc&lt;/code&gt;文件中加上：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    export PIP_REQUIRE_VIRTUALENV=true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者让在执行pip的时候让系统自动开启虚拟环境：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    export PIP_RESPECT_VIRTUALENV=true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Virtualenvwrapper&lt;/h2&gt;
+&lt;p&gt;Virtaulenvwrapper是virtualenv的扩展包，用于更方便管理虚拟环境，它可以做：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将所有虚拟环境整合在一个目录下&lt;/li&gt;
+&lt;li&gt;管理（新增，删除，复制）虚拟环境&lt;/li&gt;
+&lt;li&gt;切换虚拟环境&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    sudo easy_install virtualenvwrapper
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;此时还不能使用virtualenvwrapper，默认virtualenvwrapper安装在/usr/local/bin下面，实际上你需要运行virtualenvwrapper.sh文件才行，先别急，打开这个文件看看,里面有安装步骤，我们照着操作把环境设置好。&lt;/p&gt;
+&lt;p&gt;创建目录用来存放虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    mkdir $HOME/.virtualenvs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在&lt;code&gt;~/.bashrc&lt;/code&gt;中添加行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    export WORKON_HOME=$HOME/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;保存退出后运行： &lt;code&gt;source ~/.bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此时virtualenvwrapper就可以使用了。&lt;/p&gt;
+&lt;p&gt;列出虚拟环境列表&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    workon
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;也可以使用&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    lsvirtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;新建虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    mkvirtualenv [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动/切换虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    workon [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;删除虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    rmvirtualenv [虚拟环境名称]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;离开虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    deactivate
+&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category><category term="virtualenv"></category></entry></feed>

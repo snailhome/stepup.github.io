@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>STEP UP - System</title><link href="/" rel="alternate"></link><link href="/feeds/system.atom.xml" rel="self"></link><id>/</id><updated>2015-10-29T18:40:00+08:00</updated><entry><title>从Windows平台到Linux平台的迁移</title><link href="/cong-windowsping-tai-dao-linuxping-tai-de-qian-yi.html" rel="alternate"></link><published>2015-10-29T18:40:00+08:00</published><updated>2015-10-29T18:40:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-10-29:/cong-windowsping-tai-dao-linuxping-tai-de-qian-yi.html</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;从Windows平台到Linux平台的迁移，不是嘴皮子说说就可以了，对于完全脑盲的人，也许简单；可以对于已经在Windows平台已经有一定使用基础的人来说，必须有替代的产品才会有迁移的动力……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对比了从Windows到Linux迁移过程中应用替代方面的艰辛，在下面罗列一些各个专业方面的应用、工具，给自己一个留存，也给后人一些经验～&lt;/p&gt;
+&lt;h2&gt;系统篇&lt;/h2&gt;
+&lt;p&gt;既然是迁移到Linux，那么系统当然是Liunx了，可以Linux的发行版本太多，选择的余地也很大，而且针对不同的应用场景，还有不同的选择。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器用途： CentOS7.1&lt;/li&gt;
+&lt;li&gt;个人桌面： Linux Mint 17.2、Ubuntu 15.10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;办公应用篇&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;WPS for Linux 9.1&lt;/li&gt;
+&lt;li&gt;LibreOffice 4.4.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;开发工具编辑器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PyCharm(收费)4.5.4&lt;/li&gt;
+&lt;li&gt;SublimeText3.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Markdown编辑器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Haroopad 0 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;从Windows平台到Linux平台的迁移，不是嘴皮子说说就可以了，对于完全脑盲的人，也许简单；可以对于已经在Windows平台已经有一定使用基础的人来说，必须有替代的产品才会有迁移的动力……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对比了从Windows到Linux迁移过程中应用替代方面的艰辛，在下面罗列一些各个专业方面的应用、工具，给自己一个留存，也给后人一些经验～&lt;/p&gt;
+&lt;h2&gt;系统篇&lt;/h2&gt;
+&lt;p&gt;既然是迁移到Linux，那么系统当然是Liunx了，可以Linux的发行版本太多，选择的余地也很大，而且针对不同的应用场景，还有不同的选择。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器用途： CentOS7.1&lt;/li&gt;
+&lt;li&gt;个人桌面： Linux Mint 17.2、Ubuntu 15.10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;办公应用篇&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;WPS for Linux 9.1&lt;/li&gt;
+&lt;li&gt;LibreOffice 4.4.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;开发工具编辑器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PyCharm(收费)4.5.4&lt;/li&gt;
+&lt;li&gt;SublimeText3.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Markdown编辑器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Haroopad 0.13.1&lt;/li&gt;
+&lt;li&gt;Retext&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;局域网通讯&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;IPTux&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;下载工具&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;uGet&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Windows模拟器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Wine&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;虚拟机&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;VirtualBox&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;浏览器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;FireFox 41&lt;/li&gt;
+&lt;li&gt;Chromium 45&lt;/li&gt;
+&lt;/ul&gt;</content><category term="平台迁移"></category></entry><entry><title>10 个实用的 Bash alias</title><link href="/10-ge-shi-yong-de-bash-alias.html" rel="alternate"></link><published>2015-10-06T10:48:00+08:00</published><updated>2015-10-06T10:48:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-10-06:/10-ge-shi-yong-de-bash-alias.html</id><summary type="html">&lt;p&gt;alias 即“别名”，为便于理解，你可以将其看成是一个命令的快捷方式。使用 alias 的最大好处是，可以简化输入，从而为你节省时间，并提高效率。定义的 alias 可以保存到 ~/.bashrc 文件中，以后在命令行中就可以直接使用了。&lt;/p&gt;
+&lt;p&gt;要设置别名&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim ~/.bashrc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下面介绍了 10 个 Bash alias，个人觉得都很实用：&lt;/p&gt;
+&lt;h2&gt;几个有用的别名用法&lt;/h2&gt;
+&lt;h3&gt;ssh 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias server_name=&amp;quot;ssh -v -l USERNAME IP ADDRESS&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更改 server_name、USERNAME 及 IP 地址以适应你的需要。对于经常要使用 ssh 登录远程 shell 的同学来说，这是一个值得收藏的别名。&lt;/p&gt;
+&lt;h3&gt;ls …&lt;/h3&gt;</summary><content type="html">&lt;p&gt;alias 即“别名”，为便于理解，你可以将其看成是一个命令的快捷方式。使用 alias 的最大好处是，可以简化输入，从而为你节省时间，并提高效率。定义的 alias 可以保存到 ~/.bashrc 文件中，以后在命令行中就可以直接使用了。&lt;/p&gt;
+&lt;p&gt;要设置别名&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim ~/.bashrc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下面介绍了 10 个 Bash alias，个人觉得都很实用：&lt;/p&gt;
+&lt;h2&gt;几个有用的别名用法&lt;/h2&gt;
+&lt;h3&gt;ssh 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias server_name=&amp;quot;ssh -v -l USERNAME IP ADDRESS&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更改 server_name、USERNAME 及 IP 地址以适应你的需要。对于经常要使用 ssh 登录远程 shell 的同学来说，这是一个值得收藏的别名。&lt;/p&gt;
+&lt;h3&gt;ls 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias ll=&amp;quot;ls -l&amp;quot;，另一个 alias la=&amp;quot;ls -a&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;意思很明显，在此就不多作解释了。&lt;/p&gt;
+&lt;h3&gt;rm 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias rm=&amp;quot;rm -i&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这个别名让你更加安全地执行删除操作。&lt;/p&gt;
+&lt;h3&gt;df 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias df=&amp;quot;df -h&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;让你以 MB 或 G 为单位查看磁盘的空间。&lt;/p&gt;
+&lt;h3&gt;Firefox 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias ff1=&amp;quot;/home/jlwallen/firefox/firefox&amp;quot; 及 alias ff2=&amp;quot;/home/jlwallen/firefoxb3/firefox&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;适合使用两个 Firefox 版本的朋友，如一个稳定版，另一个为测试版。&lt;/p&gt;
+&lt;h3&gt;书签别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias fftr=&amp;quot;/home/jlwallen/firefox/firefox http://linuxtoy.org&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;用于打开一个指定的网址。&lt;/p&gt;
+&lt;h3&gt;文件别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias emenu=&amp;quot;aterm nano -e ~/.e16/menus/user_apps&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如常常需要编辑的配置文件。&lt;/p&gt;
+&lt;h3&gt;apt-get update 别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias update=&amp;quot;sudo apt-get update&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;使用其他 Linux 发行版的同学可以换一下其中的 sudo apt-get update。&lt;/p&gt;
+&lt;h3&gt;rpm 批量安装别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias brpm=&amp;quot;rpm -ivh ~/RPM/*rpm&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;便于同时安装多个 rpm 包。&lt;/p&gt;
+&lt;h3&gt;长路径别名&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias astart=&amp;quot;cd ~/GNUstep/Library/AfterStep/start&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对于需要经常访问的路径特别长的目录也可为其定义别名。&lt;/p&gt;
+&lt;h2&gt;我的别名用法&lt;/h2&gt;
+&lt;h3&gt;进入虚拟环境&lt;/h3&gt;
+&lt;p&gt;我有一个 &lt;code&gt;virtualenv&lt;/code&gt; 的虚拟环境 &lt;code&gt;env2p&lt;/code&gt; ，为了快速进入虚拟环境&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias se2p=&amp;quot;cd ~/env2p&amp;amp;source bin/activate&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我只要se2p就进入了虚拟环境。&lt;/p&gt;
+&lt;h3&gt;推送 &lt;code&gt;git&lt;/code&gt; 到 &lt;code&gt;github.io&lt;/code&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias git2p=&amp;quot;cd ~/env2p/blog&amp;amp;&amp;amp;make publish&amp;amp;&amp;amp;cd output&amp;amp;&amp;amp;git add -A&amp;amp;&amp;amp;git commit -m &amp;#39;Git My Static Blog&amp;#39;&amp;amp;&amp;amp;git push origin master&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bash"></category><category term="alias"></category><category term="别名"></category></entry><entry><title>CentOS7下安装Fcitx小企鹅输入法</title><link href="/centos7xia-an-zhuang-fcitxxiao-qi-e-shu-ru-fa.html" rel="alternate"></link><published>2015-09-29T23:07:00+08:00</published><updated>2015-09-29T23:07:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2015-09-29:/centos7xia-an-zhuang-fcitxxiao-qi-e-shu-ru-fa.html</id><summary type="html">&lt;p&gt;感觉CentOS7自带的ibus输入法用得不尽人意，考虑安装个Fcitx小企鹅输入法试试，心动不如行动，Let's go～&lt;/p&gt;
+&lt;h2&gt;1. 加入EPEL源&lt;/h2&gt;
+&lt;p&gt;EPEL7几乎是CentOS必备的源:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install epel-release
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;2. 添加mosquito-myrepo源&lt;/h2&gt;
+&lt;p&gt;mosquito-myrepo是一个私人制作的第三方源，其中包含了fcitx输入法。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;项目地址： https://github.com/1dot75cm/myrepo
+支持的发行版： Fedora 19/20/21/rawhide 以及RHEL/CentOS 7
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum-config-manager --add-repo&lt;span class="o"&gt;=&lt;/span&gt;https://copr.fedoraproject.org/coprs/mosquito/myrepo/repo/epel-7/mosquito-myrepo-epel-7.repo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;3. 卸载原来的ibus输入法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum remove …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;感觉CentOS7自带的ibus输入法用得不尽人意，考虑安装个Fcitx小企鹅输入法试试，心动不如行动，Let's go～&lt;/p&gt;
+&lt;h2&gt;1. 加入EPEL源&lt;/h2&gt;
+&lt;p&gt;EPEL7几乎是CentOS必备的源:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install epel-release
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;2. 添加mosquito-myrepo源&lt;/h2&gt;
+&lt;p&gt;mosquito-myrepo是一个私人制作的第三方源，其中包含了fcitx输入法。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;项目地址： https://github.com/1dot75cm/myrepo
+支持的发行版： Fedora 19/20/21/rawhide 以及RHEL/CentOS 7
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum-config-manager --add-repo&lt;span class="o"&gt;=&lt;/span&gt;https://copr.fedoraproject.org/coprs/mosquito/myrepo/repo/epel-7/mosquito-myrepo-epel-7.repo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;3. 卸载原来的ibus输入法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum remove ibus
+$ sudo yum remove imsettings imsettings-libs im-chooser
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;4. 安装输入法&lt;/h2&gt;
+&lt;p&gt;可以选择下面的各种输入法中的某一个或多个:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install fcitx-table-wbpy &lt;span class="c1"&gt;# 五笔拼音输入法&lt;/span&gt;
+$ sudo yum install fcitx-googlepinyin fcitx-cloudpinyin &lt;span class="c1"&gt;# 谷歌拼音输入法&lt;/span&gt;
+$ sudo yum install fcitx-qimpanel-configtool &lt;span class="c1"&gt;# 输入法面板设置&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;5. 配置Fcitx&lt;/h2&gt;
+&lt;p&gt;在~/.bashrc中添加如下内容&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GTK_IM_MODULE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;fcitx
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;QT_IM_MODULE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;fcitx
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;XMODIFIERS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;”@im&lt;span class="o"&gt;=&lt;/span&gt;fcitx”
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;6. 关闭gnome-shell 对键盘的监听，然后切换输入法为fcitx:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo pkill ibus-daemon
+$ sudo gsettings &lt;span class="nb"&gt;set&lt;/span&gt; org.gnome.settings-daemon.plugins.keyboard active &lt;span class="nb"&gt;false&lt;/span&gt;
+$ sudo imsettings-switch fcitx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;7. 清理工作&lt;/h2&gt;
+&lt;p&gt;mosquito-myrepo在不断地支持更多的软件，这也进一步造成该repo中的软件与base、EPEL中的软件存在版本冲突，在该repo的项目主页中建议安装yum的优先级插件 &lt;code&gt;yum-plugin-priorities&lt;/code&gt; ，这在一定程度上会缓解版本冲突问题，但无法从根本上避免。&lt;/p&gt;
+&lt;p&gt;鉴于多个repo的版本冲突会造成一些麻烦，最好的办法还是在安装完需要的软件之后就禁用该repo，需要的时候再启用。&lt;/p&gt;
+&lt;p&gt;编辑 &lt;code&gt;/etc/yum.repos.d/mosquito-myrepo-epel-7.repo&lt;/code&gt; ，将其中的 &lt;code&gt;enable=1&lt;/code&gt; 改成 &lt;code&gt;enable=0&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;h2&gt;8. 启用fcitx输入法&lt;/h2&gt;
+&lt;p&gt;重启系统，fcitx自动启动，但图标藏在桌面右下角的通知栏中
+打开fcitx的配置工具，选择输入法标签点”+”可以搜索并添加输入法&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;Ctrl+空格&lt;/code&gt;开关输入法&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;Ctrl+Shift&lt;/code&gt;切换输入法&lt;/p&gt;</content><category term="CentOs7"></category><category term="Fcitx"></category></entry><entry><title>Linux Mint 安装后要做的几件事</title><link href="/linux-mint-an-zhuang-hou-yao-zuo-de-ji-jian-shi.html" rel="alternate"></link><published>2010-01-01T08:03:00+08:00</published><updated>2010-01-01T08:03:00+08:00</updated><author><name>蜗牛</name></author><id>tag:None,2010-01-01:/linux-mint-an-zhuang-hou-yao-zuo-de-ji-jian-shi.html</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Linux Mint 1.72 是一个粉美观的桌面 Linux 系统，网评还不错的桌面，试用看看感觉还蛮好的。
+但是要记得安装好系统后要记得先做好几件事，才能用得舒心。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;修改更新源&lt;/h2&gt;
+&lt;p&gt;系统一装完，先修改更新源在做更新，不然会等吐血
+打开&lt;code&gt;菜单&lt;/code&gt; -&amp;gt; &lt;code&gt;系统管理&lt;/code&gt; -&amp;gt; &lt;code&gt;软件源&lt;/code&gt; -&amp;gt; &lt;code&gt;官方仓库&lt;/code&gt;项
+分别选择&lt;code&gt;镜像&lt;/code&gt;里的&lt;code&gt;主要&lt;/code&gt;和&lt;code&gt;基础&lt;/code&gt;两个选项，找最快的源，我选择的是：&lt;/p&gt;
+&lt;p&gt;＊ 主要：http://mirrors.hustunique.com/linuxmint
+＊ 基础：http://mirrors.yun-idc.com/ubuntu&lt;/p&gt;
+&lt;p&gt;然后点击&lt;code&gt;更新缓存&lt;/code&gt;，然后打开终端开始更新吧&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get clean &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;Linux Mint 1.72 是一个粉美观的桌面 Linux 系统，网评还不错的桌面，试用看看感觉还蛮好的。
+但是要记得安装好系统后要记得先做好几件事，才能用得舒心。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;修改更新源&lt;/h2&gt;
+&lt;p&gt;系统一装完，先修改更新源在做更新，不然会等吐血
+打开&lt;code&gt;菜单&lt;/code&gt; -&amp;gt; &lt;code&gt;系统管理&lt;/code&gt; -&amp;gt; &lt;code&gt;软件源&lt;/code&gt; -&amp;gt; &lt;code&gt;官方仓库&lt;/code&gt;项
+分别选择&lt;code&gt;镜像&lt;/code&gt;里的&lt;code&gt;主要&lt;/code&gt;和&lt;code&gt;基础&lt;/code&gt;两个选项，找最快的源，我选择的是：&lt;/p&gt;
+&lt;p&gt;＊ 主要：http://mirrors.hustunique.com/linuxmint
+＊ 基础：http://mirrors.yun-idc.com/ubuntu&lt;/p&gt;
+&lt;p&gt;然后点击&lt;code&gt;更新缓存&lt;/code&gt;，然后打开终端开始更新吧&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get clean &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get upgrade -y
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;修改语言支持&lt;/h2&gt;
+&lt;p&gt;打开&lt;code&gt;菜单&lt;/code&gt; -&amp;gt; &lt;code&gt;首选项&lt;/code&gt; -&amp;gt; &lt;code&gt;语言设置&lt;/code&gt;窗口 －&amp;gt; &lt;code&gt;输入法&lt;/code&gt;页 -&amp;gt; 点击&lt;code&gt;添加/删除语言&lt;/code&gt;，我只保留了中英美三国语言，语言、地区都选中国，点击&lt;code&gt;应用到整个系统&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;添加输入法&lt;/h2&gt;
+&lt;p&gt;linux mint支持多种输入法框架，这方面做得还是比较好的。打开&lt;code&gt;菜单&lt;/code&gt; -&amp;gt; &lt;code&gt;首选项&lt;/code&gt; -&amp;gt; &lt;code&gt;语言设置&lt;/code&gt;窗口 －&amp;gt; &lt;code&gt;输入法&lt;/code&gt;页 -&amp;gt; 点击&lt;code&gt;添加对xxx的支持&lt;/code&gt;按钮，就可以添加相应输入法的框架了&lt;/p&gt;
+&lt;p&gt;我使用小企鹅&lt;code&gt;fcitx&lt;/code&gt;输入法，在输入法&lt;code&gt;页点击&lt;/code&gt;添加对fcitx的支持&lt;code&gt;按钮，就会开始安装进程，完成后不要点击&lt;/code&gt;安装可选部件件&lt;code&gt;，不然会一股脑给你安装了61个可选部件，我勒个去～～，那怎么做？
+关闭&lt;/code&gt;语言设置&lt;code&gt;窗口，打开&lt;/code&gt;菜单&lt;code&gt;-&amp;gt;&lt;/code&gt;系统管理&lt;code&gt;-&amp;gt;&lt;/code&gt;新立得软件包管理器&lt;code&gt;，过滤&lt;/code&gt;fcitx&lt;code&gt;，然后在列表中分别找到&lt;/code&gt;fcitx-googlepinyin&lt;code&gt;，&lt;/code&gt;fcitx-table-wubi&lt;code&gt;，&lt;/code&gt;fcitx-table&lt;code&gt;，在列表项上右键选择&lt;/code&gt;标志以便安装&lt;code&gt;，然后点击&lt;/code&gt;应用`就开始安装了。
+这里安装的是谷哥拼音和五笔。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;fcitx&lt;/code&gt;输入法界面比较美观，汉化也比较全面
+&lt;code&gt;ibus&lt;/code&gt;也安装起来用过，但界面没那么好，汉化也不全，另外还有一个不足，在&lt;code&gt;General&lt;/code&gt;页的&lt;code&gt;Show property panel:&lt;/code&gt;项应选择&lt;code&gt;Do not show&lt;/code&gt;，不然任务栏经常会被卡住&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现在应用注销一下以使输入法生效，重新登录后就可以在任务栏上看到键盘图标了
+现在就可以用：
+&lt;em&gt; &lt;code&gt;Ctrl+空格&lt;/code&gt;：开关输入法
+&lt;/em&gt; &lt;code&gt;Ctrl+Shift&lt;/code&gt;：切换输入法&lt;/p&gt;
+&lt;h2&gt;添加Firefox的语言包&lt;/h2&gt;
+&lt;p&gt;打开Firefox，&lt;code&gt;Open menu&lt;/code&gt; -&amp;gt; &lt;code&gt;Add-ones&lt;/code&gt;
+搜索&lt;code&gt;chinese&lt;/code&gt;，安装 &lt;code&gt;Chinese Simplified(zh-CN) Language Pack&lt;/code&gt;
+另外还可以选择安装&lt;code&gt;Firebug&lt;/code&gt;、&lt;code&gt;BaiduSearch&lt;/code&gt;
+关闭Firefox，再重新打开，界面就是中文的了&lt;/p&gt;</content><category term="Linux Mint"></category><category term="更新源"></category><category term="输入法"></category><category term="语言包"></category></entry></feed>

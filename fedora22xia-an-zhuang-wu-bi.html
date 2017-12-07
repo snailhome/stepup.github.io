@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Fedora22下安装五笔 — STEP UP</title>
+	<meta name="description" content="标题: Fedora22下安装五笔; 日期: 2015-07-31; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Fedora22下安装五笔</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-07-31T23:48:00+08:00" itemprop="datePublished">2015-07-31 23:48:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/software.html" rel="category">Software</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/wu-bi.html" rel="tag">五笔</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>Fedora22输入法以ibus为框架，因此要安装五笔输入法，也应该安装安装ibus框架下的极点或海峰五笔。</p>
+<h2>输入法安装</h2>
+<div class="highlight"><pre><span></span>$ su
+Password:
+<span class="c1"># dnf install -y ibus*wubi*</span>
+<span class="c1"># reboot</span>
+</pre></div>
+
+
+<p>后面一个操作就是重启系统
+重启登录系统后：</p>
+<ul>
+<li>点击屏幕右上角，点击<code>工具图标</code>，</li>
+<li>在打开的窗口里点击<code>个人</code>，点击<code>区域和语言</code>，</li>
+<li>点击<code>区域和语言</code>对话框的<code>输入源</code>下的<code>+</code>，</li>
+<li>选择<code>添加输入源</code>里的<code>汉语（中国）</code>，</li>
+<li>选择<code>汉语（极点五笔86（极爽词库 6.0））</code>或<code>汉语（海峰五笔86）</code>，点击<code>添加</code></li>
+</ul>
+<h2>输入法切换</h2>
+<p>ibus输入法切换使用<code>WIN</code>键加<code>空格</code>键来切换。</p></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

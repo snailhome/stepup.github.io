@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>46 个非常有用的 PHP 代码片段 — STEP UP</title>
+	<meta name="description" content="标题: 46 个非常有用的 PHP 代码片段; 日期: 2015-08-09; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">46 个非常有用的 PHP 代码片段</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-08-09T17:52:00+08:00" itemprop="datePublished">2015-08-09 17:52:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/code.html" rel="category">Code</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/php.html" rel="tag">php</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/code.html" rel="tag">code</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>在编写代码的时候有个神奇的工具总是好的！下面这里收集了 40+ PHP 代码片段，可以帮助你开发 PHP 项目。</p>
+<p>这些 PHP 片段对于 PHP 初学者也非常有帮助，非常容易学习，让我们开始学习吧～</p>
+<h3>1. 发送 SMS</h3>
+<p>在开发 Web 或者移动应用的时候，经常会遇到需要发送 SMS 给用户，或者因为登录原因，或者是为了发送信息。下面的 PHP 代码就实现了发送 SMS 的功能。</p>
+<p>为了使用任何的语言发送 SMS，需要一个 SMS gateway。大部分的 SMS 会提供一个 API，这里是使用 MSG91 作为 SMS gateway。</p>
+<div class="highlight"><pre><span></span><span class="x">function send_sms($mobile,$msg)</span>
+<span class="x">{</span>
+<span class="x">$authKey = &quot;XXXXXXXXXXX&quot;;</span>
+<span class="x">date_default_timezone_set(&quot;Asia/Kolkata&quot;);</span>
+<span class="x">$date = strftime(&quot;%Y-%m-%d %H:%M:%S&quot;);</span>
+<span class="x">//Multiple mobiles numbers separated by comma</span>
+<span class="x">$mobileNumber = $mobile;</span>
+
+<span class="x">//Sender ID,While using route4 sender id should be 6 characters long.</span>
+<span class="x">$senderId = &quot;IKOONK&quot;;</span>
+
+<span class="x">//Your message to send, Add URL encoding here.</span>
+<span class="x">$message = urlencode($msg);</span>
+
+<span class="x">//Define route </span>
+<span class="x">$route = &quot;template&quot;;</span>
+<span class="x">//Prepare you post parameters</span>
+<span class="x">$postData = array(</span>
+<span class="x">    &#39;authkey&#39; =&gt; $authKey,</span>
+<span class="x">    &#39;mobiles&#39; =&gt; $mobileNumber,</span>
+<span class="x">    &#39;message&#39; =&gt; $message,</span>
+<span class="x">    &#39;sender&#39; =&gt; $senderId,</span>
+<span class="x">    &#39;route&#39; =&gt; $route</span>
+<span class="x">);</span>
+
+<span class="x">//API URL</span>
+<span class="x">$url=&quot;https://control.msg91.com/sendhttp.php&quot;;</span>
+
+<span class="x">// init the resource</span>
+<span class="x">$ch = curl_init();</span>
+<span class="x">curl_setopt_array($ch, array(</span>
+<span class="x">    CURLOPT_URL =&gt; $url,</span>
+<span class="x">    CURLOPT_RETURNTRANSFER =&gt; true,</span>
+<span class="x">    CURLOPT_POST =&gt; true,</span>
+<span class="x">    CURLOPT_POSTFIELDS =&gt; $postData</span>
+<span class="x">    //,CURLOPT_FOLLOWLOCATION =&gt; true</span>
+<span class="x">));</span>
+
+
+<span class="x">//Ignore SSL certificate verification</span>
+<span class="x">curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);</span>
+<span class="x">curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);</span>
+
+
+<span class="x">//get response</span>
+<span class="x">$output = curl_exec($ch);</span>
+<span class="x">//Print error if any</span>
+<span class="x">if(curl_errno($ch))</span>
+<span class="x">{</span>
+<span class="x">    echo &#39;error:&#39; . curl_error($ch);</span>
+<span class="x">}</span>
+
+<span class="x">curl_close($ch);</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>其中“$authKey = "XXXXXXXXXXX";”需要你输入你的密码，“$senderId = "IKOONK";”需要你输入你的 SenderID。当输入移动号码的时候需要指定国家代码 (比如，美国是 1，印度是 91 )。</p>
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">;</span>
+<span class="nv">$mobile</span> <span class="o">=</span> <span class="s2">&quot;918112998787&quot;</span><span class="p">;</span>
+<span class="nx">send_sms</span><span class="p">(</span><span class="nv">$mobile</span><span class="p">,</span><span class="nv">$message</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>2. 使用 mandrill 发送邮件</h3>
+<p>Mandrill 是一款强大的 SMTP 提供器。开发者倾向于使用一个第三方 SMTP provider 来获取更好的收件交付。</p>
+<p>下面的函数中，你需要把 “Mandrill.php” 放在同一个文件夹，作为 PHP 文件，这样就可以使用TA来发送邮件。</p>
+<div class="highlight"><pre><span></span><span class="x">function send_email($to_email,$subject,$message1)</span>
+<span class="x">{</span>
+<span class="x">require_once &#39;Mandrill.php&#39;;</span>
+<span class="x">$apikey = &#39;XXXXXXXXXX&#39;; //specify your api key here</span>
+<span class="x">$mandrill = new Mandrill($apikey);</span>
+
+<span class="x">$message = new stdClass();</span>
+<span class="x">$message-&gt;html = $message1;</span>
+<span class="x">$message-&gt;text = $message1;</span>
+<span class="x">$message-&gt;subject = $subject;</span>
+<span class="x">$message-&gt;from_email = &quot;blog@koonk.com&quot;;//Sender Email</span>
+<span class="x">$message-&gt;from_name  = &quot;KOONK&quot;;//Sender Name</span>
+<span class="x">$message-&gt;to = array(array(&quot;email&quot; =&gt; $to_email));</span>
+<span class="x">$message-&gt;track_opens = true;</span>
+
+<span class="x">$response = $mandrill-&gt;messages-&gt;send($message);</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>“$apikey = 'XXXXXXXXXX'; //specify your api key here”这里需要你指定你的 API 密钥（从 Mandrill 账户中获得）。</p>
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$to</span> <span class="o">=</span> <span class="s2">&quot;abc@example.com&quot;</span><span class="p">;</span>
+<span class="nv">$subject</span> <span class="o">=</span> <span class="s2">&quot;This is a test email&quot;</span><span class="p">;</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="nx">send_email</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span><span class="nv">$subject</span><span class="p">,</span><span class="nv">$message</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<p>为了达到最好的效果，最好按照 Mandrill 的教程去配置 DNS。</p>
+<h3>3. PHP 函数：阻止 SQL 注入</h3>
+<p>SQL 注入或者 SQLi 常见的攻击网站的手段，使用下面的代码可以帮助你防止这些工具。</p>
+<div class="highlight"><pre><span></span><span class="x">function clean($input)</span>
+<span class="x">{</span>
+<span class="x">    if (is_array($input))</span>
+<span class="x">    {</span>
+<span class="x">        foreach ($input as $key =&gt; $val)</span>
+<span class="x">         {</span>
+<span class="x">            $output[$key] = clean($val);</span>
+<span class="x">            // $output[$key] = $this-&gt;clean($val);</span>
+<span class="x">        }</span>
+<span class="x">    }</span>
+<span class="x">    else</span>
+<span class="x">    {</span>
+<span class="x">        $output = (string) $input;</span>
+<span class="x">        // if magic quotes is on then use strip slashes</span>
+<span class="x">        if (get_magic_quotes_gpc()) </span>
+<span class="x">        {</span>
+<span class="x">            $output = stripslashes($output);</span>
+<span class="x">        }</span>
+<span class="x">        // $output = strip_tags($output);</span>
+<span class="x">        $output = htmlentities($output, ENT_QUOTES, &#39;UTF-8&#39;);</span>
+<span class="x">    }</span>
+<span class="x">// return the clean text</span>
+<span class="x">    return $output;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$text</span> <span class="o">=</span> <span class="s2">&quot;&lt;script&gt;alert(1)&lt;/script&gt;&quot;</span><span class="p">;</span>
+<span class="nv">$text</span> <span class="o">=</span> <span class="nx">clean</span><span class="p">(</span><span class="nv">$text</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$text</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>4. 检测用户位置</h3>
+<p>使用下面的函数，可以检测用户是在哪个城市访问你的网站</p>
+<div class="highlight"><pre><span></span><span class="x">function detect_city($ip) {</span>
+
+<span class="x">        $default = &#39;UNKNOWN&#39;;</span>
+
+<span class="x">        $curlopt_useragent = &#39;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)&#39;;</span>
+
+<span class="x">        $url = &#39;http://ipinfodb.com/ip_locator.php?ip=&#39; . urlencode($ip);</span>
+<span class="x">        $ch = curl_init();</span>
+
+<span class="x">        $curl_opt = array(</span>
+<span class="x">            CURLOPT_FOLLOWLOCATION  =&gt; 1,</span>
+<span class="x">            CURLOPT_HEADER      =&gt; 0,</span>
+<span class="x">            CURLOPT_RETURNTRANSFER  =&gt; 1,</span>
+<span class="x">            CURLOPT_USERAGENT   =&gt; $curlopt_useragent,</span>
+<span class="x">            CURLOPT_URL       =&gt; $url,</span>
+<span class="x">            CURLOPT_TIMEOUT         =&gt; 1,</span>
+<span class="x">            CURLOPT_REFERER         =&gt; &#39;http://&#39; . $_SERVER[&#39;HTTP_HOST&#39;],</span>
+<span class="x">        );</span>
+
+<span class="x">        curl_setopt_array($ch, $curl_opt);</span>
+
+<span class="x">        $content = curl_exec($ch);</span>
+
+<span class="x">        if (!is_null($curl_info)) {</span>
+<span class="x">            $curl_info = curl_getinfo($ch);</span>
+<span class="x">        }</span>
+
+<span class="x">        curl_close($ch);</span>
+
+<span class="x">        if ( preg_match(&#39;{&lt;li&gt;City : ([^&lt;]*)&lt;/li&gt;}i&#39;, $content, $regs) )  {</span>
+<span class="x">            $city = $regs[1];</span>
+<span class="x">        }</span>
+<span class="x">        if ( preg_match(&#39;{&lt;li&gt;State/Province : ([^&lt;]*)&lt;/li&gt;}i&#39;, $content, $regs) )  {</span>
+<span class="x">            $state = $regs[1];</span>
+<span class="x">        }</span>
+
+<span class="x">        if( $city!=&#39;&#39; &amp;&amp; $state!=&#39;&#39; ){</span>
+<span class="x">          $location = $city . &#39;, &#39; . $state;</span>
+<span class="x">          return $location;</span>
+<span class="x">        }else{</span>
+<span class="x">          return $default; </span>
+<span class="x">        }</span>
+
+<span class="x">    }</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$ip</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REMOTE_ADDR&#39;</span><span class="p">];</span>
+<span class="nv">$city</span> <span class="o">=</span> <span class="nx">detect_city</span><span class="p">(</span><span class="nv">$ip</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$city</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>5. 获取 Web 页面的源代码</h3>
+<p>使用下面的函数，可以获取任意 Web 页面的 HTML 代码</p>
+<div class="highlight"><pre><span></span><span class="x">function display_sourcecode($url)</span>
+<span class="x">{</span>
+<span class="x">$lines = file($url);</span>
+<span class="x">$output = &quot;&quot;;</span>
+<span class="x">foreach ($lines as $line_num =&gt; $line) { </span>
+<span class="x">    // loop thru each line and prepend line numbers</span>
+<span class="x">    $output.= &quot;Line #&lt;b&gt;{$line_num}&lt;/b&gt; : &quot; . htmlspecialchars($line) . &quot;&lt;br&gt;\n&quot;;</span>
+<span class="x">}</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;http://blog.koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$source</span> <span class="o">=</span> <span class="nx">display_sourcecode</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$source</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>6. 计算喜欢你的 Facebook 页面的用户</h3>
+<div class="highlight"><pre><span></span><span class="x">function fb_fan_count($facebook_name)</span>
+<span class="x">{</span>
+<span class="x">    $data = json_decode(file_get_contents(&quot;https://graph.facebook.com/&quot;.$facebook_name));</span>
+<span class="x">    $likes = $data-&gt;likes;</span>
+<span class="x">    return $likes;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$page</span> <span class="o">=</span> <span class="s2">&quot;koonktechnologies&quot;</span><span class="p">;</span>
+<span class="nv">$count</span> <span class="o">=</span> <span class="nx">fb_fan_count</span><span class="p">(</span><span class="nv">$page</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$count</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>7. 确定任意图片的主导颜色</h3>
+<div class="highlight"><pre><span></span><span class="x">function dominant_color($image)</span>
+<span class="x">{</span>
+<span class="x">$i = imagecreatefromjpeg($image);</span>
+<span class="x">for ($x=0;$x&lt;imagesx($i);$x++) {</span>
+<span class="x">    for ($y=0;$y&lt;imagesy($i);$y++) {</span>
+<span class="x">        $rgb = imagecolorat($i,$x,$y);</span>
+<span class="x">        $r   = ($rgb &gt;&gt; 16) &amp; 0xFF;</span>
+<span class="x">        $g   = ($rgb &gt;&gt;  &amp; 0xFF;</span>
+<span class="x">        $b   = $rgb &amp; 0xFF;</span>
+<span class="x">        $rTotal += $r;</span>
+<span class="x">        $gTotal += $g;</span>
+<span class="x">        $bTotal += $b;</span>
+<span class="x">        $total++;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+<span class="x">$rAverage = round($rTotal/$total);</span>
+<span class="x">$gAverage = round($gTotal/$total);</span>
+<span class="x">$bAverage = round($bTotal/$total);</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>8. whois 查询</h3>
+<p>使用下面的函数可以获取任何域名用户的完整细节</p>
+<div class="highlight"><pre><span></span><span class="x">function whois_query($domain) {</span>
+
+<span class="x">    // fix the domain name:</span>
+<span class="x">    $domain = strtolower(trim($domain));</span>
+<span class="x">    $domain = preg_replace(&#39;/^http:\/\//i&#39;, &#39;&#39;, $domain);</span>
+<span class="x">    $domain = preg_replace(&#39;/^www\./i&#39;, &#39;&#39;, $domain);</span>
+<span class="x">    $domain = explode(&#39;/&#39;, $domain);</span>
+<span class="x">    $domain = trim($domain[0]);</span>
+
+<span class="x">    // split the TLD from domain name</span>
+<span class="x">    $_domain = explode(&#39;.&#39;, $domain);</span>
+<span class="x">    $lst = count($_domain)-1;</span>
+<span class="x">    $ext = $_domain[$lst];</span>
+
+<span class="x">    // You find resources and lists </span>
+<span class="x">    // like these on wikipedia: </span>
+<span class="x">    //</span>
+<span class="x">    // http://de.wikipedia.org/wiki/Whois</span>
+<span class="x">    //</span>
+<span class="x">    $servers = array(</span>
+<span class="x">        &quot;biz&quot; =&gt; &quot;whois.neulevel.biz&quot;,</span>
+<span class="x">        &quot;com&quot; =&gt; &quot;whois.internic.net&quot;,</span>
+<span class="x">        &quot;us&quot; =&gt; &quot;whois.nic.us&quot;,</span>
+<span class="x">        &quot;coop&quot; =&gt; &quot;whois.nic.coop&quot;,</span>
+<span class="x">        &quot;info&quot; =&gt; &quot;whois.nic.info&quot;,</span>
+<span class="x">        &quot;name&quot; =&gt; &quot;whois.nic.name&quot;,</span>
+<span class="x">        &quot;net&quot; =&gt; &quot;whois.internic.net&quot;,</span>
+<span class="x">        &quot;gov&quot; =&gt; &quot;whois.nic.gov&quot;,</span>
+<span class="x">        &quot;edu&quot; =&gt; &quot;whois.internic.net&quot;,</span>
+<span class="x">        &quot;mil&quot; =&gt; &quot;rs.internic.net&quot;,</span>
+<span class="x">        &quot;int&quot; =&gt; &quot;whois.iana.org&quot;,</span>
+<span class="x">        &quot;ac&quot; =&gt; &quot;whois.nic.ac&quot;,</span>
+<span class="x">        &quot;ae&quot; =&gt; &quot;whois.uaenic.ae&quot;,</span>
+<span class="x">        &quot;at&quot; =&gt; &quot;whois.ripe.net&quot;,</span>
+<span class="x">        &quot;au&quot; =&gt; &quot;whois.aunic.net&quot;,</span>
+<span class="x">        &quot;be&quot; =&gt; &quot;whois.dns.be&quot;,</span>
+<span class="x">        &quot;bg&quot; =&gt; &quot;whois.ripe.net&quot;,</span>
+<span class="x">        &quot;br&quot; =&gt; &quot;whois.registro.br&quot;,</span>
+<span class="x">        &quot;bz&quot; =&gt; &quot;whois.belizenic.bz&quot;,</span>
+<span class="x">        &quot;ca&quot; =&gt; &quot;whois.cira.ca&quot;,</span>
+<span class="x">        &quot;cc&quot; =&gt; &quot;whois.nic.cc&quot;,</span>
+<span class="x">        &quot;ch&quot; =&gt; &quot;whois.nic.ch&quot;,</span>
+<span class="x">        &quot;cl&quot; =&gt; &quot;whois.nic.cl&quot;,</span>
+<span class="x">        &quot;cn&quot; =&gt; &quot;whois.cnnic.net.cn&quot;,</span>
+<span class="x">        &quot;cz&quot; =&gt; &quot;whois.nic.cz&quot;,</span>
+<span class="x">        &quot;de&quot; =&gt; &quot;whois.nic.de&quot;,</span>
+<span class="x">        &quot;fr&quot; =&gt; &quot;whois.nic.fr&quot;,</span>
+<span class="x">        &quot;hu&quot; =&gt; &quot;whois.nic.hu&quot;,</span>
+<span class="x">        &quot;ie&quot; =&gt; &quot;whois.domainregistry.ie&quot;,</span>
+<span class="x">        &quot;il&quot; =&gt; &quot;whois.isoc.org.il&quot;,</span>
+<span class="x">        &quot;in&quot; =&gt; &quot;whois.ncst.ernet.in&quot;,</span>
+<span class="x">        &quot;ir&quot; =&gt; &quot;whois.nic.ir&quot;,</span>
+<span class="x">        &quot;mc&quot; =&gt; &quot;whois.ripe.net&quot;,</span>
+<span class="x">        &quot;to&quot; =&gt; &quot;whois.tonic.to&quot;,</span>
+<span class="x">        &quot;tv&quot; =&gt; &quot;whois.tv&quot;,</span>
+<span class="x">        &quot;ru&quot; =&gt; &quot;whois.ripn.net&quot;,</span>
+<span class="x">        &quot;org&quot; =&gt; &quot;whois.pir.org&quot;,</span>
+<span class="x">        &quot;aero&quot; =&gt; &quot;whois.information.aero&quot;,</span>
+<span class="x">        &quot;nl&quot; =&gt; &quot;whois.domain-registry.nl&quot;</span>
+<span class="x">    );</span>
+
+<span class="x">    if (!isset($servers[$ext])){</span>
+<span class="x">        die(&#39;Error: No matching nic server found!&#39;);</span>
+<span class="x">    }</span>
+
+<span class="x">    $nic_server = $servers[$ext];</span>
+
+<span class="x">    $output = &#39;&#39;;</span>
+
+<span class="x">    // connect to whois server:</span>
+<span class="x">    if ($conn = fsockopen ($nic_server, 43)) {</span>
+<span class="x">        fputs($conn, $domain.&quot;\r\n&quot;);</span>
+<span class="x">        while(!feof($conn)) {</span>
+<span class="x">            $output .= fgets($conn,128);</span>
+<span class="x">        }</span>
+<span class="x">        fclose($conn);</span>
+<span class="x">    }</span>
+<span class="x">    else { die(&#39;Error: Could not connect to &#39; . $nic_server . &#39;!&#39;); }</span>
+
+<span class="x">    return $output;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$domain</span> <span class="o">=</span> <span class="s2">&quot;http://www.blog.koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">whois_query</span><span class="p">(</span><span class="nv">$domain</span><span class="p">);</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>9. 验证邮箱地址</h3>
+<p>有时候，当在网站填写表单，用户可能会输入错误的邮箱地址，这个函数可以验证邮箱地址是否有效。</p>
+<div class="highlight"><pre><span></span><span class="x">function is_validemail($email)</span>
+<span class="x">{</span>
+<span class="x">$check = 0;</span>
+<span class="x">if(filter_var($email,FILTER_VALIDATE_EMAIL))</span>
+<span class="x">{</span>
+<span class="x">$check = 1;</span>
+<span class="x">}</span>
+<span class="x">return $check;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$email</span> <span class="o">=</span> <span class="s2">&quot;blog@koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$check</span> <span class="o">=</span> <span class="nx">is_validemail</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$check</span><span class="p">;</span>
+<span class="c1">// If the output is 1, then email is valid.</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>10. 获取用户的真实  IP</h3>
+<div class="highlight"><pre><span></span><span class="x">function getRealIpAddr()  </span>
+<span class="x">{  </span>
+<span class="x">    if (!emptyempty($_SERVER[&#39;HTTP_CLIENT_IP&#39;]))  </span>
+<span class="x">    {  </span>
+<span class="x">        $ip=$_SERVER[&#39;HTTP_CLIENT_IP&#39;];  </span>
+<span class="x">    }  </span>
+<span class="x">    elseif (!emptyempty($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]))  </span>
+<span class="x">    //to check ip is pass from proxy  </span>
+<span class="x">    {  </span>
+<span class="x">        $ip=$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;];  </span>
+<span class="x">    }  </span>
+<span class="x">    else  </span>
+<span class="x">    {  </span>
+<span class="x">        $ip=$_SERVER[&#39;REMOTE_ADDR&#39;];  </span>
+<span class="x">    }  </span>
+<span class="x">    return $ip;  </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$ip</span> <span class="o">=</span> <span class="nx">getRealIpAddr</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$ip</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>11. 转换 URL：从字符串变成超链接</h3>
+<p>如果你正在开发论坛，博客或者是一个常规的表单提交，很多时候都要用户访问一个网站。使用这个函数，URL 字符串就可以自动的转换为超链接。</p>
+<div class="highlight"><pre><span></span><span class="x">function makeClickableLinks($text) </span>
+<span class="x">{  </span>
+<span class="x"> $text = eregi_replace(&#39;(((f|ht){1}tp://)[-a-zA-Z0-9@:%_+.~#?&amp;//=]+)&#39;,  </span>
+<span class="x"> &#39;&lt;a href=&quot;\1&quot;&gt;\1&lt;/a&gt;&#39;, $text);  </span>
+<span class="x"> $text = eregi_replace(&#39;([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_+.~#?&amp;//=]+)&#39;,  </span>
+<span class="x"> &#39;\1&lt;a href=&quot;http://\2&quot;&gt;\2&lt;/a&gt;&#39;, $text);  </span>
+<span class="x"> $text = eregi_replace(&#39;([_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,3})&#39;,  </span>
+<span class="x"> &#39;&lt;a href=&quot;mailto:\1&quot;&gt;\1&lt;/a&gt;&#39;, $text);  </span>
+
+<span class="x">return $text;  </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$text</span> <span class="o">=</span> <span class="s2">&quot;This is my first post on http://blog.koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$text</span> <span class="o">=</span> <span class="nx">makeClickableLinks</span><span class="p">(</span><span class="nv">$text</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$text</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>12. 阻止多个 IP 访问你的网站</h3>
+<p>这个代码片段可以方便你禁止某些特定的 IP 地址访问你的网站</p>
+<div class="highlight"><pre><span></span><span class="x">if ( !file_exists(&#39;blocked_ips.txt&#39;) ) {</span>
+<span class="x"> $deny_ips = array(</span>
+<span class="x">  &#39;127.0.0.1&#39;,</span>
+<span class="x">  &#39;192.168.1.1&#39;,</span>
+<span class="x">  &#39;83.76.27.9&#39;,</span>
+<span class="x">  &#39;192.168.1.163&#39;</span>
+<span class="x"> );</span>
+<span class="x">} else {</span>
+<span class="x"> $deny_ips = file(&#39;blocked_ips.txt&#39;);</span>
+<span class="x">}</span>
+<span class="x">// read user ip adress:</span>
+<span class="x">$ip = isset($_SERVER[&#39;REMOTE_ADDR&#39;]) ? trim($_SERVER[&#39;REMOTE_ADDR&#39;]) : &#39;&#39;;</span>
+
+<span class="x">// search current IP in $deny_ips array</span>
+<span class="x">if ( (array_search($ip, $deny_ips))!== FALSE ) {</span>
+<span class="x"> // address is blocked:</span>
+<span class="x"> echo &#39;Your IP adress (&#39;.$ip.&#39;) was blocked!&#39;;</span>
+<span class="x"> exit;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>13. 强制性文件下载</h3>
+<p>如果你需要下载特定的文件而不用另开新窗口，下面的代码片段可以帮助你。</p>
+<div class="highlight"><pre><span></span><span class="x">function force_download($file) </span>
+<span class="x">{ </span>
+<span class="x">    $dir      = &quot;../log/exports/&quot;; </span>
+<span class="x">    if ((isset($file))&amp;&amp;(file_exists($dir.$file))) { </span>
+<span class="x">       header(&quot;Content-type: application/force-download&quot;); </span>
+<span class="x">       header(&#39;Content-Disposition: inline; filename=&quot;&#39; . $dir.$file . &#39;&quot;&#39;); </span>
+<span class="x">       header(&quot;Content-Transfer-Encoding: Binary&quot;); </span>
+<span class="x">       header(&quot;Content-length: &quot;.filesize($dir.$file)); </span>
+<span class="x">       header(&#39;Content-Type: application/octet-stream&#39;); </span>
+<span class="x">       header(&#39;Content-Disposition: attachment; filename=&quot;&#39; . $file . &#39;&quot;&#39;); </span>
+<span class="x">       readfile(&quot;$dir$file&quot;); </span>
+<span class="x">    } else { </span>
+<span class="x">       echo &quot;No file selected&quot;; </span>
+<span class="x">    } </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="x">&lt;php</span>
+<span class="x">force_download(&quot;image.jpg&quot;);</span>
+<span class="x">?&gt;</span>
+</pre></div>
+
+
+<h3>14. 创建 JSON 数据</h3>
+<p>使用下面的 PHP 片段可以创建 JSON 数据，可以方便你创建移动应用的 Web 服务</p>
+<div class="highlight"><pre><span></span><span class="x">$json_data = array (&#39;id&#39;=&gt;1,&#39;name&#39;=&gt;&quot;Mohit&quot;);</span>
+<span class="x">echo json_encode($json_data);</span>
+</pre></div>
+
+
+<h3>15. 压缩 zip 文件</h3>
+<p>使用下面的 PHP 片段可以即时压缩 zip 文件</p>
+<div class="highlight"><pre><span></span><span class="x">function create_zip($files = array(),$destination = &#39;&#39;,$overwrite = false) {  </span>
+<span class="x">    //if the zip file already exists and overwrite is false, return false  </span>
+<span class="x">    if(file_exists($destination) &amp;&amp; !$overwrite) { return false; }  </span>
+<span class="x">    //vars  </span>
+<span class="x">    $valid_files = array();  </span>
+<span class="x">    //if files were passed in...  </span>
+<span class="x">    if(is_array($files)) {  </span>
+<span class="x">        //cycle through each file  </span>
+<span class="x">        foreach($files as $file) {  </span>
+<span class="x">            //make sure the file exists  </span>
+<span class="x">            if(file_exists($file)) {  </span>
+<span class="x">                $valid_files[] = $file;  </span>
+<span class="x">            }  </span>
+<span class="x">        }  </span>
+<span class="x">    }  </span>
+<span class="x">    //if we have good files...  </span>
+<span class="x">    if(count($valid_files)) {  </span>
+<span class="x">        //create the archive  </span>
+<span class="x">        $zip = new ZipArchive();  </span>
+<span class="x">        if($zip-&gt;open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {  </span>
+<span class="x">            return false;  </span>
+<span class="x">        }  </span>
+<span class="x">        //add the files  </span>
+<span class="x">        foreach($valid_files as $file) {  </span>
+<span class="x">            $zip-&gt;addFile($file,$file);  </span>
+<span class="x">        }  </span>
+<span class="x">        //debug  </span>
+<span class="x">        //echo &#39;The zip archive contains &#39;,$zip-&gt;numFiles,&#39; files with a status of &#39;,$zip-&gt;status;  </span>
+
+<span class="x">        //close the zip -- done!  </span>
+<span class="x">        $zip-&gt;close();  </span>
+
+<span class="x">        //check to make sure the file exists  </span>
+<span class="x">        return file_exists($destination);  </span>
+<span class="x">    }  </span>
+<span class="x">    else  </span>
+<span class="x">    {  </span>
+<span class="x">        return false;  </span>
+<span class="x">    }  </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$files</span><span class="o">=</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;file1.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;file2.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;file3.gif&#39;</span><span class="p">);</span>  
+<span class="nx">create_zip</span><span class="p">(</span><span class="nv">$files</span><span class="p">,</span> <span class="s1">&#39;myzipfile.zip&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> 
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>16. 解压文件</h3>
+<div class="highlight"><pre><span></span><span class="x">function unzip($location,$newLocation)</span>
+<span class="x">{</span>
+<span class="x">        if(exec(&quot;unzip $location&quot;,$arr)){</span>
+<span class="x">            mkdir($newLocation);</span>
+<span class="x">            for($i = 1;$i&lt; count($arr);$i++){</span>
+<span class="x">                $file = trim(preg_replace(&quot;~inflating: ~&quot;,&quot;&quot;,$arr[$i]));</span>
+<span class="x">                copy($location.&#39;/&#39;.$file,$newLocation.&#39;/&#39;.$file);</span>
+<span class="x">                unlink($location.&#39;/&#39;.$file);</span>
+<span class="x">            }</span>
+<span class="x">            return TRUE;</span>
+<span class="x">        }else{</span>
+<span class="x">            return FALSE;</span>
+<span class="x">        }</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">unzip</span><span class="p">(</span><span class="s1">&#39;test.zip&#39;</span><span class="p">,</span><span class="s1">&#39;unziped/test&#39;</span><span class="p">);</span> <span class="c1">//File would be unzipped in unziped/test folder</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>17. 缩放图片</h3>
+<div class="highlight"><pre><span></span><span class="x">function resize_image($filename, $tmpname, $xmax, $ymax)  </span>
+<span class="x">{  </span>
+<span class="x">    $ext = explode(&quot;.&quot;, $filename);  </span>
+<span class="x">    $ext = $ext[count($ext)-1];  </span>
+
+<span class="x">    if($ext == &quot;jpg&quot; || $ext == &quot;jpeg&quot;)  </span>
+<span class="x">        $im = imagecreatefromjpeg($tmpname);  </span>
+<span class="x">    elseif($ext == &quot;png&quot;)  </span>
+<span class="x">        $im = imagecreatefrompng($tmpname);  </span>
+<span class="x">    elseif($ext == &quot;gif&quot;)  </span>
+<span class="x">        $im = imagecreatefromgif($tmpname);  </span>
+
+<span class="x">    $x = imagesx($im);  </span>
+<span class="x">    $y = imagesy($im);  </span>
+
+<span class="x">    if($x &lt;= $xmax &amp;&amp; $y &lt;= $ymax)  </span>
+<span class="x">        return $im;  </span>
+
+<span class="x">    if($x &gt;= $y) {  </span>
+<span class="x">        $newx = $xmax;  </span>
+<span class="x">        $newy = $newx * $y / $x;  </span>
+<span class="x">    }  </span>
+<span class="x">    else {  </span>
+<span class="x">        $newy = $ymax;  </span>
+<span class="x">        $newx = $x / $y * $newy;  </span>
+<span class="x">    }  </span>
+
+<span class="x">    $im2 = imagecreatetruecolor($newx, $newy);  </span>
+<span class="x">    imagecopyresized($im2, $im, 0, 0, 0, 0, floor($newx), floor($newy), $x, $y);  </span>
+<span class="x">    return $im2;   </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>18. 使用 mail() 发送邮件</h3>
+<p>之前我们提供了如何使用 Mandrill 发送邮件的 PHP 代码片段，但是如果你不想使用第三方服务，那么可以使用下面的 PHP 代码片段。</p>
+<div class="highlight"><pre><span></span><span class="x">function send_mail($to,$subject,$body)</span>
+<span class="x">{</span>
+<span class="x">$headers = &quot;From: KOONK\r\n&quot;;</span>
+<span class="x">$headers .= &quot;Reply-To: blog@koonk.com\r\n&quot;;</span>
+<span class="x">$headers .= &quot;Return-Path: blog@koonk.com\r\n&quot;;</span>
+<span class="x">$headers .= &quot;X-Mailer: PHP5\n&quot;;</span>
+<span class="x">$headers .= &#39;MIME-Version: 1.0&#39; . &quot;\n&quot;;</span>
+<span class="x">$headers .= &#39;Content-type: text/html; charset=iso-8859-1&#39; . &quot;\r\n&quot;;</span>
+<span class="x">mail($to,$subject,$body,$headers);</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$to</span> <span class="o">=</span> <span class="s2">&quot;admin@koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$subject</span> <span class="o">=</span> <span class="s2">&quot;This is a test mail&quot;</span><span class="p">;</span>
+<span class="nv">$body</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="nx">send_mail</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span><span class="nv">$subject</span><span class="p">,</span><span class="nv">$body</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>19. 把秒转换成天数，小时数和分钟</h3>
+<div class="highlight"><pre><span></span><span class="x">function secsToStr($secs) {</span>
+<span class="x">    if($secs&gt;=86400){$days=floor($secs/86400);$secs=$secs%86400;$r=$days.&#39; day&#39;;if($days&lt;&gt;1){$r.=&#39;s&#39;;}if($secs&gt;0){$r.=&#39;, &#39;;}}</span>
+<span class="x">    if($secs&gt;=3600){$hours=floor($secs/3600);$secs=$secs%3600;$r.=$hours.&#39; hour&#39;;if($hours&lt;&gt;1){$r.=&#39;s&#39;;}if($secs&gt;0){$r.=&#39;, &#39;;}}</span>
+<span class="x">    if($secs&gt;=60){$minutes=floor($secs/60);$secs=$secs%60;$r.=$minutes.&#39; minute&#39;;if($minutes&lt;&gt;1){$r.=&#39;s&#39;;}if($secs&gt;0){$r.=&#39;, &#39;;}}</span>
+<span class="x">    $r.=$secs.&#39; second&#39;;if($secs&lt;&gt;1){$r.=&#39;s&#39;;}</span>
+<span class="x">    return $r;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$seconds</span> <span class="o">=</span> <span class="s2">&quot;56789&quot;</span><span class="p">;</span>
+<span class="nv">$output</span> <span class="o">=</span> <span class="nx">secsToStr</span><span class="p">(</span><span class="nv">$seconds</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>20. 数据库连接</h3>
+<p>连接 MySQL 数据库</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$DBNAME</span> <span class="o">=</span> <span class="s1">&#39;koonk&#39;</span><span class="p">;</span>
+<span class="nv">$HOST</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+<span class="nv">$DBUSER</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
+<span class="nv">$DBPASS</span> <span class="o">=</span> <span class="s1">&#39;koonk&#39;</span><span class="p">;</span>
+<span class="nv">$CONNECT</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="nv">$HOST</span><span class="p">,</span><span class="nv">$DBUSER</span><span class="p">,</span><span class="nv">$DBPASS</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$CONNECT</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;MySQL Error: &#39;</span><span class="o">.</span><span class="nb">mysql_error</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nv">$SELECT</span> <span class="o">=</span> <span class="nb">mysql_select_db</span><span class="p">(</span><span class="nv">$DBNAME</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$SELECT</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;MySQL Error: &#39;</span><span class="o">.</span><span class="nb">mysql_error</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>21. 目录清单</h3>
+<p>使用下面的 PHP 代码片段可以在一个目录中列出所有文件和文件夹</p>
+<div class="highlight"><pre><span></span><span class="x">function list_files($dir)</span>
+<span class="x">{</span>
+<span class="x">    if(is_dir($dir))</span>
+<span class="x">    {</span>
+<span class="x">        if($handle = opendir($dir))</span>
+<span class="x">        {</span>
+<span class="x">            while(($file = readdir($handle)) !== false)</span>
+<span class="x">            {</span>
+<span class="x">                if($file != &quot;.&quot; &amp;amp;&amp;amp; $file != &quot;..&quot; &amp;amp;&amp;amp; $file != &quot;Thumbs.db&quot;/*pesky windows, images..*/)</span>
+<span class="x">                {</span>
+<span class="x">                    echo &#39;&lt;a target=&quot;_blank&quot; href=&quot;&#39;.$dir.$file.&#39;&quot;&gt;&#39;.$file.&#39;&lt;/a&gt;&lt;br&gt;&#39;.&quot;\n&quot;;</span>
+<span class="x">                }</span>
+<span class="x">            }</span>
+<span class="x">            closedir($handle);</span>
+<span class="x">        }</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+    <span class="nx">list_files</span><span class="p">(</span><span class="s2">&quot;images/&quot;</span><span class="p">);</span> <span class="c1">//This will list all files of images folder</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>22. 检测用户语言</h3>
+<p>使用下面的 PHP 代码片段可以检测用户浏览器所使用的语言</p>
+<div class="highlight"><pre><span></span><span class="x">function get_client_language($availableLanguages, $default=&#39;en&#39;){</span>
+<span class="x">    if (isset($_SERVER[&#39;HTTP_ACCEPT_LANGUAGE&#39;])) {</span>
+<span class="x">        $langs=explode(&#39;,&#39;,$_SERVER[&#39;HTTP_ACCEPT_LANGUAGE&#39;]);</span>
+<span class="x">        foreach ($langs as $value){</span>
+<span class="x">            $choice=substr($value,0,2);</span>
+<span class="x">            if(in_array($choice, $availableLanguages)){</span>
+<span class="x">                return $choice;</span>
+<span class="x">            }</span>
+<span class="x">        }</span>
+<span class="x">    } </span>
+<span class="x">    return $default;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>23. 查看 CSV 文件</h3>
+<div class="highlight"><pre><span></span><span class="x">function readCSV($csvFile){</span>
+<span class="x">    $file_handle = fopen($csvFile, &#39;r&#39;);</span>
+<span class="x">    while (!feof($file_handle) ) {</span>
+<span class="x">        $line_of_text[] = fgetcsv($file_handle, 1024);</span>
+<span class="x">    }</span>
+<span class="x">    fclose($file_handle);</span>
+<span class="x">    return $line_of_text;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$csvFile</span> <span class="o">=</span> <span class="s2">&quot;test.csv&quot;</span><span class="p">;</span>
+<span class="nv">$csv</span> <span class="o">=</span> <span class="nx">readCSV</span><span class="p">(</span><span class="nv">$csvFile</span><span class="p">);</span>
+<span class="nv">$a</span> <span class="o">=</span> <span class="nx">csv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// This will get value of Column 1 &amp; Row 1</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>24. 从 PHP 数据创建 CSV 文件</h3>
+<div class="highlight"><pre><span></span><span class="x">function generateCsv($data, $delimiter = &#39;,&#39;, $enclosure = &#39;&quot;&#39;) {</span>
+<span class="x">   $handle = fopen(&#39;php://temp&#39;, &#39;r+&#39;);</span>
+<span class="x">   foreach ($data as $line) {</span>
+<span class="x">           fputcsv($handle, $line, $delimiter, $enclosure);</span>
+<span class="x">   }</span>
+<span class="x">   rewind($handle);</span>
+<span class="x">   while (!feof($handle)) {</span>
+<span class="x">           $contents .= fread($handle, 8192);</span>
+<span class="x">   }</span>
+<span class="x">   fclose($handle);</span>
+<span class="x">   return $contents;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;oranges&quot;</span><span class="p">;</span>
+<span class="nx">generateCsv</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$delimiter</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$enclosure</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>25. 解析 XML 数据</h3>
+<div class="highlight"><pre><span></span><span class="x">$xml_string=&quot;</span><span class="cp">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;moleculedb&gt;</span>
+<span class="x">    &lt;molecule name=&#39;Benzine&#39;&gt;</span>
+<span class="x">        &lt;symbol&gt;ben&lt;/symbol&gt;</span>
+<span class="x">        &lt;code&gt;A&lt;/code&gt;</span>
+<span class="x">    &lt;/molecule&gt;</span>
+<span class="x">    &lt;molecule name=&#39;Water&#39;&gt;</span>
+<span class="x">        &lt;symbol&gt;h2o&lt;/symbol&gt;</span>
+<span class="x">        &lt;code&gt;K&lt;/code&gt;</span>
+<span class="x">    &lt;/molecule&gt;</span>
+<span class="x">&lt;/moleculedb&gt;&quot;;</span>
+
+<span class="x">//load the xml string using simplexml function</span>
+<span class="x">$xml = simplexml_load_string($xml_string);</span>
+
+<span class="x">//loop through the each node of molecule</span>
+<span class="x">foreach ($xml-&gt;molecule as $record)</span>
+<span class="x">{</span>
+<span class="x">   //attribute are accessted by</span>
+<span class="x">   echo $record[&#39;name&#39;], &#39;  &#39;;</span>
+<span class="x">   //node are accessted by -&gt; operator</span>
+<span class="x">   echo $record-&gt;symbol, &#39;  &#39;;</span>
+<span class="x">   echo $record-&gt;code, &#39;&lt;br /&gt;&#39;;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>26. 解析 JSON 数据</h3>
+<div class="highlight"><pre><span></span><span class="x">$json_string=&#39;{&quot;id&quot;:1,&quot;name&quot;:&quot;rolf&quot;,&quot;country&quot;:&quot;russia&quot;,&quot;office&quot;:[&quot;google&quot;,&quot;oracle&quot;]} &#39;;</span>
+<span class="x">$obj=json_decode($json_string);</span>
+<span class="x">//print the parsed data</span>
+<span class="x">echo $obj-&gt;name; //displays rolf</span>
+<span class="x">echo $obj-&gt;office[0]; //displays google</span>
+</pre></div>
+
+
+<h3>27. 获取当前页面 URL</h3>
+<p>这个 PHP 片段可以帮助你让用户登录后直接跳转到之前浏览的页面</p>
+<div class="highlight"><pre><span></span><span class="x">function current_url()</span>
+<span class="x">{</span>
+<span class="x">$url = &quot;http://&quot; . $_SERVER[&#39;HTTP_HOST&#39;] . $_SERVER[&#39;REQUEST_URI&#39;];</span>
+<span class="x">$validURL = str_replace(&quot;&amp;&quot;, &quot;&amp;amp;&quot;, $url);</span>
+<span class="x">return validURL;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="s2">&quot;Currently you are on: &quot;</span><span class="o">.</span><span class="nx">current_url</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>28. 从任意的 Twitter 账号获取最新的 Tweet</h3>
+<div class="highlight"><pre><span></span><span class="x">function my_twitter($username) </span>
+<span class="x">{</span>
+<span class="x">     $no_of_tweets = 1;</span>
+<span class="x">     $feed = &quot;http://search.twitter.com/search.atom?q=from:&quot; . $username . &quot;&amp;rpp=&quot; . $no_of_tweets;</span>
+<span class="x">     $xml = simplexml_load_file($feed);</span>
+<span class="x">    foreach($xml-&gt;children() as $child) {</span>
+<span class="x">        foreach ($child as $value) {</span>
+<span class="x">            if($value-&gt;getName() == &quot;link&quot;) $link = $value[&#39;href&#39;];</span>
+<span class="x">            if($value-&gt;getName() == &quot;content&quot;) {</span>
+<span class="x">                $content = $value . &quot;&quot;;</span>
+<span class="x">        echo &#39;&lt;p class=&quot;twit&quot;&gt;&#39;.$content.&#39; &lt;a class=&quot;twt&quot; href=&quot;&#39;.$link.&#39;&quot; title=&quot;&quot;&gt;&amp;nbsp; &lt;/a&gt;&lt;/p&gt;&#39;;</span>
+<span class="x">            }    </span>
+<span class="x">        }</span>
+<span class="x">    }    </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="s2">&quot;koonktech&quot;</span><span class="p">;</span>
+<span class="nx">my_twitter</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>29. 转发数量</h3>
+<p>使用这个 PHP 片段可以检测你的页面 URL 有多少转发数量</p>
+<div class="highlight"><pre><span></span><span class="x">function tweetCount($url) {</span>
+<span class="x">    $content = file_get_contents(&quot;http://api.tweetmeme.com/url_info?url=&quot;.$url);</span>
+<span class="x">    $element = new SimpleXmlElement($content);</span>
+<span class="x">    $retweets = $element-&gt;story-&gt;url_count;</span>
+<span class="x">    if($retweets){</span>
+<span class="x">        return $retweets;</span>
+<span class="x">    } else {</span>
+<span class="x">        return 0;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;http://blog.koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$count</span> <span class="o">=</span> <span class="nx">tweetCount</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+<span class="k">return</span> <span class="nv">$count</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>30. 计算两个日期的差</h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$date1</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span> <span class="s1">&#39;Y-m-d&#39;</span> <span class="p">);</span>
+<span class="nv">$date2</span> <span class="o">=</span> <span class="s2">&quot;2015-12-04&quot;</span><span class="p">;</span>
+<span class="nv">$diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">strtotime</span><span class="p">(</span><span class="nv">$date2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">strtotime</span><span class="p">(</span><span class="nv">$date1</span><span class="p">));</span>
+<span class="nv">$years</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span><span class="nv">$diff</span> <span class="o">/</span> <span class="p">(</span><span class="mi">365</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">));</span>
+<span class="nv">$months</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">((</span><span class="nv">$diff</span> <span class="o">-</span> <span class="nv">$years</span> <span class="o">*</span> <span class="mi">365</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">30</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">));</span>
+<span class="nv">$days</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">((</span><span class="nv">$diff</span> <span class="o">-</span> <span class="nv">$years</span> <span class="o">*</span> <span class="mi">365</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span> <span class="o">-</span> <span class="nv">$months</span><span class="o">*</span><span class="mi">30</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">));</span>
+<span class="nb">printf</span><span class="p">(</span><span class="s2">&quot;%d years, %d months, %d days</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nv">$years</span><span class="p">,</span> <span class="nv">$months</span><span class="p">,</span> <span class="nv">$days</span><span class="p">);</span>
+<span class="o">--------------------------------------------------------</span> <span class="k">OR</span>
+<span class="nv">$date1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="s2">&quot;2007-03-24&quot;</span><span class="p">);</span>
+<span class="nv">$date2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="s2">&quot;2009-06-26&quot;</span><span class="p">);</span>
+<span class="nv">$interval</span> <span class="o">=</span> <span class="nv">$date1</span><span class="o">-&gt;</span><span class="na">diff</span><span class="p">(</span><span class="nv">$date2</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">&quot;difference &quot;</span> <span class="o">.</span> <span class="nv">$interval</span><span class="o">-&gt;</span><span class="na">y</span> <span class="o">.</span> <span class="s2">&quot; years, &quot;</span> <span class="o">.</span> <span class="nv">$interval</span><span class="o">-&gt;</span><span class="na">m</span><span class="o">.</span><span class="s2">&quot; months, &quot;</span><span class="o">.</span><span class="nv">$interval</span><span class="o">-&gt;</span><span class="na">d</span><span class="o">.</span><span class="s2">&quot; days &quot;</span><span class="p">;</span> 
+<span class="c1">// shows the total amount of days (not divided into years, months and days like above)</span>
+<span class="k">echo</span> <span class="s2">&quot;difference &quot;</span> <span class="o">.</span> <span class="nv">$interval</span><span class="o">-&gt;</span><span class="na">days</span> <span class="o">.</span> <span class="s2">&quot; days &quot;</span><span class="p">;</span>
+<span class="o">--------------------------------------------------------</span> <span class="k">OR</span>
+
+
+<span class="sd">/**</span>
+<span class="sd"> * Calculate differences between two dates with precise semantics. Based on PHPs DateTime::diff()</span>
+<span class="sd"> * implementation by Derick Rethans. Ported to PHP by Emil H, 2011-05-02. No rights reserved.</span>
+<span class="sd"> * </span>
+<span class="sd"> * See here for original code:</span>
+<span class="sd"> * http://svn.php.net/viewvc/php/php-src/trunk/ext/date/lib/tm2unixtime.c?revision=302890&amp;view=markup</span>
+<span class="sd"> * http://svn.php.net/viewvc/php/php-src/trunk/ext/date/lib/interval.c?revision=298973&amp;view=markup</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">_date_range_limit</span><span class="p">(</span><span class="nv">$start</span><span class="p">,</span> <span class="nv">$end</span><span class="p">,</span> <span class="nv">$adj</span><span class="p">,</span> <span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">,</span> <span class="nv">$result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nv">$start</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$result</span><span class="p">[</span><span class="nv">$b</span><span class="p">]</span> <span class="o">-=</span> <span class="nb">intval</span><span class="p">((</span><span class="nv">$start</span> <span class="o">-</span> <span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nv">$adj</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">+=</span> <span class="nv">$adj</span> <span class="o">*</span> <span class="nb">intval</span><span class="p">((</span><span class="nv">$start</span> <span class="o">-</span> <span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nv">$adj</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nv">$end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$result</span><span class="p">[</span><span class="nv">$b</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">intval</span><span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">/</span> <span class="nv">$adj</span><span class="p">);</span>
+        <span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">-=</span> <span class="nv">$adj</span> <span class="o">*</span> <span class="nb">intval</span><span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="nv">$a</span><span class="p">]</span> <span class="o">/</span> <span class="nv">$adj</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="nf">_date_range_limit_days</span><span class="p">(</span><span class="nv">$base</span><span class="p">,</span> <span class="nv">$result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$days_in_month_leap</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">);</span>
+    <span class="nv">$days_in_month</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">);</span>
+    <span class="nx">_date_range_limit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$base</span><span class="p">);</span>
+    <span class="nv">$year</span> <span class="o">=</span> <span class="nv">$base</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">];</span>
+    <span class="nv">$month</span> <span class="o">=</span> <span class="nv">$base</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;invert&quot;</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$month</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$month</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$month</span> <span class="o">+=</span> <span class="mi">12</span><span class="p">;</span>
+                <span class="nv">$year</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nv">$leapyear</span> <span class="o">=</span> <span class="nv">$year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="nv">$year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nv">$year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="nv">$days</span> <span class="o">=</span> <span class="nv">$leapyear</span> <span class="o">?</span> <span class="nv">$days_in_month_leap</span><span class="p">[</span><span class="nv">$month</span><span class="p">]</span> <span class="o">:</span> <span class="nv">$days_in_month</span><span class="p">[</span><span class="nv">$month</span><span class="p">];</span>
+            <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nv">$days</span><span class="p">;</span>
+            <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$leapyear</span> <span class="o">=</span> <span class="nv">$year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="nv">$year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nv">$year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="nv">$days</span> <span class="o">=</span> <span class="nv">$leapyear</span> <span class="o">?</span> <span class="nv">$days_in_month_leap</span><span class="p">[</span><span class="nv">$month</span><span class="p">]</span> <span class="o">:</span> <span class="nv">$days_in_month</span><span class="p">[</span><span class="nv">$month</span><span class="p">];</span>
+            <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nv">$days</span><span class="p">;</span>
+            <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+            <span class="nv">$month</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$month</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$month</span> <span class="o">-=</span> <span class="mi">12</span><span class="p">;</span>
+                <span class="nv">$year</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="nf">_date_normalize</span><span class="p">(</span><span class="nv">$base</span><span class="p">,</span> <span class="nv">$result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">_date_range_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">_date_range_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">_date_range_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">_date_range_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">_date_range_limit_days</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$base</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">_date_range_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="sd">/**</span>
+<span class="sd"> * Accepts two unix timestamps.</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">_date_diff</span><span class="p">(</span><span class="nv">$one</span><span class="p">,</span> <span class="nv">$two</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$invert</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$one</span> <span class="o">&gt;</span> <span class="nv">$two</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">list</span><span class="p">(</span><span class="nv">$one</span><span class="p">,</span> <span class="nv">$two</span><span class="p">)</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$two</span><span class="p">,</span> <span class="nv">$one</span><span class="p">);</span>
+        <span class="nv">$invert</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nv">$key</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">);</span>
+    <span class="nv">$a</span> <span class="o">=</span> <span class="nb">array_combine</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nb">array_map</span><span class="p">(</span><span class="s2">&quot;intval&quot;</span><span class="p">,</span> <span class="nb">explode</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nb">date</span><span class="p">(</span><span class="s2">&quot;Y m d H i s&quot;</span><span class="p">,</span> <span class="nv">$one</span><span class="p">))));</span>
+    <span class="nv">$b</span> <span class="o">=</span> <span class="nb">array_combine</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nb">array_map</span><span class="p">(</span><span class="s2">&quot;intval&quot;</span><span class="p">,</span> <span class="nb">explode</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nb">date</span><span class="p">(</span><span class="s2">&quot;Y m d H i s&quot;</span><span class="p">,</span> <span class="nv">$two</span><span class="p">))));</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$a</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">];</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$a</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">];</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$a</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">];</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$a</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">];</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$a</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">];</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$b</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$a</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">];</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;invert&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$invert</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nv">$result</span><span class="p">[</span><span class="s2">&quot;days&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">intval</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="nv">$one</span> <span class="o">-</span> <span class="nv">$two</span><span class="p">)</span><span class="o">/</span><span class="mi">86400</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$invert</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">_date_normalize</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$a</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">_date_normalize</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$b</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nv">$date</span> <span class="o">=</span> <span class="s2">&quot;2014-12-04 19:37:22&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+<span class="nb">print_r</span><span class="p">(</span> <span class="nx">_date_diff</span><span class="p">(</span> <span class="nb">strtotime</span><span class="p">(</span><span class="nv">$date</span><span class="p">),</span> <span class="nb">time</span><span class="p">()</span> <span class="p">)</span> <span class="p">);</span>
+<span class="k">echo</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span> 
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>31. 删除文件夹内容</h3>
+<div class="highlight"><pre><span></span><span class="x">function Delete($path)</span>
+<span class="x">{</span>
+<span class="x">    if (is_dir($path) === true)</span>
+<span class="x">    {</span>
+<span class="x">        $files = array_diff(scandir($path), array(&#39;.&#39;, &#39;..&#39;));</span>
+<span class="x">        foreach ($files as $file)</span>
+<span class="x">        {</span>
+<span class="x">            Delete(realpath($path) . &#39;/&#39; . $file);</span>
+<span class="x">        }</span>
+<span class="x">        return rmdir($path);</span>
+<span class="x">    }</span>
+<span class="x">    else if (is_file($path) === true)</span>
+<span class="x">    {</span>
+<span class="x">        return unlink($path);</span>
+<span class="x">    }</span>
+<span class="x">    return false;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$path</span> <span class="o">=</span> <span class="s2">&quot;images/&quot;</span><span class="p">;</span>
+<span class="nx">Delete</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span> <span class="c1">// This will delete images folder along with its contents.</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>32. 搜索和高亮字符串中的关键字</h3>
+<div class="highlight"><pre><span></span><span class="x">function highlighter_text($text, $words)</span>
+<span class="x">{</span>
+<span class="x">    $split_words = explode( &quot; &quot; , $words );</span>
+<span class="x">    foreach($split_words as $word)</span>
+<span class="x">    {</span>
+<span class="x">        $color = &quot;#4285F4&quot;;</span>
+<span class="x">        $text = preg_replace(&quot;|($word)|Ui&quot; ,</span>
+<span class="x">            &quot;&lt;span style=\&quot;color:&quot;.$color.&quot;;\&quot;&gt;&lt;b&gt;$1&lt;/b&gt;&lt;/span&gt;&quot; , $text );</span>
+<span class="x">    }</span>
+<span class="x">    return $text;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$string</span> <span class="o">=</span> <span class="s2">&quot;I like chocolates and I like apples&quot;</span><span class="p">;</span>
+<span class="nv">$words</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">highlighter_text</span><span class="p">(</span><span class="nv">$string</span> <span class="p">,</span><span class="nv">$words</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>33. 写入文件</h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?</span>
+<span class="nv">$filename</span> <span class="o">=</span> <span class="s1">&#39;blog.csv&#39;</span><span class="p">;</span>
+<span class="nv">$fp</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="nv">$filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">);</span>
+<span class="nv">$output</span> <span class="o">=</span> <span class="s2">&quot; Hello &quot;</span><span class="p">;</span>
+<span class="nv">$output</span> <span class="o">.=</span> <span class="s2">&quot; World! &quot;</span><span class="p">;</span>
+<span class="nv">$output</span> <span class="o">.=</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="nb">fputs</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>34. 根据 URL 下载图片</h3>
+<div class="highlight"><pre><span></span><span class="x">function imagefromURL($image,$rename)</span>
+<span class="x">{</span>
+<span class="x">$ch = curl_init($image);</span>
+<span class="x">curl_setopt($ch, CURLOPT_HEADER, 0);</span>
+<span class="x">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span>
+<span class="x">curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);</span>
+<span class="x">$rawdata=curl_exec ($ch);</span>
+<span class="x">curl_close ($ch);</span>
+<span class="x">$fp = fopen(&quot;$rename&quot;,&#39;w&#39;);</span>
+<span class="x">fwrite($fp, $rawdata); </span>
+<span class="x">fclose($fp);</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;http://koonk.com/images/logo.png&quot;</span><span class="p">;</span>
+<span class="nv">$rename</span> <span class="o">=</span> <span class="s2">&quot;koonk.png&quot;</span><span class="p">;</span>
+<span class="nx">imagefromURL</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span><span class="nv">$rename</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>35. 检测 URL 是否有效</h3>
+<div class="highlight"><pre><span></span><span class="x">function isvalidURL($url)</span>
+<span class="x">{</span>
+<span class="x">$check = 0;</span>
+<span class="x">if (filter_var($url, FILTER_VALIDATE_URL) !== false) {</span>
+<span class="x">  $check = 1;</span>
+<span class="x">}</span>
+<span class="x">return $check;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;http://koonk.com&quot;</span><span class="p">;</span>
+<span class="nv">$check</span> <span class="o">=</span> <span class="nx">checkvalidURL</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$check</span><span class="p">;</span> <span class="c1">//if returns 1 then URL is valid.</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>36. 生成二维码</h3>
+<div class="highlight"><pre><span></span><span class="x">function qr_code($data, $type = &quot;TXT&quot;, $size =&#39;150&#39;, $ec=&#39;L&#39;, $margin=&#39;0&#39;)  </span>
+<span class="x">{</span>
+<span class="x">     $types = array(&quot;URL&quot; =--&gt; &quot;http://&quot;, &quot;TEL&quot; =&gt; &quot;TEL:&quot;, &quot;TXT&quot;=&gt;&quot;&quot;, &quot;EMAIL&quot; =&gt; &quot;MAILTO:&quot;);</span>
+<span class="x">    if(!in_array($type,array(&quot;URL&quot;, &quot;TEL&quot;, &quot;TXT&quot;, &quot;EMAIL&quot;)))</span>
+<span class="x">    {</span>
+<span class="x">        $type = &quot;TXT&quot;;</span>
+<span class="x">    }</span>
+<span class="x">    if (!preg_match(&#39;/^&#39;.$types[$type].&#39;/&#39;, $data))</span>
+<span class="x">    {</span>
+<span class="x">        $data = str_replace(&quot;\\&quot;, &quot;&quot;, $types[$type]).$data;</span>
+<span class="x">    }</span>
+<span class="x">    $ch = curl_init();</span>
+<span class="x">    $data = urlencode($data);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_URL, &#39;http://chart.apis.google.com/chart&#39;);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_POST, true);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_POSTFIELDS, &#39;chs=&#39;.$size.&#39;x&#39;.$size.&#39;&amp;cht=qr&amp;chld=&#39;.$ec.&#39;|&#39;.$margin.&#39;&amp;chl=&#39;.$data);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_HEADER, false);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_TIMEOUT, 30);</span>
+<span class="x">    $response = curl_exec($ch);</span>
+<span class="x">    curl_close($ch);</span>
+<span class="x">    return $response;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">&quot;Content-type: image/png&quot;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">qr_code</span><span class="p">(</span><span class="s2">&quot;http://koonk.com&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>37. 计算两个地图坐标之间的距离</h3>
+<div class="highlight"><pre><span></span><span class="x">function getDistanceBetweenPointsNew($latitude1, $longitude1, $latitude2, $longitude2) {</span>
+<span class="x">    $theta = $longitude1 - $longitude2;</span>
+<span class="x">    $miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));</span>
+<span class="x">    $miles = acos($miles);</span>
+<span class="x">    $miles = rad2deg($miles);</span>
+<span class="x">    $miles = $miles * 60 * 1.1515;</span>
+<span class="x">    $feet = $miles * 5280;</span>
+<span class="x">    $yards = $feet / 3;</span>
+<span class="x">    $kilometers = $miles * 1.609344;</span>
+<span class="x">    $meters = $kilometers * 1000;</span>
+<span class="x">    return compact(&#39;miles&#39;,&#39;feet&#39;,&#39;yards&#39;,&#39;kilometers&#39;,&#39;meters&#39;); </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$point1</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span> <span class="o">=&gt;</span> <span class="mf">40.770623</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mf">73.964367</span><span class="p">);</span>
+<span class="nv">$point2</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span> <span class="o">=&gt;</span> <span class="mf">40.758224</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mf">73.917404</span><span class="p">);</span>
+<span class="nv">$distance</span> <span class="o">=</span> <span class="nx">getDistanceBetweenPointsNew</span><span class="p">(</span><span class="nv">$point1</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="nv">$point1</span><span class="p">[</span><span class="s1">&#39;long&#39;</span><span class="p">],</span> <span class="nv">$point2</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="nv">$point2</span><span class="p">[</span><span class="s1">&#39;long&#39;</span><span class="p">]);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$distance</span> <span class="k">as</span> <span class="nv">$unit</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$unit</span><span class="o">.</span><span class="s1">&#39;: &#39;</span><span class="o">.</span><span class="nb">number_format</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;&lt;br /&gt;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>38. 获取一个特定话题标签的所有 Tweets</h3>
+<div class="highlight"><pre><span></span><span class="x">function getTweets($hash_tag) {</span>
+<span class="x">    $url = &#39;http://search.twitter.com/search.atom?q=&#39;.urlencode($hash_tag) ;</span>
+<span class="x">    echo &quot;&lt;p&gt;Connecting to &lt;strong&gt;$url&lt;/strong&gt; ...&lt;/p&gt;&quot;;</span>
+<span class="x">    $ch = curl_init($url);</span>
+<span class="x">    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, TRUE);</span>
+<span class="x">    $xml = curl_exec ($ch);</span>
+<span class="x">    curl_close ($ch);</span>
+<span class="x">    //If you want to see the response from Twitter, uncomment this next part out:</span>
+<span class="x">    //echo &quot;&lt;p&gt;Response:&lt;/p&gt;&quot;;</span>
+<span class="x">    //echo &quot;&lt;pre&gt;&quot;.htmlspecialchars($xml).&quot;&lt;/pre&gt;&quot;;</span>
+<span class="x">    $affected = 0;</span>
+<span class="x">    $twelement = new SimpleXMLElement($xml);</span>
+<span class="x">    foreach ($twelement-&gt;entry as $entry) {</span>
+<span class="x">        $text = trim($entry-&gt;title);</span>
+<span class="x">        $author = trim($entry-&gt;author-&gt;name);</span>
+<span class="x">        $time = strtotime($entry-&gt;published);</span>
+<span class="x">        $id = $entry-&gt;id;</span>
+<span class="x">        echo &quot;&lt;p&gt;Tweet from &quot;.$author.&quot;: &lt;strong&gt;&quot;.$text.&quot;&lt;/strong&gt;  &lt;em&gt;Posted &quot;.date(&#39;n/j/y g:i a&#39;,$time).&quot;&lt;/em&gt;&lt;/p&gt;&quot;;</span>
+<span class="x">    }</span>
+<span class="x">    return true ;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>39. 添加 th,st,nd 或者 rd 作为数字的后缀</h3>
+<p>Friday the 13th</p>
+<div class="highlight"><pre><span></span><span class="x">function ordinal($cdnl){ </span>
+<span class="x">    $test_c = abs($cdnl) % 10; </span>
+<span class="x">    $ext = ((abs($cdnl) %100 &lt; 21 &amp;&amp; abs($cdnl) %100 &gt; 4) ? &#39;th&#39;</span>
+<span class="x">            : (($test_c &lt; 4) ? ($test_c &lt; 3) ? ($test_c &lt; 2) ? ($test_c &lt; 1) </span>
+<span class="x">            ? &#39;th&#39; : &#39;st&#39; : &#39;nd&#39; : &#39;rd&#39; : &#39;th&#39;)); </span>
+<span class="x">    return $cdnl.$ext; </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$number</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">ordinal</span><span class="p">(</span><span class="nv">$number</span><span class="p">);</span> <span class="c1">//output is 10th</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>40. 限制文件下载的速度</h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// local file that should be send to the client</span>
+<span class="nv">$local_file</span> <span class="o">=</span> <span class="s1">&#39;test-file.zip&#39;</span><span class="p">;</span>
+<span class="c1">// filename that the user gets as default</span>
+<span class="nv">$download_file</span> <span class="o">=</span> <span class="s1">&#39;your-download-name.zip&#39;</span><span class="p">;</span>
+
+<span class="c1">// set the download rate limit (=&gt; 20,5 kb/s)</span>
+<span class="nv">$download_rate</span> <span class="o">=</span> <span class="mf">20.5</span><span class="p">;</span> 
+<span class="k">if</span><span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$local_file</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">is_file</span><span class="p">(</span><span class="nv">$local_file</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// send headers</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Cache-control: private&#39;</span><span class="p">);</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: application/octet-stream&#39;</span><span class="p">);</span> 
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Length: &#39;</span><span class="o">.</span><span class="nb">filesize</span><span class="p">(</span><span class="nv">$local_file</span><span class="p">));</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition: filename=&#39;</span><span class="o">.</span><span class="nv">$download_file</span><span class="p">);</span>
+
+    <span class="c1">// flush content</span>
+    <span class="nb">flush</span><span class="p">();</span>    
+    <span class="c1">// open file stream</span>
+    <span class="nv">$file</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="nv">$local_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">);</span>    
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="nb">feof</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="c1">// send the current file part to the browser</span>
+        <span class="k">print</span> <span class="nb">fread</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nv">$download_rate</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">));</span>    
+
+        <span class="c1">// flush the content to the browser</span>
+        <span class="nb">flush</span><span class="p">();</span>
+
+        <span class="c1">// sleep one second</span>
+        <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>    
+    <span class="p">}</span>    
+
+    <span class="c1">// close file stream</span>
+    <span class="nb">fclose</span><span class="p">(</span><span class="nv">$file</span><span class="p">);}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="k">die</span><span class="p">(</span><span class="s1">&#39;Error: The file &#39;</span><span class="o">.</span><span class="nv">$local_file</span><span class="o">.</span><span class="s1">&#39; does not exist!&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>41. 把文本转换成图片</h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">&quot;Content-type: image/png&quot;</span><span class="p">);</span>
+<span class="nv">$string</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">];</span>
+<span class="nv">$im</span> <span class="o">=</span> <span class="nb">imagecreatefrompng</span><span class="p">(</span><span class="s2">&quot;images/button.png&quot;</span><span class="p">);</span>
+<span class="nv">$color</span> <span class="o">=</span> <span class="nb">imagecolorallocate</span><span class="p">(</span><span class="nv">$im</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
+<span class="nv">$px</span> <span class="o">=</span> <span class="p">(</span><span class="nb">imagesx</span><span class="p">(</span><span class="nv">$im</span><span class="p">)</span> <span class="o">-</span> <span class="mf">7.5</span> <span class="o">*</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$string</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nv">$py</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="nv">$fontSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nb">imagestring</span><span class="p">(</span><span class="nv">$im</span><span class="p">,</span> <span class="nx">fontSize</span><span class="p">,</span> <span class="nv">$px</span><span class="p">,</span> <span class="nv">$py</span><span class="p">,</span> <span class="nv">$string</span><span class="p">,</span> <span class="nv">$color</span><span class="p">);</span>
+<span class="nb">imagepng</span><span class="p">(</span><span class="nv">$im</span><span class="p">);</span>
+<span class="nb">imagedestroy</span><span class="p">(</span><span class="nv">$im</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>42. 获取远程文件的大小</h3>
+<div class="highlight"><pre><span></span><span class="x">function remote_filesize($url, $user = &quot;&quot;, $pw = &quot;&quot;)</span>
+<span class="x">{</span>
+<span class="x">    ob_start();</span>
+<span class="x">    $ch = curl_init($url);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_HEADER, 1);</span>
+<span class="x">    curl_setopt($ch, CURLOPT_NOBODY, 1);</span>
+<span class="x">    if(!empty($user) &amp;&amp; !empty($pw))</span>
+<span class="x">    {</span>
+<span class="x">        $headers = array(&#39;Authorization: Basic &#39; .  base64_encode(&quot;$user:$pw&quot;));</span>
+<span class="x">        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);</span>
+<span class="x">    }</span>
+<span class="x">    $ok = curl_exec($ch);</span>
+<span class="x">    curl_close($ch);</span>
+<span class="x">    $head = ob_get_contents();</span>
+<span class="x">    ob_end_clean();</span>
+<span class="x">    $regex = &#39;/Content-Length:\s([0-9].+?)\s/&#39;;</span>
+<span class="x">    $count = preg_match($regex, $head, $matches);</span>
+<span class="x">    return isset($matches[1]) ? $matches[1] : &quot;unknown&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$file</span> <span class="o">=</span> <span class="s2">&quot;http://koonk.com/images/logo.png&quot;</span><span class="p">;</span>
+<span class="nv">$size</span> <span class="o">=</span> <span class="nx">remote_filesize</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$size</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>43. 使用 imagebrick 进行 pdf 到图像的转换</h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$pdf_file</span>   <span class="o">=</span> <span class="s1">&#39;./pdf/demo.pdf&#39;</span><span class="p">;</span>
+<span class="nv">$save_to</span>    <span class="o">=</span> <span class="s1">&#39;./jpg/demo.jpg&#39;</span><span class="p">;</span>     <span class="c1">//make sure that apache has permissions to write in this folder! (common problem)</span>
+<span class="c1">//execute ImageMagick command &#39;convert&#39; and convert PDF to JPG with applied settings</span>
+<span class="nb">exec</span><span class="p">(</span><span class="s1">&#39;convert &quot;&#39;</span><span class="o">.</span><span class="nv">$pdf_file</span><span class="o">.</span><span class="s1">&#39;&quot; -colorspace RGB -resize 800 &quot;&#39;</span><span class="o">.</span><span class="nv">$save_to</span><span class="o">.</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="nv">$output</span><span class="p">,</span> <span class="nv">$return_var</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nv">$return_var</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">//if exec successfuly converted pdf to jpg</span>
+    <span class="k">print</span> <span class="s2">&quot;Conversion OK&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">print</span> <span class="s2">&quot;Conversion failed.&lt;br /&gt;&quot;</span><span class="o">.</span><span class="nv">$output</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>44. 使用 tinyurl 生成短网址</h3>
+<div class="highlight"><pre><span></span><span class="x">function get_tiny_url($url)  </span>
+<span class="x">{  </span>
+<span class="x">    $ch = curl_init();  </span>
+<span class="x">    $timeout = 5;  </span>
+<span class="x">    curl_setopt($ch,CURLOPT_URL,&#39;http://tinyurl.com/api-create.php?url=&#39;.$url);  </span>
+<span class="x">    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);  </span>
+<span class="x">    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);  </span>
+<span class="x">    $data = curl_exec($ch);  </span>
+<span class="x">    curl_close($ch);  </span>
+<span class="x">    return $data;  </span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;http://blog.koonk.com/2015/07/Hello-World&quot;</span><span class="p">;</span>
+<span class="nv">$tinyurl</span> <span class="o">=</span> <span class="nx">get_tiny_url</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$tinyurl</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<h3>45. youtube 下载链接生成器</h3>
+<p>使用下面的 PHP 片段可以让你的用户下载 Youtube 视频</p>
+<div class="highlight"><pre><span></span><span class="x">function str_between($string, $start, $end)</span>
+<span class="x">{ </span>
+<span class="x">$string = &quot; &quot;.$string; $ini = strpos($string,$start); if ($ini == 0) return &quot;&quot;; $ini += strlen($start); $len = strpos($string,$end,$ini) - $ini; return substr($string,$ini,$len); }</span>
+<span class="x">function get_youtube_download_link(){</span>
+<span class="x">    $youtube_link = $_GET[&#39;youtube&#39;];</span>
+<span class="x">    $youtube_page = file_get_contents($youtube_link);</span>
+<span class="x">    $v_id = str_between($youtube_page, &quot;&amp;video_id=&quot;, &quot;&amp;&quot;);</span>
+<span class="x">    $t_id = str_between($youtube_page, &quot;&amp;t=&quot;, &quot;&amp;&quot;);</span>
+<span class="x">    $flv_link = &quot;http://www.youtube.com/get_video?video_id=$v_id&amp;t=$t_id&quot;;</span>
+<span class="x">    $hq_flv_link = &quot;http://www.youtube.com/get_video?video_id=$v_id&amp;t=$t_id&amp;fmt=6&quot;;</span>
+<span class="x">    $mp4_link = &quot;http://www.youtube.com/get_video?video_id=$v_id&amp;t=$t_id&amp;fmt=18&quot;;</span>
+<span class="x">    $threegp_link = &quot;http://www.youtube.com/get_video?video_id=$v_id&amp;t=$t_id&amp;fmt=17&quot;;</span>
+<span class="x">    echo &quot;\t\tDownload (right-click &amp;gt; save as)&amp;#58;\n\t\t&quot;;</span>
+<span class="x">    echo &quot;&lt;a href=\&quot;$flv_link\&quot;&gt;FLV&lt;/a&gt;\n\t\t&quot;;</span>
+<span class="x">    echo &quot;&lt;a href=\&quot;$hq_flv_link\&quot;&gt;HQ FLV (if available)&lt;/a&gt;\n\t\t&quot;;</span>
+<span class="x">    echo &quot;&lt;a href=\&quot;$mp4_link\&quot;&gt;MP4&lt;/a&gt;\n\t\t&quot;;</span>
+<span class="x">    echo &quot;&lt;a href=\&quot;$threegp_link\&quot;&gt;3GP&lt;/a&gt;&lt;br&gt;&lt;br&gt;\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h3>46. Facebook 样式的时间戳</h3>
+<p>Facebook (x mins age, y hours ago etc)</p>
+<div class="highlight"><pre><span></span><span class="x">function nicetime($date)</span>
+<span class="x">{</span>
+<span class="x">    if(empty($date)) {</span>
+<span class="x">        return &quot;No date provided&quot;;</span>
+<span class="x">    }</span>
+
+<span class="x">    $periods         = array(&quot;second&quot;, &quot;minute&quot;, &quot;hour&quot;, &quot;day&quot;, &quot;week&quot;, &quot;month&quot;, &quot;year&quot;, &quot;decade&quot;);</span>
+<span class="x">    $lengths         = array(&quot;60&quot;,&quot;60&quot;,&quot;24&quot;,&quot;7&quot;,&quot;4.35&quot;,&quot;12&quot;,&quot;10&quot;);</span>
+
+<span class="x">    $now             = time();</span>
+<span class="x">    $unix_date         = strtotime($date);</span>
+
+<span class="x">       // check validity of date</span>
+<span class="x">    if(empty($unix_date)) {    </span>
+<span class="x">        return &quot;Bad date&quot;;</span>
+<span class="x">    }</span>
+<span class="x">    // is it future date or past date</span>
+<span class="x">    if($now &gt; $unix_date) {    </span>
+<span class="x">        $difference     = $now - $unix_date;</span>
+<span class="x">        $tense         = &quot;ago&quot;;</span>
+
+<span class="x">    } else {</span>
+<span class="x">        $difference     = $unix_date - $now;</span>
+<span class="x">        $tense         = &quot;from now&quot;;</span>
+<span class="x">    }</span>
+
+<span class="x">    for($j = 0; $difference &gt;= $lengths[$j] &amp;&amp; $j &lt; count($lengths)-1; $j++) {</span>
+<span class="x">        $difference /= $lengths[$j];</span>
+<span class="x">    }</span>
+
+<span class="x">    $difference = round($difference);</span>
+
+<span class="x">    if($difference != 1) {</span>
+<span class="x">        $periods[$j].= &quot;s&quot;;</span>
+<span class="x">    }</span>
+
+<span class="x">    return &quot;$difference $periods[$j] {$tense}&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<p>语法：</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$date</span> <span class="o">=</span> <span class="s2">&quot;2015-07-05 03:45&quot;</span><span class="p">;</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">nicetime</span><span class="p">(</span><span class="nv">$date</span><span class="p">);</span> <span class="c1">// 2 days ago</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+
+<p>摘自：<a href="http://www.oschina.net/question/2012764_246023">开源中国</a></p></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

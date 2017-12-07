@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Fedora下安装Sublime Text 3 — STEP UP</title>
+	<meta name="description" content="标题: Fedora下安装Sublime Text 3; 日期: 2015-08-11; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Fedora下安装Sublime Text 3</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-08-11T23:42:00+08:00" itemprop="datePublished">2015-08-11 23:42:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/software.html" rel="category">Software</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/fedora.html" rel="tag">Fedora</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/sublime-text-3.html" rel="tag">Sublime Text 3</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p><code>Sublime Text 3</code> 官网上有 Windown版本的，Ubuntu版本的，MAC版本的，唯独没有 Fedora/RedHat版本的。</p>
+<p>网上找到了安装方法</p>
+<h2>1. 下载安装脚本文件</h2>
+<p>下载32位版本：</p>
+<div class="highlight"><pre><span></span>wget https://gist.githubusercontent.com/dkd903/531a2409c40c926c66d6/raw/2c83194719f1216a7321e4b48f6b604dc8779faf/Install_Sublime_Text_3.sh -O install-sublime-text.sh
+</pre></div>
+
+
+<p>下载64位版本：</p>
+<div class="highlight"><pre><span></span>wget https://gist.githubusercontent.com/dkd903/8ba3f51313c1781cc571/raw/f37b1c18547d086cd45e8b484efc518260106ea9/Install_Sublime_Text_3_64.sh -O install-sublime-text.sh
+</pre></div>
+
+
+<h2>2. 修改文件属性为可执行</h2>
+<div class="highlight"><pre><span></span>chmod +x install-sublime-text.sh
+</pre></div>
+
+
+<h2>3. 执行安装脚本</h2>
+<div class="highlight"><pre><span></span>su -c <span class="s2">&quot;sh install-sublime-text.sh&quot;</span>
+</pre></div>
+
+
+<p>现在你就可以在从菜单里找到 <code>Sublime Text 3</code> 了，或者在命令行里执行 <code>subl</code> 来运行它。</p>
+<p>如果先前你有安装过 <code>Sublime Text 2</code>，那么安装完成后就会被 <code>Sublime Text 3</code> 所替代。</p>
+<hr>
+<p>这里列出脚本内容以供参考：</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="nv">SHORTCUT</span><span class="o">=</span><span class="s2">&quot;[Desktop Entry]</span>
+<span class="s2">Name=Sublime Text 3</span>
+<span class="s2">Comment=Edit text files</span>
+<span class="s2">Exec=/usr/local/sublime-text-3/sublime_text</span>
+<span class="s2">Icon=/usr/local/sublime-text-3/Icon/128x128/sublime_text.png</span>
+<span class="s2">Terminal=false</span>
+<span class="s2">Type=Application</span>
+<span class="s2">Encoding=UTF-8</span>
+<span class="s2">Categories=Utility;TextEditor;&quot;</span>
+<span class="nv">SCRIPT</span><span class="o">=</span><span class="s2">&quot;#!/bin/sh</span>
+<span class="s2">if [ \${1} == \&quot;--help\&quot; ]; then</span>
+<span class="s2">    /usr/local/sublime-text-3/sublime_text --help</span>
+<span class="s2">else</span>
+<span class="s2">    /usr/local/sublime-text-3/sublime_text \$@ &gt; /dev/null 2&gt;&amp;1 &amp;</span>
+<span class="s2">fi&quot;</span>
+
+curl -L <span class="s2">&quot;http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3059_x64.tar.bz2&quot;</span> -o <span class="s2">&quot;/usr/src/Sublime Text 3.tar.bz2&quot;</span>
+<span class="nb">cd</span> /usr/src
+tar -xvjf <span class="s2">&quot;Sublime Text 3.tar.bz2&quot;</span>
+<span class="nb">cd</span> <span class="s2">&quot;Sublime Text 3&quot;</span>
+mkdir -pv <span class="s2">&quot;/usr/local/sublime-text-3&quot;</span>
+mv -fv * <span class="s2">&quot;/usr/local/sublime-text-3/&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">SCRIPT</span><span class="si">}</span><span class="s2">&quot;</span> &gt; <span class="s2">&quot;/usr/local/bin/subl&quot;</span>
+chmod +x <span class="s2">&quot;/usr/local/bin/subl&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">SHORTCUT</span><span class="si">}</span><span class="s2">&quot;</span> &gt; <span class="s2">&quot;/usr/share/applications/sublime-text-3.desktop&quot;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;Finish!&quot;</span>
+</pre></div></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

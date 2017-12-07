@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>STEP UP</title>
+	<meta name="description" content="Coding, scientific development, finance, data analysis, visualization, statistics, and machine learning">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+        
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/djnagode-modelsli-tian-jia-kuo-zhan-zi-duan-zai-bian-ji-jie-mian-li-de-zi-duan-nei-rong-yi-lian-jie-fang-shi-shi-xian-de-fang-fa.html">
+		<h2 itemprop="name headline">Djnago的Models里添加扩展字段，在编辑界面里的字段内容以链接方式实现的方法</h2>
+	</a>
+	<time datetime="2015-09-17T13:00:00+08:00" itemprop="datePublished">2015-09-17 13:00:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p>先来看一个例子，该例子是让其在编辑界面里添加了个字段，其字段内容为搜索同姓氏人员的一个链接，该实现是在<code>models.py</code>里实现的</p>
+<div class="highlight"><pre><span></span><span class="c1"># models.py</span>
+<span class="kn">from</span> <span class="nn">django.utils.html</span> <span class="kn">import</span> <span class="n">format_html</span>
+<span class="k">class</span> <span class="nc">Staff</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">seek_same</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        编辑界面里的扩展字段的内容以链接方式实现的方法</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">format_html</span><span class="p">(</span><span class="s1">&#39;&lt;a href=&quot;../../staff/?first_name__exact={}&quot; target=&quot;_blank&quot;&gt;{}&lt;/a&gt;&#39;</span><span class="p">,</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">first_name</span><span class="p">)</span>
+    <span class="n">seek_same</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s1">&#39;同姓氏人员&#39;</span>  <span class="c1"># 短描述：即字段名</span>
+    <span class="c1"># 显示HTML tag</span>
+    <span class="c1"># 对于用户提交的数据, 永远不要这么设置!</span>
+    <span class="n">seek_same</span><span class="o">.</span><span class="n">allow_tags</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+
+
+<p>这里定义了一个<code>def …</code></p></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/django.html" rel="category">Django</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/django.html" rel="tag">Django</a>
+	</span>
+	<span itemprop="keywords">
+		<a href="/tag/kuo-zhan-zi-duan.html" rel="tag">扩展字段</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/fedoraxia-an-zhuang-sublime-text-3.html">
+		<h2 itemprop="name headline">Fedora下安装Sublime Text 3</h2>
+	</a>
+	<time datetime="2015-08-11T23:42:00+08:00" itemprop="datePublished">2015-08-11 23:42:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p><code>Sublime Text 3</code> 官网上有 Windown版本的，Ubuntu版本的，MAC版本的，唯独没有 Fedora/RedHat版本的。</p>
+<p>网上找到了安装方法</p>
+<h2>1. 下载安装脚本文件</h2>
+<p>下载32位版本：</p>
+<div class="highlight"><pre><span></span>wget https://gist.githubusercontent.com/dkd903/531a2409c40c926c66d6/raw/2c83194719f1216a7321e4b48f6b604dc8779faf/Install_Sublime_Text_3.sh -O install-sublime-text.sh
+</pre></div>
+
+
+<p>下载64位版本：</p>
+<div class="highlight"><pre><span></span>wget https://gist.githubusercontent.com/dkd903/8ba3f51313c1781cc571/raw/f37b1c18547d086cd45e8b484efc518260106ea9/Install_Sublime_Text_3_64.sh -O install-sublime-text.sh
+</pre></div>
+
+
+<h2>2. 修改文件属性为可执行</h2>
+<div class="highlight"><pre><span></span>chmod +x install-sublime-text.sh
+</pre></div>
+
+
+<h2>3 …</h2></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/software.html" rel="category">Software</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/fedora.html" rel="tag">Fedora</a>
+	</span>
+	<span itemprop="keywords">
+		<a href="/tag/sublime-text-3.html" rel="tag">Sublime Text 3</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/46-ge-fei-chang-you-yong-de-php-dai-ma-pian-duan.html">
+		<h2 itemprop="name headline">46 个非常有用的 PHP 代码片段</h2>
+	</a>
+	<time datetime="2015-08-09T17:52:00+08:00" itemprop="datePublished">2015-08-09 17:52:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p>在编写代码的时候有个神奇的工具总是好的！下面这里收集了 40+ PHP 代码片段，可以帮助你开发 PHP 项目。</p>
+<p>这些 PHP 片段对于 PHP 初学者也非常有帮助，非常容易学习，让我们开始学习吧～</p>
+<h3>1. 发送 SMS</h3>
+<p>在开发 Web 或者移动应用的时候，经常会遇到需要发送 SMS 给用户，或者因为登录原因，或者是为了发送信息。下面的 PHP 代码就实现了发送 SMS 的功能。</p>
+<p>为了使用任何的语言发送 SMS，需要一个 SMS gateway。大部分的 SMS 会提供一个 API，这里是使用 MSG91 作为 SMS gateway。</p>
+<div class="highlight"><pre><span></span><span class="x">function send_sms($mobile,$msg)</span>
+<span class="x">{</span>
+<span class="x">$authKey …</span></pre></div></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/code.html" rel="category">Code</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/php.html" rel="tag">php</a>
+	</span>
+	<span itemprop="keywords">
+		<a href="/tag/code.html" rel="tag">code</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/pythonxu-ni-huan-jing-gong-ju-virtualenv.html">
+		<h2 itemprop="name headline">Python虚拟环境工具：virtualenv</h2>
+	</a>
+	<time datetime="2015-08-05T01:21:00+08:00" itemprop="datePublished">2015-08-05 01:21:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p>virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响，它能够：</p>
+<ol>
+<li>在没有权限的情况下安装新套件</li>
+<li>不同应用可以使用不同的套件版本</li>
+<li>套件升级不影响其他应用</li>
+</ol>
+<h3>安装</h3>
+<div class="highlight"><pre><span></span>    sudo apt-get install python-virtualenv
+</pre></div>
+
+
+<p>使用方法</p>
+<div class="highlight"><pre><span></span>    virtualenv [虚拟环境名称]
+</pre></div>
+
+
+<p>如，创建<strong>ENV</strong>的虚拟环境</p>
+<div class="highlight"><pre><span></span>    virtualenv ENV
+</pre></div>
+
+
+<p>如果系统中存在python2和python3两个版本，我们要让虚拟环境基于其中一个版本，可以这样操作</p>
+<div class="highlight"><pre><span></span>    virtualenv -p python2 ENV  #基于python2
+</pre></div>
+
+
+<p>或者</p>
+<div class="highlight"><pre><span></span>    virtualenv -p python3 ENV  #基于python3
+</pre></div>
+
+
+<p>默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 <code>--no-site-packages</code> 建立虚拟环境</p>
+<div class="highlight"><pre><span></span>    virtualenv --no-site-packages [虚拟环境名称]
+</pre></div>
+
+
+<p>但在新版本virtualenv中这个选项已经是默认项了。</p>
+<p>启动虚拟环境</p>
+<div class="highlight"><pre><span></span>    cd ENV …</pre></div></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/python.html" rel="category">Python</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/python.html" rel="tag">python</a>
+	</span>
+	<span itemprop="keywords">
+		<a href="/tag/virtualenv.html" rel="tag">virtualenv</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/fedora22xia-an-zhuang-wu-bi.html">
+		<h2 itemprop="name headline">Fedora22下安装五笔</h2>
+	</a>
+	<time datetime="2015-07-31T23:48:00+08:00" itemprop="datePublished">2015-07-31 23:48:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p>Fedora22输入法以ibus为框架，因此要安装五笔输入法，也应该安装安装ibus框架下的极点或海峰五笔。</p>
+<h2>输入法安装</h2>
+<div class="highlight"><pre><span></span>$ su
+Password:
+<span class="c1"># dnf install -y ibus*wubi*</span>
+<span class="c1"># reboot</span>
+</pre></div>
+
+
+<p>后面一个操作就是重启系统
+重启登录系统后：</p>
+<ul>
+<li>点击屏幕右上角，点击<code>工具图标</code>，</li>
+<li>在打开的窗口里点击<code>个人</code>，点击<code>区域和语言</code>，</li>
+<li>点击<code>区域和语言</code>对话框的<code>输入源</code>下的<code>+</code>，</li>
+<li>选择<code>添加输入源</code>里的<code>汉语（中国）</code>，</li>
+<li>选择<code>汉语（极点五笔86（极爽词库 6.0））</code>或<code>汉语（海峰五笔86）</code>，点击<code>添加</code></li>
+</ul>
+<h2>输入法切换</h2>
+<p>ibus输入法切换使用<code>WIN</code>键加<code>空格</code>键来切换。</p></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/software.html" rel="category">Software</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/wu-bi.html" rel="tag">五笔</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/fedora22-an-zhuang-chrome.html">
+		<h2 itemprop="name headline">Fedora22 安装 Chrome</h2>
+	</a>
+	<time datetime="2015-07-30T23:41:00+08:00" itemprop="datePublished">2015-07-30 23:41:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p>Fedora22 无法直接安装 Chrome，需要先添加<code>Chrome</code>的软件仓库</p>
+<div class="highlight"><pre><span></span>$ su -
+Password:
+<span class="c1"># cat &lt;&lt; EOF &gt; /etc/yum.repos.d/google-chrome.repo</span>
+<span class="o">[</span>google-chrome<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>google-chrome - <span class="se">\$</span>basearch
+<span class="nv">baseurl</span><span class="o">=</span>http://dl.google.com/linux/chrome/rpm/stable/<span class="se">\$</span>basearch
+<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">gpgkey</span><span class="o">=</span>https://dl-ssl.google.com/linux/linux_signing_key.pub
+EOF
+</pre></div>
+
+
+<p>现在可以安装了</p>
+<div class="highlight"><pre><span></span><span class="c1"># dnf install -y google-chrome-stable</span>
+</pre></div>
+
+
+<p>但是会有一个<code>获取GPG密钥错误 …</code></p></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/software.html" rel="category">Software</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/chrome.html" rel="tag">Chrome</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/markdownyu-fa-ji-qi-yun-yong-jie-shao.html">
+		<h2 itemprop="name headline">Markdown语法及其运用介绍</h2>
+	</a>
+	<time datetime="2015-07-07T21:56:00+08:00" itemprop="datePublished">2015-07-07 21:56:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><h2>一、什么是Markdown</h2>
+<p><img alt="Markdown" src="../images/20151005/markdown.png"></p>
+<blockquote>
+<p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也就十来个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+</blockquote>
+<h2>二、为什么重复造轮子</h2>
+<ul>
+<li>自行车的轮子<ul>
+<li>木头轮子</li>
+<li>钢圏轮子</li>
+<li>橡胶垫轮子</li>
+<li>橡胶胎轮子</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>每一种轮子的改进都会推动自行车向或更快、或更轻、或更舒适的方向改进。</p>
+</blockquote>
+<ul>
+<li>书写格式的“轮子”<ul>
+<li>Word格式<ul>
+<li>公文格式</li>
+</ul>
+</li>
+<li>HTML格式</li>
+<li>Markdown格式</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>不同格式的规范让文档或更规范、或方便交流、或方便查看、或易于转换。</p>
+</blockquote>
+<h2>三、为什么使用Markdown</h2>
+<p>Markdown的目标：</p>
+<ul>
+<li>实现让文档「易读易写」</li>
+<li>成为一种适用于网络的书写语言</li>
+</ul>
+<p>Markdown语法的特点</p>
+<ul>
+<li>语法简单 …</li></ul></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/writing.html" rel="category">Writing</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/markdown.html" rel="tag">markdown</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/markdown-yu-fa-shuo-ming.html">
+		<h2 itemprop="name headline">Markdown 语法说明</h2>
+	</a>
+	<time datetime="2015-06-18T23:55:00+08:00" itemprop="datePublished">2015-06-18 23:55:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p><img alt="Markdown" src="../images/20151005/markdown.png"></p>
+<h2>概述</h2>
+<h3>宗旨</h3>
+<p>Markdown 的目标是实现「易读易写」。</p>
+<p>可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 Setext、atx、Textile、reStructuredText、Grutatext 和 EtText，而最大灵感来源其实是纯文本电子邮件的格式。</p>
+<p>总之， Markdown
+的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像*强调*。Markdown 的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。</p>
+<h3>兼容 HTML</h3>
+<p>Markdown 语法的目标是：成为一种适用于网络的书写语言。</p>
+<p>Markdown 并不是想取代 HTML的地位，甚至接近它 …</p></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/writing.html" rel="category">Writing</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/markdown.html" rel="tag">markdown</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/bi-ji-ben-ce-shi-huan-jing-de-nginxfu-wu-pei-zhi.html">
+		<h2 itemprop="name headline">笔记本测试环境的Nginx服务配置</h2>
+	</a>
+	<time datetime="2015-06-15T22:06:00+08:00" itemprop="datePublished">2015-06-15 22:06:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><p>本文记录了笔记本下安装测试环境的Nginx的服务配置，以作为模板，留待后用。</p></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/resource.html" rel="category">Resource</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/nginx.html" rel="tag">nginx</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="/centos7ben-di-yuman-zhuang-lnmpjian-zhan-zu-he.html">
+		<h2 itemprop="name headline">CentOS7本地yum安装LNMP建站组合</h2>
+	</a>
+	<time datetime="2015-06-15T01:08:00+08:00" itemprop="datePublished">2015-06-15 01:08:00</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">蜗牛</span>
+	</span>
+	<div class="summary"><h2>简介：</h2>
+<blockquote>
+<p>LNMP代表的就是：Linux系统下Nginx+MySQL(Mariadb)+PHP这种网站服务器架构。
+Linux是一类Unix计算机操作系统的统称，是目前最流行的免费操作系统。代表版本有：Debian、CentOS、Ubuntu、Fedora、Gentoo等。
+Nginx是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。
+Mysql是一个小型关系型数据库管理系统，目前使用Mariadb替代之。
+PHP是一种在服务器端执行的嵌入HTML文档的脚本语言。Jun 14, 2015
+这四种软件均为免费开源软件，组合到一起，成为一个免费、高效、扩展性强的网站服务系统。
+下面我们针对这个组合逐步说明各个组件在内网环境的安装步骤及协调配置。
+<!--more--></p>
+</blockquote>
+<h2>一、CentOS7的安装及本地yum库的创建</h2>
+<p>CentOS7的安装及本地yum库的创建不再复述，我们这里假定CentOS7已安装好并配置内网可以联通，并且已按照前述方法创建好了本地yum库，并且防火墙已先关闭。</p>
+<blockquote>
+<p>为了方便测试，先</p>
+<div class="highlight"><pre><span></span># systemctl stop firewalld &amp;&amp; systemctl disable firewalld
+</pre></div>
+
+
+<p>以方便调试。</p>
+</blockquote>
+<h2>二、Nginx安装</h2>
+<p>由于Nginx不在内置的Packages里，我们需要先创建Nginx的本地yum库。</p>
+<h3>1 …</h3></div>
+	目录:
+	<span itemprop="articleSection">
+		<a href="/category/software.html" rel="category">Software</a>
+	</span>
+	标签:
+ 
+	<span itemprop="keywords">
+		<a href="/tag/centos7.html" rel="tag">CentOS7</a>
+	</span>
+	<span itemprop="keywords">
+		<a href="/tag/yum.html" rel="tag">Yum</a>
+	</span>
+	<span itemprop="keywords">
+		<a href="/tag/lnmp.html" rel="tag">LNMP</a>
+	</span>
+</div>
+<hr>
+ <div class="pagination">
+<ul>
+    <li class="prev"><a href="/index.html">&larr; 前一页</a></li>
+
+    <li class=""><a href="/index.html">1</a></li>
+    <li class="active"><a href="/index2.html">2</a></li>
+    <li class=""><a href="/index3.html">3</a></li>
+
+    <li class="next"><a href="/index3.html">后一页 &rarr;</a></li>
+
+</ul>
+</div> 		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

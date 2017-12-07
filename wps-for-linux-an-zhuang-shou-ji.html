@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>WPS for Linux 安装手记 — STEP UP</title>
+	<meta name="description" content="标题: WPS for Linux 安装手记; 日期: 2015-10-30; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">WPS for Linux 安装手记</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-10-30T00:13:00+08:00" itemprop="datePublished">2015-10-30 00:13:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/software.html" rel="category">Software</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/wps.html" rel="tag">WPS</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><blockquote>
+<p><strong>问题:</strong> 我听说一个好东西Kingsoft Office（译注：就是WPS），所以我想在我的Linux上试试。我怎样才能安装Kingsoft Office呢？</p>
+</blockquote>
+<p>Kingsoft Office 是一套办公套件，支持多个平台，包括Windows, Linux, iOS 和 Android。它包含三个组件：Writer（WPS文字）用来文字处理，Presentation（WPS演示）支持幻灯片，Spereadsheets（WPS表格）是电子表格。其使用免费增值模式，其中基础版本是免费使用。比较其他的linux办公套件，如LibreOffice、 OpenOffice，其最大优势在于，Kingsoft Office能最好的兼容微软的Office（译注：版权问题？了解下wps和Office的历史问题，可以得到一些结论）。因此如果你需要在windows和linux平台间交互，Kingsoft office是一个很好的选择。</p>
+<p>WPS for Linux 官方下载地址： <a href="http://community.wps.cn/download/">http://community.wps.cn/download/</a></p>
+<h2>CentOS, Fedora 或 RHEL中安装Kingsoft Office</h2>
+<p>在官方页面下载RPM文件。</p>
+<p>需要使用yum命令并用"localinstall"选项来本地安装这个RPM包</p>
+<div class="highlight"><pre><span></span>$ sudo yum localinstall kingsoft-office-9.1.0.4244-0.1.a12p3.i686.rpm
+</pre></div>
+
+
+<p>注意不要使用rpm命令安装。否者，你会得到依赖错误，而且很难解决：</p>
+<p>错误: 依赖失败:</p>
+<div class="highlight"><pre><span></span>libICE.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libSM.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libX11.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libXext.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libXrender.so.1 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libc.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+</pre></div>
+
+
+<p>基于Red Hat的发行版有多重库支持。如果你要想安装的RPM包是32位的并有32位库依赖（你的系统是64位的），一个很好的解决方法就是使用yum来安装。只要RPM在构建时候已经添加所有依赖关系，yum就可以自动使用yum库解决依赖关系。</p>
+<hr>
+<h2>Debian, Ubuntu 和 Linux Mint 中安装Kingsoft Office</h2>
+<p>在官方页面下载DEB包。官方RPM包同样只支持32位版本linux，但是你可以在64位中安装。</p>
+<p>DEB包同样遇到一堆依赖。因此使用gdebi命令来代替dpkg来自动解决依赖。</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install gdebi-core
+$ sudo gdebi kingsoft-office_9.1.0.4244~a12p3_i386.deb 
+</pre></div>
+
+
+<p>启动 Kingsoft Office</p>
+<p>安装完成后，你就可以在桌面管理器轻松启动Witer（WPS文字）, Presentation（WPS演示）, and Spreadsheets（WPS表格）。</p>
+<p>不但如此，你也可以在命令行中启动Kingsoft Office。</p>
+<p>启动Wirter（WPS文字），使用这个命令：</p>
+<div class="highlight"><pre><span></span>$ wps <span class="o">(</span>译注：原文丢失此命令<span class="o">)</span>
+</pre></div>
+
+
+<p>启动Presentation（WPS演示），使用这个命令：</p>
+<div class="highlight"><pre><span></span>$ wpp
+</pre></div>
+
+
+<p>启动Spreadsheets（WPS表格），使用这个命令：</p>
+<div class="highlight"><pre><span></span>$ et
+</pre></div>
+
+
+<h2>安装缺失的字体</h2>
+<p>首次运行wps时会提示缺失字体：wingding、wingding2、wingding3、webdings、MT Extra</p>
+<p>字体文件可以从Windows系统的<code>C:\Windows\fonts</code>复制，复制到<code>～/.fonts</code>，没有目录就创建一个啦。</p>
+<blockquote>
+<p>PS. 没有找到<code>MT Extra</code>字体</p>
+</blockquote></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

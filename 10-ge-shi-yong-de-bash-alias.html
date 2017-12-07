@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>10 个实用的 Bash alias — STEP UP</title>
+	<meta name="description" content="标题: 10 个实用的 Bash alias; 日期: 2015-10-06; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">10 个实用的 Bash alias</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-10-06T10:48:00+08:00" itemprop="datePublished">2015-10-06 10:48:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/system.html" rel="category">System</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/bash.html" rel="tag">bash</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/alias.html" rel="tag">alias</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/bie-ming.html" rel="tag">别名</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>alias 即“别名”，为便于理解，你可以将其看成是一个命令的快捷方式。使用 alias 的最大好处是，可以简化输入，从而为你节省时间，并提高效率。定义的 alias 可以保存到 ~/.bashrc 文件中，以后在命令行中就可以直接使用了。</p>
+<p>要设置别名</p>
+<div class="highlight"><pre><span></span>$ vim ~/.bashrc
+</pre></div>
+
+
+<p>下面介绍了 10 个 Bash alias，个人觉得都很实用：</p>
+<h2>几个有用的别名用法</h2>
+<h3>ssh 别名</h3>
+<div class="highlight"><pre><span></span>alias server_name=&quot;ssh -v -l USERNAME IP ADDRESS&quot;
+</pre></div>
+
+
+<p>更改 server_name、USERNAME 及 IP 地址以适应你的需要。对于经常要使用 ssh 登录远程 shell 的同学来说，这是一个值得收藏的别名。</p>
+<h3>ls 别名</h3>
+<div class="highlight"><pre><span></span>alias ll=&quot;ls -l&quot;，另一个 alias la=&quot;ls -a&quot;
+</pre></div>
+
+
+<p>意思很明显，在此就不多作解释了。</p>
+<h3>rm 别名</h3>
+<div class="highlight"><pre><span></span>alias rm=&quot;rm -i&quot;
+</pre></div>
+
+
+<p>这个别名让你更加安全地执行删除操作。</p>
+<h3>df 别名</h3>
+<div class="highlight"><pre><span></span>alias df=&quot;df -h&quot;
+</pre></div>
+
+
+<p>让你以 MB 或 G 为单位查看磁盘的空间。</p>
+<h3>Firefox 别名</h3>
+<div class="highlight"><pre><span></span>alias ff1=&quot;/home/jlwallen/firefox/firefox&quot; 及 alias ff2=&quot;/home/jlwallen/firefoxb3/firefox&quot;
+</pre></div>
+
+
+<p>适合使用两个 Firefox 版本的朋友，如一个稳定版，另一个为测试版。</p>
+<h3>书签别名</h3>
+<div class="highlight"><pre><span></span>alias fftr=&quot;/home/jlwallen/firefox/firefox http://linuxtoy.org&quot;
+</pre></div>
+
+
+<p>用于打开一个指定的网址。</p>
+<h3>文件别名</h3>
+<div class="highlight"><pre><span></span>alias emenu=&quot;aterm nano -e ~/.e16/menus/user_apps&quot;
+</pre></div>
+
+
+<p>如常常需要编辑的配置文件。</p>
+<h3>apt-get update 别名</h3>
+<div class="highlight"><pre><span></span>alias update=&quot;sudo apt-get update&quot;
+</pre></div>
+
+
+<p>使用其他 Linux 发行版的同学可以换一下其中的 sudo apt-get update。</p>
+<h3>rpm 批量安装别名</h3>
+<div class="highlight"><pre><span></span>alias brpm=&quot;rpm -ivh ~/RPM/*rpm&quot;
+</pre></div>
+
+
+<p>便于同时安装多个 rpm 包。</p>
+<h3>长路径别名</h3>
+<div class="highlight"><pre><span></span>alias astart=&quot;cd ~/GNUstep/Library/AfterStep/start&quot;
+</pre></div>
+
+
+<p>对于需要经常访问的路径特别长的目录也可为其定义别名。</p>
+<h2>我的别名用法</h2>
+<h3>进入虚拟环境</h3>
+<p>我有一个 <code>virtualenv</code> 的虚拟环境 <code>env2p</code> ，为了快速进入虚拟环境</p>
+<div class="highlight"><pre><span></span>alias se2p=&quot;cd ~/env2p&amp;source bin/activate&quot;
+</pre></div>
+
+
+<p>我只要se2p就进入了虚拟环境。</p>
+<h3>推送 <code>git</code> 到 <code>github.io</code></h3>
+<div class="highlight"><pre><span></span>alias git2p=&quot;cd ~/env2p/blog&amp;&amp;make publish&amp;&amp;cd output&amp;&amp;git add -A&amp;&amp;git commit -m &#39;Git My Static Blog&#39;&amp;&amp;git push origin master&quot;
+</pre></div></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

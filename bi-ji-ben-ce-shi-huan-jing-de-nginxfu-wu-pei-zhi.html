@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>笔记本测试环境的Nginx服务配置 — STEP UP</title>
+	<meta name="description" content="标题: 笔记本测试环境的Nginx服务配置; 日期: 2015-06-15; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">笔记本测试环境的Nginx服务配置</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-06-15T22:06:00+08:00" itemprop="datePublished">2015-06-15 22:06:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/resource.html" rel="category">Resource</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/nginx.html" rel="tag">nginx</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><div class="highlight"><pre><span></span><span class="c1"># vim xioms_nginx.conf 配置文件</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">#</span> <span class="nt">nginx</span> <span class="nt">需要连接的中间件</span>
+<span class="nt">upstream</span> <span class="nt">xioms</span> <span class="p">{</span>
+    <span class="err">#</span> <span class="err">这是sock文件模式</span>
+    <span class="err">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">home</span><span class="o">/</span><span class="n">env</span><span class="o">/</span><span class="n">xioms</span><span class="o">/</span><span class="n">xioms</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+    <span class="err">#</span> <span class="err">这是端口监听模式</span>
+    <span class="err">#</span> <span class="err">server</span> <span class="err">127.0.0.1:8001</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">#</span> <span class="nt">服务配置</span>
+<span class="nt">server</span> <span class="p">{</span>
+    <span class="err">#</span> <span class="err">网站端口</span>
+    <span class="err">listen</span>      <span class="err">8080</span><span class="p">;</span>
+    <span class="err">#</span> <span class="err">域名</span>
+    <span class="err">server_name</span> <span class="err">localhost</span><span class="p">;</span> <span class="err">#</span> <span class="err">指定为服务器IP或域名</span>
+    <span class="err">charset</span>     <span class="err">utf-8</span><span class="p">;</span>
+
+    <span class="err">#</span> <span class="err">最大上传大小</span>
+    <span class="err">client_max_body_size</span> <span class="err">75M</span><span class="p">;</span>   <span class="err">#</span> <span class="err">adjust</span> <span class="err">to</span> <span class="err">taste</span>
+
+    <span class="err">#</span> <span class="err">Django</span> <span class="err">media</span> <span class="err">目录</span>
+    <span class="err">location</span> <span class="err">^~</span> <span class="err">/media/</span>  <span class="err">{</span>
+        <span class="err">#</span> <span class="err">Django</span> <span class="err">项目的</span> <span class="err">media</span> <span class="err">目录</span> 
+        <span class="err">alias</span> <span class="err">/home/env/xioms/media/</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">#</span> <span class="nt">Django</span> <span class="nt">static</span> <span class="nt">目录</span>
+    <span class="nt">location</span> <span class="o">^~</span> <span class="o">/</span><span class="nt">static</span><span class="o">/</span> <span class="p">{</span>
+        <span class="err">#</span> <span class="err">Django</span> <span class="err">项目的</span> <span class="err">static</span> <span class="err">目录</span>
+        <span class="err">alias</span> <span class="err">/home/env/xioms/static/</span><span class="p">;</span> 
+    <span class="p">}</span>
+
+    <span class="err">#</span> <span class="nt">最后把所有非静态或媒体的文件请求发给Django处理</span>
+    <span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="err">uwsgi_pass</span>  <span class="err">xioms</span><span class="p">;</span>
+        <span class="err">include</span>     <span class="err">uwsgi_params</span><span class="p">;</span>  
+    <span class="p">}</span>
+<span class="err">}</span>
+</pre></div></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

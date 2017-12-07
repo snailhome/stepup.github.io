@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Markdown语法及其运用介绍 — STEP UP</title>
+	<meta name="description" content="标题: Markdown语法及其运用介绍; 日期: 2015-07-07; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Markdown语法及其运用介绍</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-07-07T21:56:00+08:00" itemprop="datePublished">2015-07-07 21:56:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/writing.html" rel="category">Writing</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/markdown.html" rel="tag">markdown</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><h2>一、什么是Markdown</h2>
+<p><img alt="Markdown" src="../images/20151005/markdown.png"></p>
+<blockquote>
+<p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也就十来个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+</blockquote>
+<h2>二、为什么重复造轮子</h2>
+<ul>
+<li>自行车的轮子<ul>
+<li>木头轮子</li>
+<li>钢圏轮子</li>
+<li>橡胶垫轮子</li>
+<li>橡胶胎轮子</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>每一种轮子的改进都会推动自行车向或更快、或更轻、或更舒适的方向改进。</p>
+</blockquote>
+<ul>
+<li>书写格式的“轮子”<ul>
+<li>Word格式<ul>
+<li>公文格式</li>
+</ul>
+</li>
+<li>HTML格式</li>
+<li>Markdown格式</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>不同格式的规范让文档或更规范、或方便交流、或方便查看、或易于转换。</p>
+</blockquote>
+<h2>三、为什么使用Markdown</h2>
+<p>Markdown的目标：</p>
+<ul>
+<li>实现让文档「易读易写」</li>
+<li>成为一种适用于网络的书写语言</li>
+</ul>
+<p>Markdown语法的特点</p>
+<ul>
+<li>语法简单，方便记忆</li>
+<li>专注你的文字内容而不是排版样式，让书写者可以专注于写作。</li>
+<li>纯文本内容，兼容所有的文本编辑器与字处理软件。</li>
+<li>方便读写，直观。适合所有人的写作语言。</li>
+<li>输出格式规范、简洁，可以轻松的导出本身的 .md 文件、 HTML、 PDF 、 DOC 、 EPUB 等格式。</li>
+</ul>
+<blockquote>
+<p>HTML 是一种<code>发布</code>的格式
+Markdown 是一种<code>书写</code>的格式</p>
+</blockquote>
+<h2>四、Markdown语法简介</h2>
+<h3>1. 基础语法</h3>
+<ul>
+<li>标题格式<ul>
+<li>一~六级标题</li>
+</ul>
+</li>
+<li>加粗</li>
+<li>斜体</li>
+<li>行内代码</li>
+<li>图片</li>
+<li>超链接</li>
+<li>引用</li>
+<li>有序列表</li>
+<li>无序列表</li>
+<li>分页符</li>
+<li>分节符</li>
+<li>分段符</li>
+</ul>
+<h3>2. 扩展语法</h3>
+<ul>
+<li>代码块</li>
+<li>删除线</li>
+<li>列表</li>
+<li>下划线</li>
+<li>上标</li>
+<li>下标</li>
+<li>脚注</li>
+<li>脚注引用</li>
+<li>表格</li>
+<li>高亮</li>
+<li>目录</li>
+<li>嵌入对象</li>
+<li>数学代码（行间）</li>
+<li>数学代码（行内）</li>
+</ul>
+<h2>五、Markdown书写工具</h2>
+<h3>1. Windown平台</h3>
+<ul>
+<li>Haroopad</li>
+<li>Spark</li>
+<li>CuteMarkEd</li>
+<li>Markdown Edit</li>
+<li>Miu</li>
+<li>WriteMonkey</li>
+<li>MarkdownPad2(共享)</li>
+<li>Texts(共享)</li>
+</ul>
+<h3>2. Linux平台</h3>
+<ul>
+<li>ReText</li>
+<li>Haroopad</li>
+<li>UberWriter</li>
+</ul>
+<h3>3. Mac平台</h3>
+<ul>
+<li>Mou</li>
+<li>Byword</li>
+<li>Ulysses</li>
+<li>Day One</li>
+<li>iA Writer</li>
+</ul>
+<h3>4. 在线工具</h3>
+<ul>
+<li><a href="http://www.jianshu.com/">简书：http://www.jianshu.com/</a></li>
+<li><a href="https://www.zybuluo.com/mdeditor">CMD作业部落：https://www.zybuluo.com/mdeditor</a></li>
+<li><a href="http://mahua.jser.me/">MaHua：http://mahua.jser.me/</a></li>
+<li><a href="https://stackedit.io/editor">StackEdit：https://stackedit.io/editor</a></li>
+<li><a href="http://leanote.org/">leanote：http://leanote.org/</a></li>
+</ul>
+<h3>5. 网站系统</h3>
+<ul>
+<li>Typecho</li>
+<li>WordPress</li>
+</ul>
+<h3>6. 现有编辑器扩展支持</h3>
+<ul>
+<li>Vim</li>
+<li>Sublime Text 2</li>
+<li>马克飞象 - 印象笔记</li>
+</ul>
+<h3>7. Markdown转换工具</h3>
+<ul>
+<li><a href="">pandoc：</a></li>
+</ul>
+<h2>六、用Markdown做什么</h2>
+<h3>写作、创作</h3>
+<p>写作一般而言，会碰到这么一些难题：</p>
+<ul>
+<li>难以专心：写Word文档的时候，我们经常浪费大量时间在Word本身上，特别是那80%我们用不到的功能。比如，找借口，Word又出问题了；或者，又要升级了。其实，在内心偷笑，哈哈，可以偷懒了</li>
+<li>浪费力气在排版上：使用Word时，我们会花费大量力气去排版，试图让文档变得漂亮一些。是粗体还是斜体，是宋体还是黑体，对创作来说，有那么重要吗？</li>
+<li>难以自动的版本跟踪：每一位自杀的写作者的电脑文档里面，都必然有一个Word文档，从V1.0到V20.0的无数版本...</li>
+<li>难以共同协作：想想你让一位合作的编辑帮你改书有多么痛苦，一个Word文档来，一个Word去，极其难用的修订与审阅功能，你就理解了；</li>
+</ul>
+<p>Markdown如何解决这些难题的？</p>
+<ul>
+<li>借助于github解决文档共享与版本自动跟踪问题</li>
+<li>Markdown让我们专注写作，而不是关注排版</li>
+<li>强大的数学公式支持</li>
+<li>方便的输出格式</li>
+</ul>
+<h3>制作教程、电子书</h3>
+<ul>
+<li>编写教程</li>
+<li>编写电子书</li>
+<li>方便的文件格式输出，可以输出HTML、DOC、ODT、PDF、LaTeX、EPUB、RST等格式</li>
+<li>方便、快速的形成电子书或纸书的排版</li>
+</ul>
+<blockquote>
+<p>现在你也可以当作家</p>
+</blockquote>
+<h3>发布博客、笔记</h3>
+<ul>
+<li>发布博客</li>
+<li>记录云笔记</li>
+</ul>
+<blockquote>
+<p>记录你的思想，保存你的知识</p>
+</blockquote>
+<h2>七、如何把Markdown运用到实际工作中</h2>
+<ul>
+<li>书写典型经验、知识库</li>
+<li>书写技术总结、论文</li>
+<li>书写工作日志、计划总结</li>
+<li>翻译说明书</li>
+</ul>
+<h2>八、一些使用Markdown的不错的社区网站</h2>
+<ul>
+<li><a href="http://www.ituring.com.cn/">图灵社区：http://www.ituring.com.cn/</a></li>
+<li><a href="http://www.ziqiangxuetang.com/">自强学堂：http://www.ziqiangxuetang.com/</a></li>
+<li><a href="http://www.oschina.net/">开源中国：http://www.oschina.net/</a></li>
+</ul></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

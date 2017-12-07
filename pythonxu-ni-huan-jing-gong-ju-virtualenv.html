@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Python虚拟环境工具：virtualenv — STEP UP</title>
+	<meta name="description" content="标题: Python虚拟环境工具：virtualenv; 日期: 2015-08-05; 作者: 蜗牛">
+	<meta name="author" content="蜗牛">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="/">STEP UP</a>
+			<br><small>不积跬步，无以至千里...</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Python虚拟环境工具：virtualenv</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">蜗牛</h4>
+		</span>
+		<time datetime="2015-08-05T01:21:00+08:00" itemprop="datePublished">2015-08-05 01:21:00</time>
+	</div>
+	<div>
+		目录:
+		<span itemprop="articleSection">
+			<a href="/category/python.html" rel="category">Python</a>
+		</span>
+	</div>
+ 
+	<div>
+		标签:
+		<span itemprop="keywords">
+			<a href="/tag/python.html" rel="tag">python</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="/tag/virtualenv.html" rel="tag">virtualenv</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响，它能够：</p>
+<ol>
+<li>在没有权限的情况下安装新套件</li>
+<li>不同应用可以使用不同的套件版本</li>
+<li>套件升级不影响其他应用</li>
+</ol>
+<h3>安装</h3>
+<div class="highlight"><pre><span></span>    sudo apt-get install python-virtualenv
+</pre></div>
+
+
+<p>使用方法</p>
+<div class="highlight"><pre><span></span>    virtualenv [虚拟环境名称]
+</pre></div>
+
+
+<p>如，创建<strong>ENV</strong>的虚拟环境</p>
+<div class="highlight"><pre><span></span>    virtualenv ENV
+</pre></div>
+
+
+<p>如果系统中存在python2和python3两个版本，我们要让虚拟环境基于其中一个版本，可以这样操作</p>
+<div class="highlight"><pre><span></span>    virtualenv -p python2 ENV  #基于python2
+</pre></div>
+
+
+<p>或者</p>
+<div class="highlight"><pre><span></span>    virtualenv -p python3 ENV  #基于python3
+</pre></div>
+
+
+<p>默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 <code>--no-site-packages</code> 建立虚拟环境</p>
+<div class="highlight"><pre><span></span>    virtualenv --no-site-packages [虚拟环境名称]
+</pre></div>
+
+
+<p>但在新版本virtualenv中这个选项已经是默认项了。</p>
+<p>启动虚拟环境</p>
+<div class="highlight"><pre><span></span>    cd ENV
+    source ./bin/activate
+</pre></div>
+
+
+<p>注意此时命令行会多一个(ENV)，ENV为虚拟环境名称，接下来所有模块都只会安装到该目录中去。</p>
+<p>退出虚拟环境</p>
+<div class="highlight"><pre><span></span>    deactivate
+</pre></div>
+
+
+<p>在虚拟环境安装Python套件
+Virtualenv 附带有pip安装工具，因此需要安装的套件可以直接运行：</p>
+<div class="highlight"><pre><span></span>    pip install [套件名称]
+</pre></div>
+
+
+<p>如果没有启动虚拟环境，系统也安装了pip工具，那么套件将被安装在系统环境中，为了避免发生此事，可以在<code>~/.bashrc</code>文件中加上：</p>
+<div class="highlight"><pre><span></span>    export PIP_REQUIRE_VIRTUALENV=true
+</pre></div>
+
+
+<p>或者让在执行pip的时候让系统自动开启虚拟环境：</p>
+<div class="highlight"><pre><span></span>    export PIP_RESPECT_VIRTUALENV=true
+</pre></div>
+
+
+<h2>Virtualenvwrapper</h2>
+<p>Virtaulenvwrapper是virtualenv的扩展包，用于更方便管理虚拟环境，它可以做：</p>
+<ol>
+<li>将所有虚拟环境整合在一个目录下</li>
+<li>管理（新增，删除，复制）虚拟环境</li>
+<li>切换虚拟环境</li>
+<li>...</li>
+</ol>
+<h3>安装</h3>
+<div class="highlight"><pre><span></span>    sudo easy_install virtualenvwrapper
+</pre></div>
+
+
+<p>此时还不能使用virtualenvwrapper，默认virtualenvwrapper安装在/usr/local/bin下面，实际上你需要运行virtualenvwrapper.sh文件才行，先别急，打开这个文件看看,里面有安装步骤，我们照着操作把环境设置好。</p>
+<p>创建目录用来存放虚拟环境</p>
+<div class="highlight"><pre><span></span>    mkdir $HOME/.virtualenvs
+</pre></div>
+
+
+<p>在<code>~/.bashrc</code>中添加行：</p>
+<div class="highlight"><pre><span></span>    export WORKON_HOME=$HOME/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+</pre></div>
+
+
+<p>保存退出后运行： <code>source ~/.bashrc</code></p>
+<p>此时virtualenvwrapper就可以使用了。</p>
+<p>列出虚拟环境列表</p>
+<div class="highlight"><pre><span></span>    workon
+</pre></div>
+
+
+<p>也可以使用</p>
+<div class="highlight"><pre><span></span>    lsvirtualenv
+</pre></div>
+
+
+<p>新建虚拟环境</p>
+<div class="highlight"><pre><span></span>    mkvirtualenv [虚拟环境名称]
+</pre></div>
+
+
+<p>启动/切换虚拟环境</p>
+<div class="highlight"><pre><span></span>    workon [虚拟环境名称]
+</pre></div>
+
+
+<p>删除虚拟环境</p>
+<div class="highlight"><pre><span></span>    rmvirtualenv [虚拟环境名称]
+</pre></div>
+
+
+<p>离开虚拟环境</p>
+<div class="highlight"><pre><span></span>    deactivate
+</pre></div></div>
+	<hr>
+	<h2>评论</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>导航</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">STEP UP</a></li>
+							<li><a href="/pages/guan-yu-stepup.html"><i class="fa fa-关于StepUp "></i> 关于StepUp</a></li>
+							<li><a href="/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>作者</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>目录</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/code.html">Code (2)</a></li>
+							<li><a href="/category/django.html">Django (3)</a></li>
+							<li><a href="/category/essay.html">Essay (2)</a></li>
+							<li><a href="/category/python.html">Python (1)</a></li>
+							<li><a href="/category/resource.html">Resource (3)</a></li>
+							<li><a href="/category/software.html">Software (6)</a></li>
+							<li><a href="/category/system.html">System (4)</a></li>
+							<li><a href="/category/writing.html">Writing (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>链接</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; 蜗牛 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>
